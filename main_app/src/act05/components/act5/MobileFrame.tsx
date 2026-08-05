@@ -27,31 +27,33 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
   return (
     <div className="w-full h-full bg-[#FAF6F0] flex flex-col relative overflow-hidden">
         {/* Mobile App Navigation Header */}
-        <div className="bg-[#681D2A] text-white px-4 py-3 flex items-center justify-between shrink-0 shadow-md">
-          <div className="flex items-center gap-2">
-            {showBackButton ? (
-              <button
-                onClick={onBackPress}
-                className="p-1 -ml-1 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
-                aria-label="Go Back"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-            ) : (
-              <div className="w-2 h-2 rounded-full bg-[#DFBA75]" />
-            )}
-            <div>
-              <h1 className="text-base font-bold font-serif leading-tight">{screenTitle}</h1>
-              <p className="text-[10px] text-[#F0D399]">Priya & Arjun • NRI Wedding</p>
+        {currentScreen !== 'home' && (
+          <div className="bg-[#681D2A] text-white px-4 py-3 flex items-center justify-between shrink-0 shadow-md">
+            <div className="flex items-center gap-2">
+              {showBackButton ? (
+                <button
+                  onClick={onBackPress}
+                  className="p-1 -ml-1 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                  aria-label="Go Back"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+              ) : (
+                <div className="w-2 h-2 rounded-full bg-[#DFBA75]" />
+              )}
+              <div>
+                <h1 className="text-base font-bold font-serif leading-tight">{screenTitle}</h1>
+                <p className="text-[10px] text-[#F0D399]">Priya & Arjun • NRI Wedding</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <span className="text-[11px] font-semibold bg-[#4A121D] text-[#F0D399] px-2 py-0.5 rounded-full border border-[#DFBA75]/30">
+                Act 5
+              </span>
             </div>
           </div>
-
-          <div className="flex items-center gap-1">
-            <span className="text-[11px] font-semibold bg-[#4A121D] text-[#F0D399] px-2 py-0.5 rounded-full border border-[#DFBA75]/30">
-              Act 5
-            </span>
-          </div>
-        </div>
+        )}
 
         {/* Floating Toast Notification */}
         {toastMessage && (
@@ -62,7 +64,7 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
         )}
 
         {/* Screen Content Scrollable Viewport */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className={`flex-1 overflow-y-auto ${currentScreen === 'home' ? '' : 'p-4 space-y-4'}`}>
           {children}
         </div>
 
