@@ -1,0 +1,6 @@
+{
+  "name": "Wedding Planner Mobile Prototype",
+  "description": "Pixel-perfect React application recreating 14 mobile UI screens from the South Indian wedding vendor blueprint PDF.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

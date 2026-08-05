@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  --color-maroon: #7A1C31;
+  --color-maroon-hover: #631426;
+  --color-maroon-subtle: #F6ECEF;
+  --color-cream-bg: #F9F6F0;
+  --color-cream-card: #FFFFFF;
+  --color-cream-border: #EBE5DC;
+  --color-gold-text: #B38600;
+  --color-gold-bg: #FFFDF5;
+  --color-gold-border: #E3D1A6;
+  --color-green-success: #2A7E3B;
+  --color-green-bg: #F1F9F3;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: #ECE5DB;
+  margin: 0;
+  padding: 0;
+  color: #1A1613;
+}
+
+/* Custom scrollbar for mobile iframe view */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CBC0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B5A89B;
+}
+
+.font-serif-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
