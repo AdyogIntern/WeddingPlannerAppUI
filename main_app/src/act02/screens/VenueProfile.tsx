@@ -8,7 +8,7 @@ export const VenueProfile: React.FC = () => {
   const venue = vendors.find((v) => v.id === 'venue-1') || vendors[0];
 
   return (
-    <div className="flex flex-col h-full justify-between font-sans">
+    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
       <div>
         {/* Top Header */}
         <div className="flex items-center justify-between pt-1 pb-3 text-[13px] text-[#2B2523]">

@@ -19,7 +19,7 @@ export const VendorProfile: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div className="flex flex-col w-full space-y-6 pb-6">
       <div>
         {/* Back Navigation Header */}
         <div className="flex items-center justify-between pt-1 pb-2 text-[12.5px] text-[#786E65]">

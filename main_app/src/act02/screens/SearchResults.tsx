@@ -71,7 +71,7 @@ export const SearchResults: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between font-sans">
+    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
       <div>
         {/* Header */}
         <ScreenHeader

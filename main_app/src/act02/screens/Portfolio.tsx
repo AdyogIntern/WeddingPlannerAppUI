@@ -19,7 +19,7 @@ export const Portfolio: React.FC = () => {
   const currentImages = imagesByTab[activeTab] || [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className="flex flex-col h-full justify-between font-sans">
+    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
       <div>
         {/* Top Header Bar */}
         <div className="flex items-center justify-between pt-1 pb-3 text-[13px] text-[#2B2523]">

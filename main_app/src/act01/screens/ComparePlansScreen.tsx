@@ -31,9 +31,8 @@ export const ComparePlansScreen: React.FC = () => {
         backgroundColor: '#FAF8F5', 
         paddingHorizontal: '22px',
         paddingTop: '12px',
-        paddingBottom: '16px',
-        justifyContent: 'space-between',
-        height: '100%',
+        paddingBottom: '80px',
+        minHeight: '100%',
         boxSizing: 'border-box'
       }}
     >

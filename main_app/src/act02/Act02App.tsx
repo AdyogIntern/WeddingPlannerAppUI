@@ -57,7 +57,7 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-[#FBF9F5] h-full w-full">
+    <div className="flex-1 flex flex-col bg-[#FBF9F5] w-full min-h-full p-4 sm:p-6 pb-20">
       {renderScreen()}
     </div>
   );

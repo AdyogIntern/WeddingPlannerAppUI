@@ -48,7 +48,7 @@ export const VendorFilters: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div className="flex flex-col w-full space-y-6 pb-6">
       <div>
         {/* Top Header */}
         <ScreenHeader

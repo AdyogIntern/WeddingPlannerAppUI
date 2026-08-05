@@ -10,7 +10,7 @@ export const Reviews: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between font-sans">
+    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
       <div>
         {/* Top Header Bar */}
         <ScreenHeader onBack={goBack} backText="Vendor" />
