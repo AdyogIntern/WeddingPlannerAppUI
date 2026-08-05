@@ -37,12 +37,6 @@ export const EverythingYouNeed: React.FC = () => {
               placeholder="Search 412 vendors in Chennai"
               className="w-full text-[13px] text-[#2B2523] placeholder-[#786E65] outline-none bg-transparent"
             />
-            <button
-              type="submit"
-              className="text-[12px] text-[#7A2234] font-medium px-2 py-0.5 rounded-md hover:bg-[#F8EDE9] cursor-pointer shrink-0"
-            >
-              Go
-            </button>
           </div>
         </form>
 
