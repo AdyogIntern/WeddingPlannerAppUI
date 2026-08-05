@@ -1,6 +1,0 @@
-{
-  "name": "Wedding Blueprint Platform - ACT 1",
-  "description": "Production-quality React Native application faithfully recreating ACT 1 ('The First Four Minutes', Screens 01-12) of the Wedding Platform specification.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

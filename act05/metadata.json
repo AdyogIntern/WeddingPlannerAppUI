@@ -1,6 +1,0 @@
-{
-  "name": "NRI Wedding Planning - Act 5",
-  "description": "Act 5 Progress, Not Points mobile application UI for NRI families planning Indian weddings remotely.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

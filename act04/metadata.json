@@ -1,6 +1,0 @@
-{
-  "name": "Wedding Planning App - Act 4",
-  "description": "Luxury NRI Wedding Planning application covering Budget Dashboard, Payment Schedule, Escrow Protection, Who Pays What, Paperwork & Remittance, and Booking Confirmation.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
