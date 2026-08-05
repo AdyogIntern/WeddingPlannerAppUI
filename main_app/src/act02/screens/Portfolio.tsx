@@ -19,25 +19,12 @@ export const Portfolio: React.FC = () => {
   const currentImages = imagesByTab[activeTab] || [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Top Header Bar */}
-        <div className="flex items-center justify-between pt-1 pb-3 text-[13px] text-[#2B2523]">
-          <button
-            onClick={goBack}
-            className="p-1 -ml-1 text-[#2B2523] hover:opacity-75 cursor-pointer flex items-center gap-1 font-medium text-sm"
-          >
-            <ArrowLeft className="w-4 h-4" />
-          </button>
-          <span className="px-3 py-1 bg-white/90 border border-[#E5DCCE] rounded-full text-[12px] font-mono text-[#2B2523] shadow-2xs">
-            {selectedImage ? `${selectedImage} / 24` : '1 / 24'}
-          </span>
-        </div>
-
-        {/* 60-Second Intro Header Banner */}
-        <div className="w-full h-44 bg-[#EAE1D2] rounded-none border-b border-[#DFD5C4] -mx-4 -mt-1 px-4 mb-4 flex items-center justify-center overflow-hidden relative group">
+        {/* Intro Video Header Banner with Navigation Overlay inside it */}
+        <div className="w-full h-44 bg-[#EAE1D2] rounded-2xl border border-[#DFD5C4] mb-4 flex flex-col justify-between p-3 relative overflow-hidden group">
           {isPlayingVideo ? (
-            <div className="w-full h-full bg-[#2B2523] text-white flex flex-col items-center justify-center p-3 relative">
+            <div className="w-full h-full bg-[#2B2523] text-white flex flex-col items-center justify-center p-3 relative rounded-xl">
               <button
                 onClick={() => setIsPlayingVideo(false)}
                 className="absolute top-2 right-2 p-1 text-white hover:opacity-75 cursor-pointer"
@@ -48,16 +35,36 @@ export const Portfolio: React.FC = () => {
               <p className="text-[10.5px] text-zinc-300 text-center">Sri Amirtham Kitchen & Muhurtham Walkthrough</p>
             </div>
           ) : (
-            <button
-              onClick={() => {
-                setIsPlayingVideo(true);
-                showToast('Playing 60-second intro video...');
-              }}
-              className="text-[#8C7A6B] hover:text-[#7A2234] transition text-[12px] font-mono font-medium tracking-widest uppercase flex items-center gap-2 cursor-pointer"
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              <span>60-second intro</span>
-            </button>
+            <>
+              {/* Top overlay row inside the banner */}
+              <div className="flex items-center justify-between text-[11px] font-mono text-[#786E65] z-10">
+                <button
+                  onClick={goBack}
+                  className="text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <span className="px-3 py-1 bg-white/90 border border-[#E5DCCE] rounded-full text-[12px] font-mono text-[#2B2523] shadow-2xs">
+                  {selectedImage ? `${selectedImage} / 24` : '1 / 24'}
+                </span>
+              </div>
+
+              {/* Centered Intro Label */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span className="text-[#8C7A6B] font-mono text-[12px] font-medium tracking-widest uppercase flex items-center gap-2">
+                  ► 60-second intro
+                </span>
+              </div>
+
+              {/* Transparent Click overlay */}
+              <button
+                onClick={() => {
+                  setIsPlayingVideo(true);
+                  showToast('Playing 60-second intro video...');
+                }}
+                className="absolute inset-0 w-full h-full cursor-pointer bg-transparent focus:outline-none"
+              />
+            </>
           )}
         </div>
 
@@ -137,4 +144,3 @@ export const Portfolio: React.FC = () => {
     </div>
   );
 };
-

@@ -1,25 +1,25 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { CalloutBox, PrimaryButton, RatingBar, ScreenHeader, SerifTitle, TextMuted } from '../components/SharedUI';
+import { CalloutBox, PrimaryButton, RatingBar, SerifTitle, TextMuted } from '../components/SharedUI';
 
 export const Reviews: React.FC = () => {
-  const { navigate, goBack, showToast } = useApp();
+  const { navigate, showToast } = useApp();
 
   const handleRequestReference = (couple: string) => {
     showToast(`Reference call request sent for ${couple}!`);
   };
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Top Header Bar */}
-        <ScreenHeader onBack={goBack} backText="Vendor" />
-
-        {/* Title */}
-        <div className="mb-3">
+        {/* Title Block matching 7.png */}
+        <div className="mb-3 pt-3">
           <SerifTitle>Sri Amirtham Catering</SerifTitle>
           <TextMuted>4.8 from 62 weddings · 31 with NRI families</TextMuted>
         </div>
+
+        {/* Divider Line under Header */}
+        <div className="border-b border-[#E0D7C6] mb-4"></div>
 
         {/* Rating Breakdown Card */}
         <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
@@ -79,13 +79,13 @@ export const Reviews: React.FC = () => {
         </div>
 
         {/* Callout Box */}
-        <CalloutBox className="mt-3">
+        <CalloutBox className="my-4">
           Critical reviews stay up. A page of five-star reviews is the fastest way to lose a sceptical NRI family.
         </CalloutBox>
       </div>
 
-      {/* Sticky Bottom Action */}
-      <div className="mt-4 pt-1">
+      {/* Bottom Action */}
+      <div className="mt-4">
         <PrimaryButton onClick={() => navigate('VendorSwap')}>
           Add to Muhurtham
         </PrimaryButton>
@@ -93,4 +93,5 @@ export const Reviews: React.FC = () => {
     </div>
   );
 };
+
 
