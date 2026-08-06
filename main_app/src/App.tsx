@@ -18,7 +18,7 @@ export default function App() {
         <div className="w-full max-w-[430px] h-[100dvh] sm:h-[850px] sm:max-h-[96vh] sm:rounded-[36px] overflow-hidden flex flex-col relative sm:shadow-[0_25px_60px_rgba(0,0,0,0.5)] border-0 sm:border sm:border-gray-800/60 transition-colors duration-300 bg-white">
           
           {/* Scrollable Content Area */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col w-full h-full pb-[72px]">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col w-full">
             <Routes>
               <Route path="/" element={<Navigate to="/act1" replace />} />
               <Route path="/act1/*" element={<Act01App />} />

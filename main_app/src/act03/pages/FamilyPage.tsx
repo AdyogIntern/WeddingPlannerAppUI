@@ -12,13 +12,13 @@ export const FamilyPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header
         title="Family"
         subtitle="6 people · 4 active this week"
       />
 
-      <main className="p-5 flex-1 space-y-5 pb-24">
+      <main className="p-5 space-y-5 pb-8">
         {/* Section 1: Who owns what */}
         <div>
           <h2 className="text-[17px] font-medium text-[#2C2420] mb-3">

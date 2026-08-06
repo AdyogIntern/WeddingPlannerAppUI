@@ -44,13 +44,13 @@ export const TasksPage: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header
         title="Tasks"
         actions={filterActions}
       />
 
-      <main className="p-5 flex-1 space-y-5 pb-24">
+      <main className="p-5 space-y-5 pb-8">
         {/* Section 1: Overdue */}
         {(activeFilter === 'all' || activeFilter === 'overdue') && (
           <div>
