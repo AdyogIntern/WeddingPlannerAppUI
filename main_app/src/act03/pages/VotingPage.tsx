@@ -81,13 +81,13 @@ export const VotingPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header
         title="Which mandap?"
         subtitle="Voting closes Friday · 4 of 6 voted"
       />
 
-      <main className="p-5 flex-1 space-y-5 pb-28">
+      <main className="p-5 space-y-5 pb-8">
         {/* Voting Options */}
         <div className="space-y-3">
           {options.map((opt) => (

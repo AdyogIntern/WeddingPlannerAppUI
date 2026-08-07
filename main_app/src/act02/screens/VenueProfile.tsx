@@ -1,46 +1,39 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
 import { CalloutBox, PrimaryButton, SerifTitle } from '../components/SharedUI';
-import { ArrowLeft, Play, Heart } from 'lucide-react';
+import { ArrowLeft, Play } from 'lucide-react';
 
 export const VenueProfile: React.FC = () => {
-  const { navigate, goBack, toggleSaveVendor, vendors } = useApp();
-  const venue = vendors.find((v) => v.id === 'venue-1') || vendors[0];
+  const { navigate, goBack } = useApp();
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6 font-sans">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Top Header */}
-        <div className="flex items-center justify-between pt-1 pb-3 text-[13px] text-[#2B2523]">
-          <button
-            onClick={goBack}
-            className="flex items-center gap-1 text-[#2B2523] hover:opacity-75 cursor-pointer font-medium"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back</span>
-          </button>
-          <div className="flex items-center gap-2">
-            <span className="uppercase tracking-widest text-[10px] font-mono font-medium text-[#8C7A6B]">
+        {/* Hero Banner with Navigation Overlay inside it matching 10.png */}
+        <div className="w-full h-44 bg-[#EAE1D2] rounded-2xl relative border border-[#DFD5C4] mb-3 p-3 flex flex-col justify-between overflow-hidden group">
+          {/* Top overlay row inside the banner */}
+          <div className="relative flex items-center justify-center text-[11px] font-mono text-[#786E65]">
+            <button
+              onClick={goBack}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <span className="uppercase tracking-widest text-[10.5px] font-semibold text-[#786E65] pt-18">
               PORTFOLIO · 31 IMAGES
             </span>
+          </div>
+
+          {/* Bottom right Walkthrough button */}
+          <div className="flex justify-end">
             <button
-              onClick={() => toggleSaveVendor(venue.id)}
-              className="text-[#7A2234] hover:opacity-80 transition cursor-pointer p-0.5"
+              onClick={() => navigate('Portfolio')}
+              className="bg-[#2B2523] hover:bg-[#7A2234] transition text-white px-3.5 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 shadow-sm cursor-pointer"
             >
-              <Heart className="w-4.5 h-4.5 fill-[#7A2234] text-[#7A2234]" />
+              <Play className="w-3 h-3 fill-current" />
+              <span>Walkthrough</span>
             </button>
           </div>
-        </div>
-
-        {/* Hero Banner with Walkthrough Button */}
-        <div className="w-full h-36 bg-[#EAE1D2] rounded-2xl relative border border-[#DFD5C4] mb-3 flex items-end justify-end p-2.5 overflow-hidden group">
-          <button
-            onClick={() => navigate('Portfolio')}
-            className="bg-[#2B2523] hover:bg-[#7A2234] transition text-white px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 shadow-sm cursor-pointer"
-          >
-            <Play className="w-3 h-3 fill-current" />
-            <span>Walkthrough</span>
-          </button>
         </div>
 
         {/* Title & Subtitle */}
@@ -55,19 +48,19 @@ export const VenueProfile: React.FC = () => {
 
         {/* 3 Metric Cards */}
         <div className="grid grid-cols-3 gap-2.5 mb-3 text-center">
-          <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
+          <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
             <div className="text-[10px] uppercase tracking-wider text-[#8C7A6B] font-mono font-semibold">
               SEATS
             </div>
             <div className="text-[18px] font-bold text-[#2B2523] mt-0.5">650</div>
           </div>
-          <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
+          <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
             <div className="text-[10px] uppercase tracking-wider text-[#8C7A6B] font-mono font-semibold">
               DINING
             </div>
             <div className="text-[18px] font-bold text-[#2B2523] mt-0.5">320</div>
           </div>
-          <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
+          <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl shadow-2xs">
             <div className="text-[10px] uppercase tracking-wider text-[#8C7A6B] font-mono font-semibold">
               PARKING
             </div>
@@ -88,29 +81,17 @@ export const VenueProfile: React.FC = () => {
           </p>
         </div>
 
-        {/* House Rules Card */}
+        {/* House Rules Card - No bullet dots matching 10.png */}
         <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
           <div className="text-[10px] uppercase tracking-widest text-[#8C7A6B] font-mono font-semibold mb-2">
             HOUSE RULES THAT MATTER
           </div>
-          <ul className="space-y-2 text-[12px] text-[#2B2523]">
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7A2234] shrink-0" />
-              <span>Outside catering allowed · kitchen included</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7A2234] shrink-0" />
-              <span>No non-vegetarian food on the premises</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7A2234] shrink-0" />
-              <span>Homam permitted in the north-east corner</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7A2234] shrink-0" />
-              <span>Loading access is 2.4m — check with decorator</span>
-            </li>
-          </ul>
+          <div className="space-y-2 text-[12px] text-[#2B2523]">
+            <div>Outside catering allowed · kitchen included</div>
+            <div>No non-vegetarian food on the premises</div>
+            <div>Homam permitted in the north-east corner</div>
+            <div>Loading access is 2.4m — check with decorator</div>
+          </div>
         </div>
 
         {/* Callout */}
@@ -128,4 +109,5 @@ export const VenueProfile: React.FC = () => {
     </div>
   );
 };
+
 

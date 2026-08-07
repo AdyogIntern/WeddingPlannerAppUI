@@ -52,45 +52,49 @@ export const OnboardingQuestionsScreen: React.FC = () => {
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '32px',
-        paddingTop: '60px',
+        paddingHorizontal: '22px',
+        paddingTop: '20px',
         paddingBottom: '16px',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         height: '100%',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        alignItems: 'center',
+        overflowY: 'auto'
       }}
     >
       {/* Top Bar Navigation & Progress Indicator */}
-      <View style={{ shrink: 0 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+      <View style={{ width: '100%', marginBottom: '24px', paddingHorizontal: '22px' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
           <TouchableOpacity 
             onPress={prevQuestion}
             style={{ 
               flexDirection: 'row', 
               alignItems: 'center', 
               gap: '4px',
-              padding: '4px 8px',
-              borderRadius: '8px',
-              backgroundColor: '#EFE7DC',
-              cursor: 'pointer'
+              padding: '6px 12px',
+              borderRadius: '20px',
+              backgroundColor: '#F5EEE5',
+              cursor: 'pointer',
+              border: '1px solid #E6D8C4'
             }}
           >
             <ChevronLeft size={14} color={colors.textDarkHeading} />
             <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.textDarkHeading }}>
-              {questionIndex === 0 ? 'Start Page' : 'Back'}
+              {questionIndex === 0 ? 'Start' : 'Back'}
             </Text>
           </TouchableOpacity>
 
           <Text style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '0.08em', color: colors.burgundyPrimary, textTransform: 'uppercase' }}>
-            QUESTION {questionIndex + 1} OF {TOTAL_QUESTIONS}
+            {questionIndex + 1} / {TOTAL_QUESTIONS}
           </Text>
 
           <TouchableOpacity 
             onPress={nextQuestion}
             style={{ 
-              padding: '4px 8px',
-              borderRadius: '8px',
-              backgroundColor: '#EFE7DC',
+              padding: '6px 12px',
+              borderRadius: '20px',
+              backgroundColor: '#F5EEE5',
+              border: '1px solid #E6D8C4'
             }}
           >
             <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.burgundyPrimary }}>Skip</Text>
@@ -103,7 +107,6 @@ export const OnboardingQuestionsScreen: React.FC = () => {
 
       {/* Main Question Content Viewport */}
       <View style={{ flex: 1, overflowY: 'auto', paddingRight: '2px', paddingBottom: '8px', maxWidth: '420px', width: '100%', margin: '0 auto' }}>
-        
         {/* Question Title & Subtitle */}
         <Text variant="serifTitle" style={{ fontSize: '19px', color: colors.textDarkHeading, marginBottom: '4px' }}>
           {currentQ.title}
@@ -362,12 +365,13 @@ export const OnboardingQuestionsScreen: React.FC = () => {
 
       </View>
 
-      {/* Bottom CTA Action Button */}
-      <View style={{ paddingTop: '6px', shrink: 0 }}>
-        <RNButton 
-          title={questionIndex === TOTAL_QUESTIONS - 1 ? 'Build my Blueprint' : 'Continue'} 
-          onPress={nextQuestion}
-        />
+      <View style={{ marginTop: 'auto', paddingTop: '12px', width: '100%', paddingBottom: '8px', alignSelf: 'center', display: 'flex', justifyContent: 'center' }}>
+        <button 
+          onClick={nextQuestion}
+          className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer shadow-2xs hover:bg-[#521422] transition-colors text-center block"
+        >
+          {questionIndex === TOTAL_QUESTIONS - 1 ? 'Build my Blueprint' : 'Continue'}
+        </button>
       </View>
     </View>
   );

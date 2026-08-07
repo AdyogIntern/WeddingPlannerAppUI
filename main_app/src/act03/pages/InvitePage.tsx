@@ -55,10 +55,10 @@ export const InvitePage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header title="Invite Appa" />
 
-      <main className="p-5 flex-1 space-y-5 pb-24">
+      <main className="p-5 space-y-5 pb-8">
         {/* Mobile Input Card */}
         <div className="bg-white rounded-2xl p-4 border border-[#E5E1D8] shadow-2xs">
           <div className="text-[10px] tracking-wider text-[#867A6E] font-semibold uppercase mb-1">

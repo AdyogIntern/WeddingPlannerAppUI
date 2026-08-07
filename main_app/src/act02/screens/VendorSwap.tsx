@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { AvatarGroup, PrimaryButton, ScreenHeader, SerifTitle } from '../components/SharedUI';
+import { PrimaryButton, ScreenHeader, SerifTitle } from '../components/SharedUI';
 import { Heart } from 'lucide-react';
 
 export const VendorSwap: React.FC = () => {
@@ -14,7 +14,7 @@ export const VendorSwap: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
         {/* Top Header */}
         <ScreenHeader
@@ -47,31 +47,31 @@ export const VendorSwap: React.FC = () => {
         <div className="border-b border-[#E0D7C6] my-3"></div>
 
         {/* Main Selected Vendor Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          {/* Portfolio Image Box */}
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-4 shadow-2xs">
+          {/* Portfolio Image Box matching 13.png with centered text */}
           <div
             onClick={() => navigate('Portfolio')}
-            className="w-full h-32 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-3 flex items-start justify-end p-2 cursor-pointer hover:opacity-90 transition group relative"
+            className="w-full h-36 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-3.5 flex items-center justify-center cursor-pointer hover:opacity-90 transition group"
           >
-            <span className="text-[9.5px] uppercase tracking-wider font-semibold text-[#786E65] bg-[#FAF7F0]/90 px-2 py-0.5 rounded shadow-2xs group-hover:bg-[#7A2234] group-hover:text-white transition">
+            <span className="text-[10px] uppercase tracking-widest font-bold text-[#786E65] bg-[#FAF7F0] px-3 py-1 rounded shadow-2xs group-hover:bg-[#7A2234] group-hover:text-white transition">
               PORTFOLIO · 24 IMAGES
             </span>
           </div>
 
           <div className="flex items-start justify-between mb-0.5">
-            <h3 className="font-serif text-[17px] font-semibold text-[#2B2523]">
+            <h3 className="font-serif text-[17px] font-bold text-[#2B2523]">
               {currentVendor.name}
             </h3>
-            <span className="text-[12px] text-[#059669] font-medium">
+            <span className="text-[12.5px] text-[#15803D] font-bold">
               ✓ Verified
             </span>
           </div>
 
-          <p className="text-[11.5px] text-[#786E65] mb-2">
+          <p className="text-[12px] text-[#786E65] mb-2">
             Iyengar & Iyer · 38 yrs · up to 1,500 plates
           </p>
 
-          <div className="mb-2">
+          <div className="mb-3">
             <div className="text-[16px] font-bold text-[#2B2523]">
               ₹{currentVendor.pricePerPlate || 1250}<span className="text-[12px] font-normal text-[#786E65]">/plate ≈ $14.90</span>
             </div>
@@ -80,51 +80,58 @@ export const VendorSwap: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-1.5 mb-3 flex-wrap">
-            <span className="px-2.5 py-1 bg-[#F2ECE1] text-[11px] text-[#2B2523] rounded-lg">
+          <div className="flex gap-1.5 mb-3.5 flex-wrap">
+            <span className="px-2.5 py-1 bg-[#F2ECE1] border border-[#E8DFC0]/60 text-[11px] text-[#2B2523] rounded-lg">
               Works with NRI clients
             </span>
-            <span className="px-2.5 py-1 bg-[#F2ECE1] text-[11px] text-[#2B2523] rounded-lg">
+            <span className="px-2.5 py-1 bg-[#F2ECE1] border border-[#E8DFC0]/60 text-[11px] text-[#2B2523] rounded-lg">
               Tasting on video call
             </span>
           </div>
 
           {/* Action Row */}
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             <div className="flex-1">
               <PrimaryButton onClick={() => handleSelectVendorAndSwap(currentVendor)}>
                 Put in Blueprint
               </PrimaryButton>
             </div>
             <button
-              onClick={() => toggleSaveVendor(currentVendor.id)}
-              className="w-11 h-11 bg-white border border-[#D5CBB9] rounded-xl flex items-center justify-center text-[#7A2234] hover:bg-[#F5ECE2] transition cursor-pointer shrink-0"
+              onClick={() => {
+                toggleSaveVendor(currentVendor.id);
+              }}
+              className="w-12 h-12 bg-white border border-[#D5CBB9] rounded-2xl flex items-center justify-center text-[#786E65] hover:bg-[#F5ECE2] transition cursor-pointer shrink-0"
             >
-              <Heart className={`w-5 h-5 ${currentVendor.isSaved ? 'fill-[#7A2234] text-[#7A2234]' : 'text-[#7A2234]'}`} />
+              <Heart className={`w-5.5 h-5.5 ${currentVendor.isSaved ? 'fill-[#7A2234] text-[#7A2234]' : 'text-[#786E65]'}`} />
             </button>
           </div>
         </div>
 
         {/* Other Options List */}
-        <div className="space-y-2 mb-3">
+        <div className="space-y-2.5 mb-3">
           {/* Option 1 */}
           <div
             onClick={() => handleSelectVendorAndSwap(vendors.find((v) => v.id === 'caterer-3') || vendors[2])}
-            className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl cursor-pointer hover:border-[#7A2234] transition shadow-2xs group"
+            className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl cursor-pointer hover:border-[#7A2234] transition group"
           >
             <div className="flex justify-between items-start mb-0.5">
-              <h4 className="font-serif text-[15px] font-semibold text-[#2B2523] group-hover:text-[#7A2234]">
+              <h4 className="font-serif text-[15px] font-bold text-[#2B2523] group-hover:text-[#7A2234]">
                 Kalyana Ruchi
               </h4>
-              <span className="text-[11.5px] text-[#786E65]">
+              <span className="text-[12px] text-[#786E65]">
                 3 votes
               </span>
             </div>
-            <p className="text-[12px] text-[#786E65] mb-2">
+            <p className="text-[12px] text-[#786E65] mb-2.5">
               ₹1,480/plate · ≈$17.60 · Chennai + Coimbatore
             </p>
-            <div className="flex items-center gap-2 pt-2 border-t border-[#EAE1D2]">
-              <AvatarGroup count={3} />
+            <div className="flex items-center gap-2 pt-2.5 border-t border-[#EAE1D2]">
+              {/* Overlapping blank tan avatars matching 13.png */}
+              <div className="flex -space-x-1.5">
+                <div className="w-5 h-5 rounded-full bg-[#D5C7B3] ring-1 ring-white"></div>
+                <div className="w-5 h-5 rounded-full bg-[#C2B29A] ring-1 ring-white"></div>
+                <div className="w-5 h-5 rounded-full bg-[#AF9E85] ring-1 ring-white"></div>
+              </div>
               <span className="text-[11.5px] text-[#786E65]">
                 Amma, Appa and Meera like this
               </span>
@@ -134,9 +141,9 @@ export const VendorSwap: React.FC = () => {
           {/* Option 2 */}
           <div
             onClick={() => handleSelectVendorAndSwap(vendors.find((v) => v.id === 'caterer-2') || vendors[1])}
-            className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl cursor-pointer hover:border-[#7A2234] transition shadow-2xs group"
+            className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl cursor-pointer hover:border-[#7A2234] transition group"
           >
-            <h4 className="font-serif text-[15px] font-semibold text-[#2B2523] group-hover:text-[#7A2234]">
+            <h4 className="font-serif text-[15px] font-bold text-[#2B2523] group-hover:text-[#7A2234]">
               Thanjavur Samayal
             </h4>
             <p className="text-[12px] text-[#786E65]">
@@ -145,11 +152,12 @@ export const VendorSwap: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center text-[12px] text-[#786E65] my-2">
+        <div className="text-center text-[12px] text-[#786E65] my-3">
           17 more caterers match this slot
         </div>
       </div>
     </div>
   );
 };
+
 

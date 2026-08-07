@@ -134,7 +134,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       style={{
         backgroundColor: selected ? '#FAF3E8' : colors.cardBackgroundLight,
         borderRadius: '12px',
-        padding: subtitle ? '10px 14px' : '11px 14px',
+        padding: subtitle ? '14px 18px' : '15px 18px',
         marginBottom: '8px',
         border: selected 
           ? `1.5px solid ${colors.cardSelectedBorder}` 
@@ -244,7 +244,7 @@ export const RNButton: React.FC<RNButtonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       style={{
-        backgroundColor: isWhite ? '#FAF5EE' : colors.burgundyButton,
+        backgroundColor: isWhite ? '#FAF5EE' : colors.burgundyDark, // Keep the dark red color if they like it, or revert to burgundyButton
         borderRadius: '16px',
         paddingVertical: '13.5px',
         paddingHorizontal: '18px',

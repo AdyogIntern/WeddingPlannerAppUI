@@ -1,9 +1,9 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { AvatarGroup, CalloutBox, PrimaryButton, ScreenHeader, SerifTitle, TextMuted } from '../components/SharedUI';
+import { CalloutBox, PrimaryButton, SerifTitle, TextMuted } from '../components/SharedUI';
 
 export const SwapImpact: React.FC = () => {
-  const { navigate, goBack, showToast, activeBlueprintVendor } = useApp();
+  const { navigate, showToast } = useApp();
 
   const handleUndo = () => {
     showToast('Swap undone. Returned to previous vendor.');
@@ -16,91 +16,91 @@ export const SwapImpact: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Header */}
-        <ScreenHeader
-          onBack={goBack}
-          rightAction={
-            <button
-              onClick={handleUndo}
-              className="text-[12.5px] text-[#7A2234] font-medium hover:opacity-75 cursor-pointer underline"
-            >
-              Undo
-            </button>
-          }
-        />
+        {/* Top Header matching 14.png */}
+        <div className="flex items-center justify-end py-1 text-[13.5px] font-medium text-[#2B2523]">
+          <button
+            onClick={handleUndo}
+            className="text-[13.5px] text-[#7A2234] font-semibold hover:opacity-75 cursor-pointer"
+          >
+            Undo
+          </button>
+        </div>
 
         {/* Title */}
         <div className="mb-3">
           <SerifTitle>Swap made</SerifTitle>
-          <TextMuted>Muhurtham · {activeBlueprintVendor.category.toLowerCase()}</TextMuted>
+          <TextMuted>Muhurtham · catering</TextMuted>
         </div>
 
+        {/* Divider Line under Header */}
+        <div className="border-b border-[#E0D7C6] mb-4"></div>
+
         {/* WAS vs NOW Comparison Card */}
-        <div className="grid grid-cols-11 gap-1.5 items-center mb-3">
+        <div className="grid grid-cols-11 gap-1.5 items-center mb-3.5">
           {/* WAS Card */}
-          <div className="col-span-5 p-2.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl">
-            <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-1">
-              Was
+          <div className="col-span-5 p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl">
+            <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-1">
+              WAS
             </div>
-            <div className="text-[13px] font-semibold text-[#2B2523] truncate">
+            <div className="text-[13px] font-bold text-[#2B2523] truncate font-serif">
               Kalyana Ruchi
             </div>
             <div className="text-[11px] text-[#786E65]">₹1,480 / plate</div>
-            <div className="text-[13px] font-bold text-[#2B2523] mt-1">₹6.22L</div>
+            <div className="text-[13.5px] font-bold text-[#2B2523] mt-1.5">₹6.22L</div>
           </div>
 
           {/* Arrow */}
-          <div className="col-span-1 text-center text-[#786E65] font-bold text-sm">
+          <div className="col-span-1 text-center text-[#8C7A6B] font-bold text-sm">
             →
           </div>
 
           {/* NOW Card */}
-          <div className="col-span-5 p-2.5 bg-[#FAF7F0] border-2 border-[#7A2234] rounded-2xl shadow-2xs">
-            <div className="text-[10px] uppercase tracking-wider text-[#7A2234] font-semibold mb-1">
-              Now
+          <div className="col-span-5 p-3 bg-[#FAF7F0] border-2 border-[#7A2234] rounded-2xl shadow-2xs">
+            <div className="text-[10px] uppercase tracking-wider text-[#7A2234] font-bold mb-1">
+              NOW
             </div>
             <div className="text-[13px] font-bold text-[#2B2523] truncate">
-              {activeBlueprintVendor.name}
+              Sri Amirtham
             </div>
             <div className="text-[11px] text-[#786E65]">
-              {activeBlueprintVendor.pricePerPlate ? `₹${activeBlueprintVendor.pricePerPlate} / plate` : activeBlueprintVendor.subcategory || 'Selected'}
+              ₹1,250 / plate
             </div>
-            <div className="text-[13px] font-bold text-[#7A2234] mt-1">
-              {activeBlueprintVendor.totalPriceFormatted}
+            <div className="text-[13.5px] font-bold text-[#7A2234] mt-1.5">
+              ₹5.25L
             </div>
           </div>
         </div>
 
         {/* What Changed Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
-            What changed
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3.5 shadow-2xs">
+          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-2.5">
+            WHAT CHANGED
           </div>
-          <div className="space-y-2 text-[12.5px]">
+          <div className="space-y-2.5 text-[13px]">
             <div className="flex justify-between items-center">
               <span className="text-[#2B2523]">Total plan</span>
               <div className="text-right">
                 <span className="font-bold text-[#2B2523]">₹42.6L </span>
-                <span className="text-emerald-700 font-medium">-₹97,000</span>
+                <span className="text-[#15803D] font-bold">-₹97,000</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-1.5">
-              <span className="text-[#2B2523]">Category status</span>
-              <span className="text-emerald-700 font-medium">Now on band</span>
+            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-2">
+              <span className="text-[#2B2523]">Food category</span>
+              <span className="text-[#15803D] font-bold">Now on band</span>
             </div>
 
-            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-1.5">
+            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-2">
               <span className="text-[#2B2523]">Progress</span>
               <div className="text-right">
-                <span className="font-semibold text-[#2B2523]">38% </span>
-                <span className="text-emerald-700 font-medium">+3%</span>
+                <span className="font-bold text-[#2B2523]">38% </span>
+                <span className="text-[#15803D] font-bold">+3%</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-1.5">
+            <div className="flex justify-between items-center border-t border-[#EAE1D2] pt-2">
               <span className="text-[#2B2523]">Payment schedule</span>
               <span className="text-[#2B2523] font-medium">Advance moves to 14 Oct</span>
             </div>
@@ -108,29 +108,33 @@ export const SwapImpact: React.FC = () => {
         </div>
 
         {/* Who Needs To Know Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
-            Who needs to know
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3.5 shadow-2xs">
+          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-2.5">
+            WHO NEEDS TO KNOW
           </div>
-          <div className="flex items-start gap-2.5 mb-1.5">
-            <AvatarGroup count={2} />
-            <div className="text-[12.5px] font-semibold text-[#2B2523]">
+          <div className="flex items-start gap-2.5 mb-2">
+            {/* 2 overlapping blank tan/beige avatars matching 14.png */}
+            <div className="flex -space-x-1.5 shrink-0 pt-0.5">
+              <div className="w-5 h-5 rounded-full bg-[#D5C7B3] ring-1 ring-white"></div>
+              <div className="w-5 h-5 rounded-full bg-[#C2B29A] ring-1 ring-white"></div>
+            </div>
+            <div className="text-[13px] font-bold text-[#2B2523] leading-tight">
               Appa owns catering — he'll be notified
             </div>
           </div>
-          <p className="text-[11.5px] text-[#786E65] leading-relaxed">
+          <p className="text-[12px] text-[#786E65] leading-relaxed">
             Under his ₹2L approval threshold and cheaper than before, so no approval is needed.
           </p>
         </div>
 
         {/* Callout Box */}
-        <CalloutBox className="mt-2">
+        <CalloutBox className="my-4">
           Every swap is reversible for 24 hours, and versioned forever.
         </CalloutBox>
       </div>
 
       {/* Sticky Bottom Action */}
-      <div className="mt-4 pt-1">
+      <div className="mt-4">
         <PrimaryButton onClick={handleBackToBlueprint}>
           Back to the Blueprint
         </PrimaryButton>
@@ -138,3 +142,4 @@ export const SwapImpact: React.FC = () => {
     </div>
   );
 };
+

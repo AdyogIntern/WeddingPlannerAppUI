@@ -16,7 +16,7 @@ export const GlobalBottomNav = () => {
   ];
 
   return (
-    <div className="absolute bottom-0 w-full bg-white border-t border-gray-200 py-2 px-4 pb-6 z-[9999] shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+    <div className="w-full bg-white border-t border-gray-200 py-2 px-4 pb-6 z-[9999] shadow-[0_-4px_10px_rgba(0,0,0,0.05)] flex-shrink-0">
       <div className="flex justify-between items-center max-w-md mx-auto">
         {navItems.map((item) => {
           const isActive = location.pathname.startsWith(item.path) || (item.path === '/act1' && location.pathname === '/');
