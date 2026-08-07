@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { PrimaryButton, ToggleSwitch } from '../components/SharedUI';
 
@@ -9,6 +9,12 @@ export const VendorFilters: React.FC = () => {
   const [flexDays, setFlexDays] = useState(false);
   const [priceMin, setPriceMin] = useState(1100);
   const [priceMax, setPriceMax] = useState(1600);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const draggingHandle = useRef<'min' | 'max' | null>(null);
+  const priceMinRef = useRef(priceMin);
+  const priceMaxRef = useRef(priceMax);
+  const SLIDER_MIN = 1100;
+  const SLIDER_MAX = 1600;
   const [selectedCuisine, setSelectedCuisine] = useState('Iyengar veg');
   const [capacity, setCapacity] = useState('400+');
 
@@ -28,6 +34,62 @@ export const VendorFilters: React.FC = () => {
       setLanguages([...languages, lang]);
     }
   };
+
+  const updateSliderValue = useCallback((event: PointerEvent) => {
+    if (!sliderRef.current || !draggingHandle.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const ratio = Math.min(1, Math.max(0, x / rect.width));
+    const value = Math.round(SLIDER_MIN + ratio * (SLIDER_MAX - SLIDER_MIN));
+
+    if (draggingHandle.current === 'min') {
+      const nextMin = Math.min(value, priceMaxRef.current);
+      const clampedMin = Math.max(SLIDER_MIN, nextMin);
+      if (clampedMin !== priceMinRef.current) {
+        priceMinRef.current = clampedMin;
+        setPriceMin(clampedMin);
+      }
+    } else {
+      const nextMax = Math.max(value, priceMinRef.current);
+      const clampedMax = Math.min(SLIDER_MAX, nextMax);
+      if (clampedMax !== priceMaxRef.current) {
+        priceMaxRef.current = clampedMax;
+        setPriceMax(clampedMax);
+      }
+    }
+  }, []);
+
+  const stopSliderDrag = useCallback(() => {
+    draggingHandle.current = null;
+    window.removeEventListener('pointermove', updateSliderValue);
+    window.removeEventListener('pointerup', stopSliderDrag);
+  }, [updateSliderValue]);
+
+  useEffect(() => {
+    priceMinRef.current = priceMin;
+  }, [priceMin]);
+
+  useEffect(() => {
+    priceMaxRef.current = priceMax;
+  }, [priceMax]);
+
+  const startSliderDrag = useCallback(
+    (handle: 'min' | 'max') => (event: React.PointerEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      draggingHandle.current = handle;
+      updateSliderValue(event.nativeEvent);
+      window.addEventListener('pointermove', updateSliderValue);
+      window.addEventListener('pointerup', stopSliderDrag);
+    },
+    [stopSliderDrag, updateSliderValue]
+  );
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('pointermove', updateSliderValue);
+      window.removeEventListener('pointerup', stopSliderDrag);
+    };
+  }, [stopSliderDrag, updateSliderValue]);
 
   const handleReset = () => {
     setDateRange('14 Feb 2027');
@@ -109,16 +171,30 @@ export const VendorFilters: React.FC = () => {
               Price per plate
             </h4>
             {/* Dual Thumb Range Slider visual */}
-            <div className="relative w-full py-2">
+            <div className="relative w-full py-2" ref={sliderRef}>
               <div className="h-1 bg-[#E8DFC0] rounded-full w-full relative">
-                <div className="absolute left-[10%] right-[20%] h-full bg-[#7A2234] rounded-full"></div>
+                <div
+                  className="absolute h-full bg-[#7A2234] rounded-full"
+                  style={{
+                    left: `${((priceMin - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%`,
+                    right: `${100 - ((priceMax - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%`,
+                  }}
+                />
               </div>
-              <div className="absolute top-1/2 left-[10%] -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"></div>
-              <div className="absolute top-1/2 left-[80%] -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"></div>
+              <div
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"
+                style={{ left: `${((priceMin - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%` }}
+                onPointerDown={startSliderDrag('min')}
+              />
+              <div
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"
+                style={{ left: `${((priceMax - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%` }}
+                onPointerDown={startSliderDrag('max')}
+              />
             </div>
             <div className="flex justify-between text-[11.5px] text-[#786E65] mt-1.5">
-              <span>₹1,100 · $13</span>
-              <span>₹1,600 · $19</span>
+              <span>₹{priceMin.toLocaleString()} · ${Math.round(priceMin / 85)}</span>
+              <span>₹{priceMax.toLocaleString()} · ${Math.round(priceMax / 85)}</span>
             </div>
           </div>
 
@@ -175,22 +251,38 @@ export const VendorFilters: React.FC = () => {
             </h4>
 
             <div className="flex items-center justify-between">
-              <span className="text-[13px] text-[#2B2523]">Works with NRI clients</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${worksWithNri ? '' : 'opacity-60'}`}
+              >
+                Works with NRI clients
+              </span>
               <ToggleSwitch checked={worksWithNri} onChange={setWorksWithNri} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[13px] text-[#2B2523]">Verified in person by us</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${verifiedInPerson ? '' : 'opacity-60'}`}
+              >
+                Verified in person by us
+              </span>
               <ToggleSwitch checked={verifiedInPerson} onChange={setVerifiedInPerson} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[13px] text-[#2B2523] opacity-60">Accepts escrow payments</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${acceptsEscrow ? '' : 'opacity-60'}`}
+              >
+                Accepts escrow payments
+              </span>
               <ToggleSwitch checked={acceptsEscrow} onChange={setAcceptsEscrow} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[13px] text-[#2B2523] opacity-60">Has done 5+ NRI weddings</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${fivePlusNri ? '' : 'opacity-60'}`}
+              >
+                Has done 5+ NRI weddings
+              </span>
               <ToggleSwitch checked={fivePlusNri} onChange={setFivePlusNri} />
             </div>
           </div>

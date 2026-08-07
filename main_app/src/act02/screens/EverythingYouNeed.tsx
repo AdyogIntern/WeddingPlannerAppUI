@@ -98,7 +98,7 @@ export const EverythingYouNeed: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleCategoryClick('Food', 'SearchResults')}
-                className="px-3 py-1.5 bg-[#F8EDE9] border border-[#7A2234]/20 rounded-xl text-[12.5px] text-[#7A2234] font-medium cursor-pointer"
+                className="px-3 py-1.5 bg-[#F2ECE1] border border-[#E8DFC0] rounded-xl text-[12.5px] text-[#2B2523] hover:bg-[#EAE1D2] transition cursor-pointer"
               >
                 Iyengar
               </button>

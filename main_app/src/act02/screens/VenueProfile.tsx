@@ -12,14 +12,14 @@ export const VenueProfile: React.FC = () => {
         {/* Hero Banner with Navigation Overlay inside it matching 10.png */}
         <div className="w-full h-44 bg-[#EAE1D2] rounded-2xl relative border border-[#DFD5C4] mb-3 p-3 flex flex-col justify-between overflow-hidden group">
           {/* Top overlay row inside the banner */}
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#786E65]">
+          <div className="relative flex items-center justify-center text-[11px] font-mono text-[#786E65]">
             <button
               onClick={goBack}
-              className="text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
-            <span className="uppercase tracking-widest text-[10.5px] font-semibold text-[#786E65] mx-auto -ml-4">
+            <span className="uppercase tracking-widest text-[10.5px] font-semibold text-[#786E65] pt-18">
               PORTFOLIO · 31 IMAGES
             </span>
           </div>
