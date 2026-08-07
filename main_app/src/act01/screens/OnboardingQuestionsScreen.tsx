@@ -52,8 +52,8 @@ export const OnboardingQuestionsScreen: React.FC = () => {
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '22px',
-        paddingTop: '12px',
+        paddingHorizontal: '32px',
+        paddingTop: '60px',
         paddingBottom: '16px',
         justifyContent: 'space-between',
         height: '100%',
@@ -102,7 +102,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
       </View>
 
       {/* Main Question Content Viewport */}
-      <View style={{ flex: 1, overflowY: 'auto', paddingRight: '2px', paddingBottom: '8px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingRight: '2px', paddingBottom: '8px', maxWidth: '420px', width: '100%', margin: '0 auto' }}>
         
         {/* Question Title & Subtitle */}
         <Text variant="serifTitle" style={{ fontSize: '19px', color: colors.textDarkHeading, marginBottom: '4px' }}>

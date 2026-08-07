@@ -29,8 +29,8 @@ export const DecidersScreen: React.FC<DecidersScreenProps> = ({
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '18px',
-        paddingTop: '6px',
+        paddingHorizontal: '32px',
+        paddingTop: '60px',
         paddingBottom: '12px',
         justifyContent: 'space-between',
         height: '100%',
@@ -38,7 +38,7 @@ export const DecidersScreen: React.FC<DecidersScreenProps> = ({
       }}
     >
       {/* Scrollable Content View */}
-      <View style={{ flex: 1, overflowY: 'auto', paddingRight: '1px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingRight: '1px', maxWidth: '420px', width: '100%', margin: '0 auto' }}>
         {/* Progress Header */}
         <Text 
           variant="caption" 
