@@ -9,6 +9,7 @@ import { FunctionDetailScreen } from './screens/FunctionDetailScreen';
 import { ComparePlansScreen } from './screens/ComparePlansScreen';
 import { SharePlanScreen } from './screens/SharePlanScreen';
 import { Wifi, Battery } from 'lucide-react';
+import { RegistrationFormScreen } from './screens/RegistrationFormScreen';
 
 export default function App() {
   const { 
@@ -46,8 +47,8 @@ export default function App() {
         return <ComparePlansScreen />;
       case 'share_plan':
         return <SharePlanScreen />;
-      default:
-        return <OnboardingQuestionsScreen />;
+      case 'registration':
+        return <RegistrationFormScreen />;
     }
   };
 

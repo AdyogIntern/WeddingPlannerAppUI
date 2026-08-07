@@ -1,11 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React from 'react';
-import { MobileContainer } from './components/MobileContainer';
-
-export default function App() {
-  return <MobileContainer />;
-}
+import Act07App from './src/App';
+export default Act07App;

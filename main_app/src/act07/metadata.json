@@ -1,0 +1,6 @@
+{
+  "name": "Kalyanam - NRI Wedding Planner",
+  "description": "Mobile application for NRI families planning Chennai weddings remotely with ACT 6 ritual library, auspicious dates finder, and live coordination.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

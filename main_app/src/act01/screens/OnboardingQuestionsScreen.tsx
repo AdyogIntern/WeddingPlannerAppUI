@@ -376,7 +376,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
 
       </View>
 
-<>{questionIndex === TOTAL_QUESTIONS - 1 && (
+{questionIndex === TOTAL_QUESTIONS - 1 && (
         <View style={{ marginTop: '12px', width: '88%', maxWidth: '340px', alignSelf: 'center' }}>
           <RNButton 
             title='Build my Blueprint' 
@@ -384,7 +384,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
             style={{ backgroundColor: '#702334', color: '#fff', borderRadius: '8px', paddingVertical: '10px', fontWeight: '600' }}
           />
         </View>
-      )}</>
+      )}
     </View>
   );
 };

@@ -8,7 +8,7 @@ import Act03App from './act03/Act03App';
 import Act04App from './act04/Act04App';
 import Act05App from './act05/Act05App';
 import Act06App from './act06/Act06App';
-import Act07App from './act07/Act07App';
+import Act07App from "./act07/src/App";
 
 export default function App() {
   return (
