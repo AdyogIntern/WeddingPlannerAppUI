@@ -5,7 +5,7 @@ import { PrimaryButton, ToggleSwitch } from '../components/SharedUI';
 export const VendorFilters: React.FC = () => {
   const { navigate, showToast } = useApp();
 
-  const [dateRange, setDateRange] = useState('14 Feb 2027');
+  const [dateRange, setDateRange] = useState('');
   const [flexDays, setFlexDays] = useState(false);
   const [priceMin, setPriceMin] = useState(1100);
   const [priceMax, setPriceMax] = useState(1600);
@@ -15,17 +15,17 @@ export const VendorFilters: React.FC = () => {
   const priceMaxRef = useRef(priceMax);
   const SLIDER_MIN = 1100;
   const SLIDER_MAX = 1600;
-  const [selectedCuisine, setSelectedCuisine] = useState('Iyengar veg');
-  const [capacity, setCapacity] = useState('400+');
+  const [selectedCuisine, setSelectedCuisine] = useState('');
+  const [capacity, setCapacity] = useState('');
 
   // Trust Toggles
-  const [worksWithNri, setWorksWithNri] = useState(true);
-  const [verifiedInPerson, setVerifiedInPerson] = useState(true);
+  const [worksWithNri, setWorksWithNri] = useState(false);
+  const [verifiedInPerson, setVerifiedInPerson] = useState(false);
   const [acceptsEscrow, setAcceptsEscrow] = useState(false);
   const [fivePlusNri, setFivePlusNri] = useState(false);
 
   // Languages
-  const [languages, setLanguages] = useState<string[]>(['Tamil', 'English']);
+  const [languages, setLanguages] = useState<string[]>([]);
 
   const toggleLanguage = (lang: string) => {
     if (languages.includes(lang)) {
@@ -92,17 +92,17 @@ export const VendorFilters: React.FC = () => {
   }, [stopSliderDrag, updateSliderValue]);
 
   const handleReset = () => {
-    setDateRange('14 Feb 2027');
+    setDateRange('');
     setFlexDays(false);
     setPriceMin(1100);
     setPriceMax(1600);
-    setSelectedCuisine('Iyengar veg');
-    setCapacity('400+');
-    setWorksWithNri(true);
-    setVerifiedInPerson(true);
+    setSelectedCuisine('');
+    setCapacity('');
+    setWorksWithNri(false);
+    setVerifiedInPerson(false);
     setAcceptsEscrow(false);
     setFivePlusNri(false);
-    setLanguages(['Tamil', 'English']);
+    setLanguages([]);
     showToast('Filters reset to default');
   };
 
@@ -146,8 +146,12 @@ export const VendorFilters: React.FC = () => {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => setDateRange('14 Feb 2027')}
-                className="px-3.5 py-1.5 bg-[#7A2234] text-white font-medium rounded-xl text-[12.5px] cursor-pointer"
+                onClick={() => setDateRange((prev) => (prev === '14 Feb 2027' ? '' : '14 Feb 2027'))}
+                className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium cursor-pointer ${
+                  dateRange === '14 Feb 2027'
+                    ? 'bg-[#7A2234] text-white'
+                    : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
+                }`}
               >
                 14 Feb 2027
               </button>
@@ -208,7 +212,9 @@ export const VendorFilters: React.FC = () => {
                 <button
                   key={item}
                   type="button"
-                  onClick={() => setSelectedCuisine(item)}
+                  onClick={() =>
+                    setSelectedCuisine((prev) => (prev === item ? '' : item))
+                  }
                   className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                     selectedCuisine === item
                       ? 'bg-[#7A2234] text-white'
@@ -231,7 +237,7 @@ export const VendorFilters: React.FC = () => {
                 <button
                   key={cap}
                   type="button"
-                  onClick={() => setCapacity(cap)}
+                  onClick={() => setCapacity((prev) => (prev === cap ? '' : cap))}
                   className={`px-4 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                     capacity === cap
                       ? 'bg-[#7A2234] text-white'
