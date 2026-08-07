@@ -6,14 +6,14 @@ export const Availability: React.FC = () => {
   const { navigate, goBack, showToast } = useApp();
   const [selectedDay, setSelectedDay] = useState<number>(14);
 
-  // Days of February 2027
+  // Days of February 2027 matching 8.png
   const calendarDays = [
     { day: 31, status: 'prev' },
     { day: 1, status: 'booked' },
     { day: 2, status: 'normal' },
     { day: 3, status: 'normal' },
     { day: 4, status: 'normal' },
-    { day: 5, status: 'normal' },
+    { day: 5, status: 'booked' },
     { day: 6, status: 'normal' },
     { day: 7, status: 'normal' },
     { day: 8, status: 'normal' },
@@ -29,7 +29,7 @@ export const Availability: React.FC = () => {
     { day: 18, status: 'normal' },
     { day: 19, status: 'normal' },
     { day: 20, status: 'normal' },
-    { day: 21, status: 'normal' },
+    { day: 21, status: 'booked' },
     { day: 22, status: 'normal' },
     { day: 23, status: 'normal' },
     { day: 24, status: 'normal' },
@@ -51,11 +51,11 @@ export const Availability: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
         {/* Header */}
         <ScreenHeader
-          backText="Venue"
+          backText="Leela Palace"
           onBack={goBack}
         />
 
@@ -64,23 +64,26 @@ export const Availability: React.FC = () => {
           <SerifTitle>February 2027</SerifTitle>
         </div>
 
+        {/* Divider Line under Header */}
+        <div className="border-b border-[#E0D7C6] mb-4"></div>
+
         {/* Calendar Grid */}
-        <div className="bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl p-3 mb-3 shadow-2xs">
-          <div className="grid grid-cols-7 text-center text-[11px] font-medium text-[#786E65] mb-2">
+        <div className="bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl p-4 mb-4 shadow-2xs">
+          <div className="grid grid-cols-7 text-center text-[12px] font-medium text-[#786E65] mb-3">
             <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
           </div>
 
-          <div className="grid grid-cols-7 gap-1 text-center text-[12.5px]">
+          <div className="grid grid-cols-7 gap-1.5 text-center text-[13px]">
             {calendarDays.map((item, idx) => {
               const isSelected = item.status !== 'prev' && item.status !== 'next' && item.day === selectedDay;
 
-              let cellStyle = 'h-8 flex items-center justify-center rounded-lg text-[#2B2523] cursor-pointer hover:bg-[#EAE1D2]';
+              let cellStyle = 'h-8 flex items-center justify-center rounded-xl text-[#2B2523] cursor-pointer hover:bg-[#EAE1D2]';
               if (isSelected) {
                 cellStyle = 'h-8 flex items-center justify-center rounded-xl bg-[#7A2234] text-white font-bold shadow-xs cursor-pointer';
               } else if (item.status === 'held') {
-                cellStyle = 'h-8 flex items-center justify-center rounded-lg bg-[#FEF3C7] text-amber-900 font-medium cursor-pointer';
+                cellStyle = 'h-8 flex items-center justify-center rounded-xl bg-[#FEF3C7] text-amber-900 font-medium cursor-pointer';
               } else if (item.status === 'booked') {
-                cellStyle = 'h-8 flex items-center justify-center rounded-lg bg-[#EAE1D2] text-[#91877E] font-normal cursor-not-allowed';
+                cellStyle = 'h-8 flex items-center justify-center rounded-xl bg-[#EAE1D2]/60 text-[#91877E]/80 font-normal cursor-not-allowed';
               } else if (item.status === 'prev' || item.status === 'next') {
                 cellStyle = 'h-8 flex items-center justify-center text-[#B8AFA2] font-normal cursor-default';
               }
@@ -102,13 +105,13 @@ export const Availability: React.FC = () => {
           </div>
 
           {/* Calendar Legend */}
-          <div className="flex items-center justify-between text-[11px] text-[#786E65] pt-3 mt-2 border-t border-[#EAE1D2]">
+          <div className="flex items-center justify-between text-[11px] text-[#786E65] pt-3.5 mt-3 border-t border-[#EAE1D2]">
             <div className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded bg-[#7A2234]" />
               <span>Your date</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded bg-[#FEF3C7] border border-amber-300" />
+              <span className="w-2.5 h-2.5 rounded bg-[#FEF3C7]" />
               <span>Held by others</span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -119,11 +122,11 @@ export const Availability: React.FC = () => {
         </div>
 
         {/* Selected Slot Detail Card */}
-        <div className="p-3.5 bg-[#FAF7F0] border-2 border-[#7A2234] rounded-2xl mb-3 shadow-2xs">
-          <h3 className="text-[14px] font-semibold text-[#2B2523] mb-1">
+        <div className="p-4 bg-[#FAF7F0] border-2 border-[#7A2234] rounded-2xl mb-4">
+          <h3 className="text-[14px] font-bold text-[#2B2523] mb-1.5">
             Sun {selectedDay} Feb · morning muhurtham
           </h3>
-          <p className="text-[12px] text-[#2B2523] leading-relaxed mb-3">
+          <p className="text-[12.5px] text-[#2B2523] leading-relaxed mb-3.5">
             Available. Hall + adjoining dining, 6 am to 1 pm. ₹8.4L including power backup and 200 parking slots.
           </p>
 
@@ -138,24 +141,24 @@ export const Availability: React.FC = () => {
         </CalloutBox>
 
         {/* Fallback Alternative Dates */}
-        <div>
-          <h4 className="text-[13px] font-semibold text-[#2B2523] mb-2">
+        <div className="mt-4">
+          <h4 className="text-[13.5px] font-bold text-[#2B2523] mb-2.5">
             If {selectedDay} Feb falls through
           </h4>
           <div className="space-y-2">
             <button
               onClick={() => setSelectedDay(21)}
-              className="w-full p-2.5 bg-[#FAF7F0] border border-[#E5DCCE] hover:border-[#7A2234] transition cursor-pointer rounded-xl flex justify-between items-center text-[12.5px]"
+              className="w-full p-3 bg-[#FAF7F0] border border-[#E5DCCE] hover:border-[#7A2234] transition cursor-pointer rounded-xl flex justify-between items-center text-[12.5px]"
             >
-              <span className="text-[#2B2523]">Sun 21 Feb · also a muhurtham day</span>
-              <span className="text-emerald-700 font-medium">Free</span>
+              <span className="text-[#2B2523] font-medium">Sun 21 Feb · also a muhurtham day</span>
+              <span className="text-[#15803D] font-bold">Free</span>
             </button>
             <button
               onClick={() => setSelectedDay(27)}
-              className="w-full p-2.5 bg-[#FAF7F0] border border-[#E5DCCE] hover:border-[#7A2234] transition cursor-pointer rounded-xl flex justify-between items-center text-[12.5px]"
+              className="w-full p-3 bg-[#FAF7F0] border border-[#E5DCCE] hover:border-[#7A2234] transition cursor-pointer rounded-xl flex justify-between items-center text-[12.5px]"
             >
-              <span className="text-[#2B2523]">Sat 27 Feb</span>
-              <span className="text-emerald-700 font-medium">Free</span>
+              <span className="text-[#2B2523] font-medium">Sat 27 Feb</span>
+              <span className="text-[#15803D] font-bold">Free</span>
             </button>
           </div>
         </div>
@@ -163,3 +166,4 @@ export const Availability: React.FC = () => {
     </div>
   );
 };
+

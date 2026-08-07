@@ -1,31 +1,24 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { CalloutBox, PrimaryButton, ScreenHeader, SerifTitle, TextMuted } from '../components/SharedUI';
-import { Heart, Video } from 'lucide-react';
+import { CalloutBox, PrimaryButton, SerifTitle, TextMuted } from '../components/SharedUI';
+import { ArrowLeft } from 'lucide-react';
 
 export const PurohitProfile: React.FC = () => {
-  const { navigate, goBack, showToast, toggleSaveVendor, vendors } = useApp();
-  const purohit = vendors.find((v) => v.id === 'purohit-1') || vendors[0];
-
-  const handleBookCall = () => {
-    showToast('30-minute video call scheduled with Sri Venkatesa Sastrigal!');
-  };
+  const { navigate, goBack } = useApp();
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Header */}
-        <ScreenHeader
-          onBack={goBack}
-          rightAction={
-            <button
-              onClick={() => toggleSaveVendor(purohit.id)}
-              className="text-[#91877E] hover:text-[#7A2234] transition cursor-pointer p-0.5"
-            >
-              <Heart className={`w-4.5 h-4.5 ${purohit.isSaved ? 'fill-[#7A2234] text-[#7A2234]' : ''}`} />
-            </button>
-          }
-        />
+        {/* Top Header matching 11.png with ← Ritual on the right */}
+        <div className="flex items-center justify-end py-1 text-[13.5px] font-medium text-[#2B2523]">
+          <button
+            onClick={goBack}
+            className="flex items-center gap-1 text-[#786E65] hover:opacity-75 cursor-pointer font-medium"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Ritual</span>
+          </button>
+        </div>
 
         {/* Title */}
         <div className="mb-3">
@@ -33,16 +26,19 @@ export const PurohitProfile: React.FC = () => {
           <TextMuted>Vadakalai Iyengar · 34 years · Chennai</TextMuted>
         </div>
 
+        {/* Divider Line under Header */}
+        <div className="border-b border-[#E0D7C6] mb-4"></div>
+
         {/* Performs Section Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
-            Performs
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
+          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-2.5">
+            PERFORMS
           </div>
           <div className="flex flex-wrap gap-1.5">
             {['Nichayathartham', 'Panda Kaal', 'Muhurtham', 'Homam', 'Grihapravesham'].map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 bg-[#F2ECE1] border border-[#E8DFC0] text-[11.5px] text-[#2B2523] rounded-lg font-medium"
+                className="px-2.5 py-1 bg-[#F8EDE9]/60 border border-[#7A2234]/10 text-[11.5px] text-[#7A2234] rounded-lg font-medium"
               >
                 {tag}
               </span>
@@ -51,11 +47,11 @@ export const PurohitProfile: React.FC = () => {
         </div>
 
         {/* Fees Section Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
-            Fees
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
+          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-2.5">
+            FEES
           </div>
-          <div className="space-y-1.5 text-[12.5px] border-b border-[#EAE1D2] pb-2 mb-2">
+          <div className="space-y-2 text-[12.5px] border-b border-[#EAE1D2] pb-2.5 mb-2">
             <div className="flex justify-between items-center">
               <span className="text-[#2B2523]">Muhurtham, with two assistants</span>
               <span className="font-bold text-[#2B2523]">₹42,000</span>
@@ -69,35 +65,34 @@ export const PurohitProfile: React.FC = () => {
               <span className="font-bold text-[#2B2523]">₹14,500</span>
             </div>
           </div>
-          <p className="text-[11px] text-[#786E65]">
+          <p className="text-[11.5px] text-[#786E65]">
             Dakshinai is separate and entirely your choice.
           </p>
         </div>
 
         {/* Before The Day Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
-          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-medium mb-1">
-            Before the day
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 shadow-2xs">
+          <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-1.5">
+            BEFORE THE DAY
           </div>
-          <p className="text-[12px] text-[#2B2523] leading-relaxed mb-2">
+          <p className="text-[12.5px] text-[#2B2523] leading-relaxed mb-2">
             He will do a 30-minute video call with the couple to explain each step of the muhurtham — in English if you prefer. Most NRI couples take this.
           </p>
           <button
-            onClick={handleBookCall}
-            className="text-[11.5px] text-[#7A2234] font-medium hover:underline cursor-pointer flex items-center gap-1"
+            onClick={() => navigate('VendorSwap')}
+            className="text-[12px] text-[#7A2234] font-medium hover:underline cursor-pointer flex items-center gap-1"
           >
-            <Video className="w-3.5 h-3.5" /> Book the call →
+            Book the call →
           </button>
         </div>
 
         {/* Languages & Travel Card */}
-        <div className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#EAE1D2] border border-[#DFD5C4] shrink-0 flex items-center justify-center font-bold text-xs text-[#786E65]">
-            SV
-          </div>
-          <div className="text-[12px]">
-            <div className="font-semibold text-[#2B2523]">Speaks Tamil, Sanskrit, English</div>
-            <div className="text-[11px] text-[#786E65]">Will travel to Coimbatore and Madurai</div>
+        <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 flex items-center gap-3">
+          {/* Blank image thumbnail */}
+          <div className="w-8 h-8 rounded-lg bg-[#EAE1D2] border border-[#DFD5C4] shrink-0"></div>
+          <div className="text-[12.5px]">
+            <div className="font-bold text-[#2B2523]">Speaks Tamil, Sanskrit, English</div>
+            <div className="text-[11.5px] text-[#786E65]">Will travel to Coimbatore and Madurai</div>
           </div>
         </div>
 
@@ -116,3 +111,4 @@ export const PurohitProfile: React.FC = () => {
     </div>
   );
 };
+

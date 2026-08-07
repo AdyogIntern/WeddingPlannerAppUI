@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { PrimaryButton, ScreenHeader, SerifTitle, ToggleSwitch } from '../components/SharedUI';
+import { PrimaryButton, ToggleSwitch } from '../components/SharedUI';
 
 export const VendorFilters: React.FC = () => {
-  const { navigate, goBack, showToast } = useApp();
+  const { navigate, showToast } = useApp();
 
-  const [dateRange, setDateRange] = useState('14 Feb 2027');
+  const [dateRange, setDateRange] = useState('');
   const [flexDays, setFlexDays] = useState(false);
+  const [priceMin, setPriceMin] = useState(1100);
   const [priceMax, setPriceMax] = useState(1600);
-  const [selectedCuisine, setSelectedCuisine] = useState('Iyengar veg');
-  const [capacity, setCapacity] = useState('400+');
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const draggingHandle = useRef<'min' | 'max' | null>(null);
+  const priceMinRef = useRef(priceMin);
+  const priceMaxRef = useRef(priceMax);
+  const SLIDER_MIN = 1100;
+  const SLIDER_MAX = 1600;
+  const [selectedCuisine, setSelectedCuisine] = useState('');
+  const [capacity, setCapacity] = useState('');
 
   // Trust Toggles
-  const [worksWithNri, setWorksWithNri] = useState(true);
-  const [verifiedInPerson, setVerifiedInPerson] = useState(true);
+  const [worksWithNri, setWorksWithNri] = useState(false);
+  const [verifiedInPerson, setVerifiedInPerson] = useState(false);
   const [acceptsEscrow, setAcceptsEscrow] = useState(false);
   const [fivePlusNri, setFivePlusNri] = useState(false);
 
   // Languages
-  const [languages, setLanguages] = useState<string[]>(['Tamil', 'English']);
+  const [languages, setLanguages] = useState<string[]>([]);
 
   const toggleLanguage = (lang: string) => {
     if (languages.includes(lang)) {
@@ -28,17 +35,74 @@ export const VendorFilters: React.FC = () => {
     }
   };
 
+  const updateSliderValue = useCallback((event: PointerEvent) => {
+    if (!sliderRef.current || !draggingHandle.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const ratio = Math.min(1, Math.max(0, x / rect.width));
+    const value = Math.round(SLIDER_MIN + ratio * (SLIDER_MAX - SLIDER_MIN));
+
+    if (draggingHandle.current === 'min') {
+      const nextMin = Math.min(value, priceMaxRef.current);
+      const clampedMin = Math.max(SLIDER_MIN, nextMin);
+      if (clampedMin !== priceMinRef.current) {
+        priceMinRef.current = clampedMin;
+        setPriceMin(clampedMin);
+      }
+    } else {
+      const nextMax = Math.max(value, priceMinRef.current);
+      const clampedMax = Math.min(SLIDER_MAX, nextMax);
+      if (clampedMax !== priceMaxRef.current) {
+        priceMaxRef.current = clampedMax;
+        setPriceMax(clampedMax);
+      }
+    }
+  }, []);
+
+  const stopSliderDrag = useCallback(() => {
+    draggingHandle.current = null;
+    window.removeEventListener('pointermove', updateSliderValue);
+    window.removeEventListener('pointerup', stopSliderDrag);
+  }, [updateSliderValue]);
+
+  useEffect(() => {
+    priceMinRef.current = priceMin;
+  }, [priceMin]);
+
+  useEffect(() => {
+    priceMaxRef.current = priceMax;
+  }, [priceMax]);
+
+  const startSliderDrag = useCallback(
+    (handle: 'min' | 'max') => (event: React.PointerEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      draggingHandle.current = handle;
+      updateSliderValue(event.nativeEvent);
+      window.addEventListener('pointermove', updateSliderValue);
+      window.addEventListener('pointerup', stopSliderDrag);
+    },
+    [stopSliderDrag, updateSliderValue]
+  );
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('pointermove', updateSliderValue);
+      window.removeEventListener('pointerup', stopSliderDrag);
+    };
+  }, [stopSliderDrag, updateSliderValue]);
+
   const handleReset = () => {
-    setDateRange('14 Feb 2027');
+    setDateRange('');
     setFlexDays(false);
+    setPriceMin(1100);
     setPriceMax(1600);
-    setSelectedCuisine('Iyengar veg');
-    setCapacity('400+');
-    setWorksWithNri(true);
-    setVerifiedInPerson(true);
+    setSelectedCuisine('');
+    setCapacity('');
+    setWorksWithNri(false);
+    setVerifiedInPerson(false);
     setAcceptsEscrow(false);
     setFivePlusNri(false);
-    setLanguages(['Tamil', 'English']);
+    setLanguages([]);
     showToast('Filters reset to default');
   };
 
@@ -48,49 +112,55 @@ export const VendorFilters: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col w-full space-y-6 pb-6">
+    <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Top Header */}
-        <ScreenHeader
-          backText="Reset"
-          onBack={handleReset}
-          rightAction={
-            <button
-              type="button"
-              onClick={handleApply}
-              className="text-[13px] text-[#7A2234] font-semibold hover:opacity-75 cursor-pointer"
-            >
-              Apply
-            </button>
-          }
-        />
-
-        {/* Title */}
-        <div className="mb-3">
-          <SerifTitle>Filters</SerifTitle>
+        {/* Top Header Row matching 2.png EXACTLY */}
+        <div className="flex items-center justify-between py-2 text-[14px]">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="text-[#786E65] hover:opacity-80 font-medium cursor-pointer"
+          >
+            Reset
+          </button>
+          <span className="font-semibold text-[#2B2523]">Filters</span>
+          <button
+            type="button"
+            onClick={handleApply}
+            className="text-[#7A2234] font-bold hover:opacity-80 cursor-pointer"
+          >
+            Apply
+          </button>
         </div>
 
-        {/* Filter Sections */}
-        <div className="space-y-4 text-[12.5px]">
+        {/* Divider line under header */}
+        <div className="border-b border-[#E0D7C6] mb-5"></div>
+
+        {/* Filter Sections Stack */}
+        <div className="space-y-5 text-[13px]">
           {/* Section 1: Available on */}
-          <div className="border-b border-[#EAE1D2] pb-3">
-            <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
+          <div>
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-2.5">
               Available on
             </h4>
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => setDateRange('14 Feb 2027')}
-                className="px-3 py-1.5 bg-[#7A2234] text-white font-medium rounded-xl text-[12px] shadow-2xs cursor-pointer"
+                onClick={() => setDateRange((prev) => (prev === '14 Feb 2027' ? '' : '14 Feb 2027'))}
+                className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium cursor-pointer ${
+                  dateRange === '14 Feb 2027'
+                    ? 'bg-[#7A2234] text-white'
+                    : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
+                }`}
               >
                 14 Feb 2027
               </button>
               <button
                 type="button"
                 onClick={() => setFlexDays(!flexDays)}
-                className={`px-3 py-1.5 rounded-xl text-[12px] font-medium transition cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                   flexDays
-                    ? 'bg-[#7A2234] text-white shadow-2xs'
+                    ? 'bg-[#7A2234] text-white'
                     : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
                 }`}
               >
@@ -100,44 +170,54 @@ export const VendorFilters: React.FC = () => {
           </div>
 
           {/* Section 2: Price per plate */}
-          <div className="border-b border-[#EAE1D2] pb-3">
-            <div className="flex justify-between items-center mb-1.5">
-              <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium">
-                Price per plate
-              </h4>
-              <span className="text-[12.5px] font-bold text-[#2B2523]">
-                ₹{priceMax.toLocaleString()} · ${Math.round(priceMax / 84)}
-              </span>
+          <div>
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-3">
+              Price per plate
+            </h4>
+            {/* Dual Thumb Range Slider visual */}
+            <div className="relative w-full py-2" ref={sliderRef}>
+              <div className="h-1 bg-[#E8DFC0] rounded-full w-full relative">
+                <div
+                  className="absolute h-full bg-[#7A2234] rounded-full"
+                  style={{
+                    left: `${((priceMin - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%`,
+                    right: `${100 - ((priceMax - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%`,
+                  }}
+                />
+              </div>
+              <div
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"
+                style={{ left: `${((priceMin - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%` }}
+                onPointerDown={startSliderDrag('min')}
+              />
+              <div
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-[#7A2234] rounded-full cursor-pointer shadow-xs"
+                style={{ left: `${((priceMax - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100}%` }}
+                onPointerDown={startSliderDrag('max')}
+              />
             </div>
-            <input
-              type="range"
-              min="1100"
-              max="2500"
-              step="50"
-              value={priceMax}
-              onChange={(e) => setPriceMax(Number(e.target.value))}
-              className="w-full accent-[#7A2234] cursor-pointer"
-            />
-            <div className="flex justify-between text-[10.5px] text-[#786E65] mt-1">
-              <span>₹1,100 · $13</span>
-              <span>₹2,500 · $30</span>
+            <div className="flex justify-between text-[11.5px] text-[#786E65] mt-1.5">
+              <span>₹{priceMin.toLocaleString()} · ${Math.round(priceMin / 85)}</span>
+              <span>₹{priceMax.toLocaleString()} · ${Math.round(priceMax / 85)}</span>
             </div>
           </div>
 
           {/* Section 3: Cuisine & community */}
-          <div className="border-b border-[#EAE1D2] pb-3">
-            <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
+          <div>
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-2.5">
               Cuisine & community
             </h4>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {['Iyengar veg', 'Iyer veg', 'No onion garlic', 'Jain'].map((item) => (
                 <button
                   key={item}
                   type="button"
-                  onClick={() => setSelectedCuisine(item)}
-                  className={`px-3 py-1.5 rounded-xl text-[12px] font-medium transition cursor-pointer ${
+                  onClick={() =>
+                    setSelectedCuisine((prev) => (prev === item ? '' : item))
+                  }
+                  className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                     selectedCuisine === item
-                      ? 'bg-[#7A2234] text-white shadow-2xs'
+                      ? 'bg-[#7A2234] text-white'
                       : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
                   }`}
                 >
@@ -148,8 +228,8 @@ export const VendorFilters: React.FC = () => {
           </div>
 
           {/* Section 4: Capacity */}
-          <div className="border-b border-[#EAE1D2] pb-3">
-            <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
+          <div>
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-2.5">
               Capacity
             </h4>
             <div className="flex gap-2">
@@ -157,10 +237,10 @@ export const VendorFilters: React.FC = () => {
                 <button
                   key={cap}
                   type="button"
-                  onClick={() => setCapacity(cap)}
-                  className={`px-3.5 py-1.5 rounded-xl text-[12px] font-medium transition cursor-pointer ${
+                  onClick={() => setCapacity((prev) => (prev === cap ? '' : cap))}
+                  className={`px-4 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                     capacity === cap
-                      ? 'bg-[#7A2234] text-white shadow-2xs'
+                      ? 'bg-[#7A2234] text-white'
                       : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
                   }`}
                 >
@@ -171,38 +251,54 @@ export const VendorFilters: React.FC = () => {
           </div>
 
           {/* Section 5: Trust Toggles */}
-          <div className="border-b border-[#EAE1D2] pb-3 space-y-2.5">
-            <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium">
+          <div className="space-y-3.5 pt-1">
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-1">
               Trust
             </h4>
 
             <div className="flex items-center justify-between">
-              <span className="text-[12.5px] text-[#2B2523]">Works with NRI clients</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${worksWithNri ? '' : 'opacity-60'}`}
+              >
+                Works with NRI clients
+              </span>
               <ToggleSwitch checked={worksWithNri} onChange={setWorksWithNri} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[12.5px] text-[#2B2523]">Verified in person by us</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${verifiedInPerson ? '' : 'opacity-60'}`}
+              >
+                Verified in person by us
+              </span>
               <ToggleSwitch checked={verifiedInPerson} onChange={setVerifiedInPerson} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[12.5px] text-[#2B2523]">Accepts escrow payments</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${acceptsEscrow ? '' : 'opacity-60'}`}
+              >
+                Accepts escrow payments
+              </span>
               <ToggleSwitch checked={acceptsEscrow} onChange={setAcceptsEscrow} />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-[12.5px] text-[#2B2523]">Has done 5+ NRI weddings</span>
+              <span
+                className={`text-[13px] text-[#2B2523] ${fivePlusNri ? '' : 'opacity-60'}`}
+              >
+                Has done 5+ NRI weddings
+              </span>
               <ToggleSwitch checked={fivePlusNri} onChange={setFivePlusNri} />
             </div>
           </div>
 
           {/* Section 6: Speaks */}
-          <div className="pb-2">
-            <h4 className="text-[11px] uppercase tracking-wider text-[#91877E] font-medium mb-2">
+          <div className="pt-1">
+            <h4 className="text-[13px] text-[#2B2523] font-semibold mb-2.5">
               Speaks
             </h4>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {['Tamil', 'English', 'Telugu', 'Hindi'].map((lang) => {
                 const isSel = languages.includes(lang);
                 return (
@@ -210,9 +306,9 @@ export const VendorFilters: React.FC = () => {
                     key={lang}
                     type="button"
                     onClick={() => toggleLanguage(lang)}
-                    className={`px-3 py-1.5 rounded-xl text-[12px] font-medium transition cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-xl text-[12.5px] font-medium transition cursor-pointer ${
                       isSel
-                        ? 'bg-[#7A2234] text-white shadow-2xs'
+                        ? 'bg-[#7A2234] text-white'
                         : 'bg-[#F2ECE1] border border-[#E8DFC0] text-[#2B2523] hover:bg-[#EAE1D2]'
                     }`}
                   >
@@ -225,8 +321,8 @@ export const VendorFilters: React.FC = () => {
         </div>
       </div>
 
-      {/* Sticky Bottom Action */}
-      <div className="mt-4 pt-2 border-t border-[#E8DFC0]/50">
+      {/* Bottom CTA Button */}
+      <div className="mt-8">
         <PrimaryButton onClick={handleApply}>
           Show 9 caterers
         </PrimaryButton>
@@ -234,4 +330,3 @@ export const VendorFilters: React.FC = () => {
     </div>
   );
 };
-
