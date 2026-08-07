@@ -134,7 +134,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       style={{
         backgroundColor: selected ? '#FAF3E8' : colors.cardBackgroundLight,
         borderRadius: '12px',
-        padding: subtitle ? '10px 14px' : '11px 14px',
+        padding: subtitle ? '14px 18px' : '15px 18px',
         marginBottom: '8px',
         border: selected 
           ? `1.5px solid ${colors.cardSelectedBorder}` 
