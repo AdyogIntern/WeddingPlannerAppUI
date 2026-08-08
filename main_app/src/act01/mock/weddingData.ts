@@ -6,16 +6,16 @@ import {
 } from '../types';
 
 export const initialOnboardingData: OnboardingData = {
-  weddingDate: '14 Feb 2027',
-  dateOptionType: 'fixed',
-  country: 'Seattle, United States',
-  city: 'Chennai',
-  guestCount: 420,
+  weddingDate: '',
+  dateOptionType: '',
+  country: '',
+  city: '',
+  guestCount: null,
   weddingType: 'Traditional',
   community: 'Iyengar',
-  currency: 'USD',
+  currency: '',
   rawBudgetAmount: 48000,
-  budgetINR: 4030000,
+  budgetINR: 0,
   functionsRequired: [
     'Nichayathartham',
     'Panda Kaal & Sumangali Prarthanai',
@@ -23,8 +23,8 @@ export const initialOnboardingData: OnboardingData = {
     'Muhurtham',
     'Reception',
   ],
-  topPriorities: ['Food', 'Traditions', 'Photography'],
-  deciders: ['Bride', 'Parents', 'Groom'],
+  topPriorities: [],
+  deciders: [],
 };
 
 export const mockFunctions: WeddingFunction[] = [

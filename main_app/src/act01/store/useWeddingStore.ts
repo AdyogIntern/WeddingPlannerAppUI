@@ -67,7 +67,7 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
   functions: mockFunctions,
   selectedFunctionId: 'f4', // Muhurtham by default
   weddingScore: 38,
-  currency: 'USD',
+  currency: '' as any,
   planVersions: mockPlanVersions,
   nudges: mockNudgeCards,
   isGenerating: false,
@@ -182,7 +182,7 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
     functions: mockFunctions,
     selectedFunctionId: 'f4',
     weddingScore: 38,
-    currency: 'USD',
+    currency: '' as any,
     planVersions: mockPlanVersions,
     isGenerating: false,
     generatingProgress: 0,

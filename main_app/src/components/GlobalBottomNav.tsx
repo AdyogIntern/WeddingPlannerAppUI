@@ -1,9 +1,22 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Heart, Search, Users, CreditCard, Calendar, Star, Video } from 'lucide-react';
+import { useWeddingStore } from '../act01/store/useWeddingStore';
 
 export const GlobalBottomNav = () => {
   const location = useLocation();
+  const currentScreen = useWeddingStore((state) => state.currentScreen);
+
+  // Hide the bottom navigation bar during Act 1 onboarding screens (landing, questions, generating, blueprint_generated, registration)
+  if (
+    location.pathname.startsWith('/act1') &&
+    currentScreen !== 'blueprint_home' &&
+    currentScreen !== 'function_details' &&
+    currentScreen !== 'compare_plans' &&
+    currentScreen !== 'share_plan'
+  ) {
+    return null;
+  }
 
   const navItems = [
     { id: 'act1', path: '/act1', icon: Heart, label: 'Vision' },

@@ -53,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <div className={`flex-1 overflow-hidden relative flex flex-col w-full h-full ${isDarkScreen ? 'bg-[#671B2B]' : 'bg-[#FAF8F5]'}`}>
+    <div className={`flex-1 overflow-hidden relative flex flex-col w-full h-full ${isDarkScreen ? 'bg-[#861F35]' : 'bg-[#FAF8F5]'}`}>
       {renderCurrentAppScreen()}
     </div>
   );
