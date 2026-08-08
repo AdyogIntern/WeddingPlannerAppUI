@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, CheckSquare, Gift, Heart, Calendar } from 'lucide-react';
+import { LayoutDashboard, Gift, Heart, Calendar } from 'lucide-react';
 import { Act5ScreenId } from '../../types/act5';
 
 interface BottomNavigationProps {
@@ -32,20 +32,6 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
       >
         <LayoutDashboard className="w-4 h-4" />
         <span className="text-[10px] font-bold">Progress</span>
-      </button>
-
-      {/* Quests Tab */}
-      <button
-        onClick={() => onSelectTab('quests')}
-        className={`relative flex flex-col items-center gap-0.5 transition-colors cursor-pointer py-1 px-2 rounded-lg ${
-          isQuestsActive ? 'text-[#681D2A]' : 'text-[#98928B] hover:text-[#68625D]'
-        }`}
-      >
-        <CheckSquare className="w-4 h-4" />
-        <span className="text-[10px] font-bold">Quests</span>
-        {activeQuestsCount > 0 && (
-          <span className="absolute top-0.5 right-1.5 w-2 h-2 rounded-full bg-[#DFBA75]" />
-        )}
       </button>
 
       {/* Rewards Tab */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Wifi, Battery, ChevronLeft, Smartphone, Monitor } from 'lucide-react';
+import { Wifi, Battery, ChevronLeft, Smartphone, Monitor, CheckSquare } from 'lucide-react';
 import { Act5ScreenId } from '../../types/act5';
-import { BottomNavigation } from './BottomNavigation';
+
 
 interface MobileFrameProps {
   children: React.ReactNode;
@@ -47,9 +47,14 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
           </div>
 
           <div className="flex items-center gap-1">
-            <span className="text-[11px] font-semibold bg-[#4A121D] text-[#F0D399] px-2 py-0.5 rounded-full border border-[#DFBA75]/30">
-              Act 5
-            </span>
+            <button
+              onClick={() => onSelectTab('quests')}
+              className="relative flex items-center gap-1.5 bg-[#4A121D] text-[#F0D399] px-3 py-1.5 rounded-full border border-[#DFBA75]/30 hover:bg-[#5A1724] transition-colors cursor-pointer"
+            >
+              <CheckSquare className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold">Quests</span>
+              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#DFBA75] border-2 border-[#681D2A]" />
+            </button>
           </div>
         </div>
 
@@ -66,11 +71,7 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
           {children}
         </div>
 
-        {/* Bottom Mobile Tab Bar */}
-        <BottomNavigation 
-          currentScreen={currentScreen} 
-          onSelectTab={onSelectTab} 
-        />
+
     </div>
   );
 };
