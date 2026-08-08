@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
-import { colors } from '../theme';
 import { useWeddingStore } from '../store/useWeddingStore';
-import { ChevronLeft, X, Clock, Heart, Sparkles, CheckCircle2 } from 'lucide-react';
+import { X, Clock, Heart } from 'lucide-react';
 
 interface DecorCardItem {
   id: string;
@@ -51,26 +50,14 @@ const mockDecorCards: DecorCardItem[] = [
 export const Act6SwipeScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [shortlisted, setShortlisted] = useState<string[]>([]);
-  const [lastAction, setLastAction] = useState<string | null>(null);
 
   const card = mockDecorCards[currentIndex] || mockDecorCards[0];
-  const itemsLeft = mockDecorCards.length - currentIndex;
+  const itemsLeft = 12 - currentIndex;
 
-  const handleAction = (action: 'skip' | 'later' | 'shortlist') => {
-    if (action === 'shortlist') {
-      setShortlisted([...shortlisted, card.vendorName]);
-      setLastAction(`Shortlisted ${card.vendorName}`);
-    } else if (action === 'skip') {
-      setLastAction(`Skipped ${card.vendorName}`);
-    } else {
-      setLastAction(`Saved ${card.vendorName} for later`);
-    }
-
+  const handleAction = () => {
     if (currentIndex < mockDecorCards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Done -> Navigate to Reels or Blueprint
       setScreen('act6_reels');
     }
   };
@@ -78,64 +65,55 @@ export const Act6SwipeScreen: React.FC = () => {
   return (
     <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
       {/* Header with Progress Bar */}
-      <div className="bg-[#1D1D1F] text-white px-5 py-3 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setScreen('act6_board')}
-            className="p-1.5 rounded-lg bg-white/10 text-white border-none cursor-pointer"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <span className="text-sm font-serif font-bold">Mandap decor</span>
-        </div>
-        <span className="text-xs text-white/70 font-mono font-semibold">{itemsLeft} left</span>
+      <div className="bg-[#1C1617] text-white px-6 pt-5 pb-3 flex items-center justify-between shrink-0">
+        <span className="text-sm font-semibold">Mandap decor</span>
+        <span className="text-xs text-white/60 font-medium">{itemsLeft} left</span>
       </div>
 
       {/* Top Gold Progress Bar */}
-      <div className="w-full bg-[#1D1D1F] px-4 pb-2">
-        <div className="w-full bg-white/20 h-1 rounded-full overflow-hidden">
+      <div className="w-full bg-[#1C1617] px-6 pb-4">
+        <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
           <div 
             className="bg-[#C9A227] h-full transition-all duration-300 rounded-full"
-            style={{ width: `${((currentIndex + 1) / mockDecorCards.length) * 100}%` }}
+            style={{ width: `${((currentIndex + 1) / 12) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Main Swipeable Card Area */}
-      <View style={{ flex: 1, padding: '16px', justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, padding: '24px', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
         
         {/* Card Container */}
-        <div className="w-full max-w-[340px] bg-white rounded-3xl overflow-hidden shadow-xl border border-[#ECECEC] relative flex flex-col">
-          {/* Main Visual Image */}
-          <div className="h-[300px] bg-[#EBE4D8] relative overflow-hidden flex items-center justify-center">
+        <div className="w-full max-w-[340px] bg-white rounded-[24px] overflow-hidden shadow-md border border-[#ECECEC] flex flex-col">
+          {/* Main Visual Image (Solid beige box with image and text overlay) */}
+          <div className="aspect-[1.1] bg-[#EFE8DC] overflow-hidden relative">
             <img 
               src={card.image} 
               alt={card.mandapName}
               className="w-full h-full object-cover"
             />
-            {/* Overlay Title */}
-            <div className="absolute top-4 left-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-xl text-center">
-              <span className="text-xs font-mono font-bold text-white tracking-widest uppercase">
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+              <span className="text-xs font-mono font-bold text-white tracking-widest uppercase bg-black/40 px-3 py-1.5 rounded-lg">
                 {card.mandapName}
               </span>
             </div>
           </div>
 
-          {/* Floating Details Box */}
-          <div className="p-4 bg-white space-y-3">
+          {/* Details Box */}
+          <div className="p-5 bg-white space-y-3">
             <div>
-              <h2 className="text-base font-bold text-[#1D1D1F]">{card.vendorName}</h2>
-              <p className="text-xs text-[#666666] mt-0.5">
-                <span className="font-semibold text-[#8B1538]">{card.cost}</span> · {card.cost} fits your budget · {card.availableDate}
+              <h2 className="text-[17px] font-bold text-[#1D1D1F] leading-tight">{card.vendorName}</h2>
+              <p className="text-xs text-[#8A8580] mt-1 font-medium">
+                {card.cost} · fits your budget · {card.availableDate}
               </p>
             </div>
 
             {/* Badges */}
-            <div className="flex flex-wrap gap-2">
-              <span className="bg-[#FFF0F3] text-[#8B1538] border border-[#F8C8D4] text-[10px] font-bold px-2.5 py-1 rounded-full">
+            <div className="flex flex-wrap gap-2 pt-1">
+              <span className="bg-[#FFF0F3] text-[#8B1538] text-[10px] font-bold px-3 py-1 rounded-full">
                 {card.matchBadge}
               </span>
-              <span className="bg-[#FAF7F2] text-[#4A4244] border border-[#E6D8C4] text-[10px] font-bold px-2.5 py-1 rounded-full">
+              <span className="bg-[#FAF2EE] text-[#8B1538]/80 text-[10px] font-bold px-3 py-1 rounded-full">
                 {card.familyBadge}
               </span>
             </div>
@@ -143,44 +121,41 @@ export const Act6SwipeScreen: React.FC = () => {
         </div>
 
         {/* Action Controls: Skip, Maybe Later, Shortlist */}
-        <div className="flex items-center justify-center gap-5 mt-6">
-          {/* Skip Button (X) */}
-          <button
-            onClick={() => handleAction('skip')}
-            className="w-13 h-13 rounded-full bg-white border border-[#ECECEC] shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 cursor-pointer active:scale-95 transition-transform"
-            title="Skip"
-          >
-            <X size={22} />
-          </button>
+        <div className="flex flex-col items-center gap-2 mt-2 w-full">
+          <div className="flex items-center justify-center gap-5">
+            {/* Skip Button (X) */}
+            <button
+              onClick={handleAction}
+              className="w-16 h-16 rounded-full bg-white border border-[#EBE7DF] shadow-xs flex items-center justify-center text-[#1D1D1F] hover:bg-gray-50 cursor-pointer active:scale-95 transition-transform"
+            >
+              <X size={24} strokeWidth={2.5} />
+            </button>
 
-          {/* Maybe Later Button (Clock) */}
-          <button
-            onClick={() => handleAction('later')}
-            className="w-11 h-11 rounded-full bg-white border border-[#ECECEC] shadow-md flex items-center justify-center text-[#C9A227] hover:bg-gray-50 cursor-pointer active:scale-95 transition-transform"
-            title="Maybe Later"
-          >
-            <Clock size={18} />
-          </button>
+            {/* Maybe Later Button (Clock) */}
+            <button
+              onClick={handleAction}
+              className="w-14 h-14 rounded-full bg-white border border-[#EBE7DF] shadow-xs flex items-center justify-center text-[#C9A227] hover:bg-gray-50 cursor-pointer active:scale-95 transition-transform"
+            >
+              <Clock size={20} strokeWidth={2.5} />
+            </button>
 
-          {/* Shortlist Button (Heart) */}
-          <button
-            onClick={() => handleAction('shortlist')}
-            className="w-14 h-14 rounded-full bg-[#8B1538] text-white shadow-lg flex items-center justify-center hover:bg-[#72102D] cursor-pointer active:scale-95 transition-transform"
-            title="Shortlist"
-          >
-            <Heart size={24} className="fill-white" />
-          </button>
-        </div>
+            {/* Shortlist Button (Heart) */}
+            <button
+              onClick={handleAction}
+              className="w-16 h-16 rounded-full bg-[#8B1538] text-white shadow-sm flex items-center justify-center hover:bg-[#72102D] cursor-pointer active:scale-95 transition-transform border-none"
+            >
+              <Heart size={24} className="fill-white" />
+            </button>
+          </div>
 
-        {/* Labels below controls */}
-        <div className="flex justify-between w-[220px] text-[10px] text-[#666666] font-semibold mt-2 px-1">
-          <span>Skip</span>
-          <span>Maybe later</span>
-          <span>Shortlist</span>
+          {/* Labels below controls */}
+          <span className="text-[11px] text-[#A8A39D] font-bold mt-2 tracking-wide">
+            Skip · Maybe later · Shortlist
+          </span>
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF7F2] p-3 rounded-2xl border border-[#E6D8C4] text-[10.5px] text-[#4A4244] text-center max-w-[340px] mt-4 leading-snug">
+        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed text-center max-w-[340px] mt-2">
           Twelve cards, ninety seconds, and the decor shortlist is done. Then the family votes on what you kept.
         </div>
       </View>
