@@ -98,8 +98,16 @@ export const SearchResults: React.FC = () => {
                 className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl hover:border-[#7A2234] transition-all cursor-pointer"
               >
                 <div className="flex gap-3">
-                  {/* Blank Thumbnail Box */}
-                  <div className="w-[72px] h-[72px] bg-[#EAE1D2] rounded-xl shrink-0 border border-[#DFD5C4]"></div>
+                  {/* Vendor Thumbnail Image */}
+                  {vendor.image ? (
+                    <img
+                      src={vendor.image}
+                      alt={vendor.name}
+                      className="w-[72px] h-[72px] object-cover rounded-xl shrink-0 border border-[#DFD5C4]"
+                    />
+                  ) : (
+                    <div className="w-[72px] h-[72px] bg-[#EAE1D2] rounded-xl shrink-0 border border-[#DFD5C4]"></div>
+                  )}
 
                   {/* Content */}
                   <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">

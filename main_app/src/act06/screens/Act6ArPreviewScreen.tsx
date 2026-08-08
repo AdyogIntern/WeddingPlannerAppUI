@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgArPreview from '../../assets/ar_stage_preview.jpg';
+
 export const Act6ArPreviewScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [selectedStyle, setSelectedStyle] = useState<'kanakambaram' | 'jasmine' | 'temple'>('kanakambaram');
@@ -11,16 +13,21 @@ export const Act6ArPreviewScreen: React.FC = () => {
       {/* Simulated Camera Area */}
       <div 
         onClick={() => setScreen('act6_lookbook')}
-        className="w-full aspect-[1.1] bg-[#2D221D] relative overflow-hidden flex items-center justify-center cursor-pointer select-none"
+        className="w-full aspect-[1.1] relative overflow-hidden flex items-center justify-center cursor-pointer select-none"
+        style={{
+          backgroundImage: `url(${imgArPreview})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
         {/* AR Preview Pill in top right */}
-        <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-[10px] border border-white/10">
+        <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-[10px] border border-white/10 z-10">
           <span className="text-[10px] font-mono font-bold text-[#1D1D1F] tracking-wide">
             AR preview
           </span>
         </div>
 
-        <span className="absolute text-xs font-mono font-bold text-white/45 tracking-[0.12em] uppercase pointer-events-none">
+        <span className="absolute text-xs font-mono font-bold text-white/60 tracking-[0.12em] uppercase pointer-events-none z-10 drop-shadow-sm">
           CAMERA · LEELA PALACE HALL
         </span>
 

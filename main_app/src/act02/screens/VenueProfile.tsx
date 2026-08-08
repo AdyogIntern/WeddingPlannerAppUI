@@ -4,22 +4,33 @@ import { CalloutBox, PrimaryButton, SerifTitle } from '../components/SharedUI';
 import { ArrowLeft, Play } from 'lucide-react';
 
 export const VenueProfile: React.FC = () => {
-  const { navigate, goBack } = useApp();
+  const { navigate, goBack, vendors } = useApp();
+  const venue = vendors.find((v) => v.id === 'venue-1');
 
   return (
     <div className="flex flex-col w-full pb-6 font-sans">
       <div>
         {/* Hero Banner with Navigation Overlay inside it matching 10.png */}
-        <div className="w-full h-44 bg-[#EAE1D2] rounded-2xl relative border border-[#DFD5C4] mb-3 p-3 flex flex-col justify-between overflow-hidden group">
+        <div
+          className="w-full h-44 rounded-2xl relative border border-[#DFD5C4] mb-3 p-3 flex flex-col justify-between overflow-hidden group"
+          style={{
+            backgroundImage: venue?.image ? `url(${venue.image})` : undefined,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          {/* Darker overlay on hover/focus */}
+          <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition"></div>
+
           {/* Top overlay row inside the banner */}
-          <div className="relative flex items-center justify-center text-[11px] font-mono text-[#786E65]">
+          <div className="relative flex items-center justify-center text-[11px] font-mono text-white z-10">
             <button
               onClick={goBack}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-white hover:opacity-75 cursor-pointer font-bold"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
-            <span className="uppercase tracking-widest text-[10.5px] font-semibold text-[#786E65] pt-18">
+            <span className="uppercase tracking-widest text-[10.5px] font-semibold text-white pt-18">
               PORTFOLIO · 31 IMAGES
             </span>
           </div>

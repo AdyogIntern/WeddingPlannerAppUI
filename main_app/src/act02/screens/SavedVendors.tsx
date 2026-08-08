@@ -3,6 +3,14 @@ import { useApp } from '../context/AppContext';
 import { CalloutBox, PrimaryButton, SerifTitle, TextMuted } from '../components/SharedUI';
 import { ChevronRight } from 'lucide-react';
 
+import mandapamImg from '../../assets/mandapam.jpg';
+import priestImg from '../../assets/priest.jpg';
+import sareeImg from '../../assets/saree.jpg';
+import jewelleryImg from '../../assets/jewellery.jpg';
+import photoCandidImg from '../../assets/photo_candid.jpg';
+import photoRomanticImg from '../../assets/photo_romantic.jpg';
+import photoDroneImg from '../../assets/photo_drone.jpg';
+
 export const SavedVendors: React.FC = () => {
   const { navigate, showToast } = useApp();
   const [activeFilter, setActiveFilter] = useState('All');
@@ -60,8 +68,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={photoCandidImg} alt="Candid photo" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={photoRomanticImg} alt="Romantic photo" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#7A2234]">Photography</h3>
@@ -78,8 +86,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={mandapamImg} alt="Mandapam decor" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={photoDroneImg} alt="Aerial Mandapam" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#7A2234]">Mandap decor</h3>
@@ -96,8 +104,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={sareeImg} alt="Saree design" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={photoCandidImg} alt="Mehendi photoshoot" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#2B2523]">Mehendi artists</h3>
@@ -114,8 +122,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={jewelleryImg} alt="Gifts jewellery" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={sareeImg} alt="Gifts fabrics" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#2B2523]">Return gifts</h3>
@@ -132,8 +140,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={priestImg} alt="Rituals priest" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={mandapamImg} alt="Rituals hall" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#2B2523]">Nadaswaram</h3>
@@ -150,8 +158,8 @@ export const SavedVendors: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <div className="w-9 h-9 bg-[#EAE1D2] rounded-lg border border-[#DFD5C4]"></div>
-                <div className="w-9 h-9 bg-[#E2D8C8] rounded-lg border border-[#DFD5C4]"></div>
+                <img src={sareeImg} alt="Silk saree" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
+                <img src={jewelleryImg} alt="Gold jewellery" className="w-9 h-9 object-cover rounded-lg border border-[#DFD5C4]" />
               </div>
               <div>
                 <h3 className="text-[14px] font-bold text-[#2B2523]">Bridal silk</h3>

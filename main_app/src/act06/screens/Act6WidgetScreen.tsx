@@ -17,7 +17,6 @@ export const Act6WidgetScreen: React.FC = () => {
         </span>
 
         {/* Large Time Text */}
-        <h1 className="text-7xl font-sans font-light tracking-tight text-white my-2">9:41</h1>
 
         {/* iOS Lock Screen Widget Card */}
         <div className="w-full max-w-[340px] bg-white/10 backdrop-blur-md p-4 mt-2 rounded-[20px] border border-white/10 text-white space-y-1.5 text-left">

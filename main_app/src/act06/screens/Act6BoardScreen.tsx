@@ -2,14 +2,28 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgMandapam from '../../assets/mandapam.jpg';
+import imgRomantic from '../../assets/photo_romantic.jpg';
+import imgDrone from '../../assets/photo_drone.jpg';
+import imgCandid from '../../assets/photo_candid.jpg';
+import imgSaree from '../../assets/saree.jpg';
+import imgJewellery from '../../assets/jewellery.jpg';
+import imgSadya from '../../assets/sadya.jpg';
+
 export const Act6BoardScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
 
+  const matchedVendors = [
+    { name: 'Bloom & Thread', img: imgMandapam },
+    { name: 'Studio Verdant', img: imgDrone },
+    { name: 'Sri Decorators', img: imgSadya },
+  ];
+
   return (
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
-      {/* Top Header */}
+      {/* ... (rest of header remains the same) */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button
           onClick={() => setScreen('act6_swipe')}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
@@ -31,16 +45,16 @@ export const Act6BoardScreen: React.FC = () => {
         <div className="grid grid-cols-2 gap-3">
           {/* Left Column */}
           <div className="flex flex-col gap-3">
-            <div className="h-[180px] rounded-2xl bg-[#EADFCF]" />
-            <div className="h-[96px] rounded-2xl bg-[#EADFCF]" />
-            <div className="h-[96px] rounded-2xl bg-[#EADFCF]" />
+            <img src={imgMandapam} alt="Mandapam" className="h-[180px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
+            <img src={imgSaree} alt="Saree design" className="h-[96px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
+            <img src={imgJewellery} alt="Jewellery" className="h-[96px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col gap-3">
-            <div className="h-[96px] rounded-2xl bg-[#EADFCF]" />
-            <div className="h-[96px] rounded-2xl bg-[#EADFCF]" />
-            <div className="h-[180px] rounded-2xl bg-[#EADFCF]" />
+            <img src={imgRomantic} alt="Romantic couple" className="h-[96px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
+            <img src={imgDrone} alt="Drone shot" className="h-[96px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
+            <img src={imgCandid} alt="Candid portrait" className="h-[180px] w-full rounded-2xl object-cover border border-[#EADFCF]" />
           </div>
         </div>
 
@@ -70,10 +84,10 @@ export const Act6BoardScreen: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            {['Bloom & Thread', 'Studio Verdant', 'Sri Decorators'].map((name) => (
-              <div key={name} className="flex flex-col items-center gap-2">
-                <div className="w-full aspect-square rounded-[14px] bg-[#EADFCF]" />
-                <span className="text-[11px] font-bold text-[#1D1D1F] text-center leading-tight">{name}</span>
+            {matchedVendors.map((item) => (
+              <div key={item.name} className="flex flex-col items-center gap-2">
+                <img src={item.img} alt={item.name} className="w-full aspect-square rounded-[14px] object-cover border border-[#EADFCF]" />
+                <span className="text-[11px] font-bold text-[#1D1D1F] text-center leading-tight">{item.name}</span>
               </div>
             ))}
           </div>

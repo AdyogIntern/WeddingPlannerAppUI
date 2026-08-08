@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgSaree from '../../assets/saree.jpg';
+import imgReception from '../../assets/reception_look.jpg';
+import imgSangeet from '../../assets/sangeet_look.jpg';
+
 export const Act6LookbookScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [selectedLook, setSelectedLook] = useState<'muhurtham' | 'reception' | 'sangeet'>('muhurtham');
@@ -10,7 +14,7 @@ export const Act6LookbookScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button
           onClick={() => setScreen('act6_sangeet_studio')}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
@@ -35,9 +39,13 @@ export const Act6LookbookScreen: React.FC = () => {
             onClick={() => setSelectedLook('muhurtham')}
             className="flex flex-col gap-2 shrink-0 text-left border-none bg-transparent p-0 cursor-pointer"
           >
-            <div className={`w-[130px] h-[170px] rounded-2xl bg-[#EADFCF] transition-all ${
-              selectedLook === 'muhurtham' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
-            }`} />
+            <img
+              src={imgSaree}
+              alt="Muhurtham outfit"
+              className={`w-[130px] h-[170px] rounded-2xl object-cover transition-all ${
+                selectedLook === 'muhurtham' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
+              }`}
+            />
             <div>
               <h4 className="text-xs font-bold text-[#1D1D1F]">Muhurtham</h4>
               <p className="text-[10px] text-[#8E867E] font-medium">Arakku red korvai</p>
@@ -49,9 +57,13 @@ export const Act6LookbookScreen: React.FC = () => {
             onClick={() => setSelectedLook('reception')}
             className="flex flex-col gap-2 shrink-0 text-left border-none bg-transparent p-0 cursor-pointer"
           >
-            <div className={`w-[130px] h-[170px] rounded-2xl bg-[#EADFCF] transition-all ${
-              selectedLook === 'reception' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
-            }`} />
+            <img
+              src={imgReception}
+              alt="Reception outfit"
+              className={`w-[130px] h-[170px] rounded-2xl object-cover transition-all ${
+                selectedLook === 'reception' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
+              }`}
+            />
             <div>
               <h4 className="text-xs font-bold text-[#1D1D1F]">Reception</h4>
               <p className="text-[10px] text-[#8E867E] font-medium">Ivory and gold</p>
@@ -63,9 +75,13 @@ export const Act6LookbookScreen: React.FC = () => {
             onClick={() => setSelectedLook('sangeet')}
             className="flex flex-col gap-2 shrink-0 text-left border-none bg-transparent p-0 cursor-pointer"
           >
-            <div className={`w-[130px] h-[170px] rounded-2xl bg-[#EADFCF] transition-all ${
-              selectedLook === 'sangeet' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
-            }`} />
+            <img
+              src={imgSangeet}
+              alt="Sangeet outfit"
+              className={`w-[130px] h-[170px] rounded-2xl object-cover transition-all ${
+                selectedLook === 'sangeet' ? 'border-2 border-[#8B1538]' : 'border border-transparent'
+              }`}
+            />
             <div>
               <h4 className="text-xs font-bold text-[#1D1D1F]">Sa...</h4>
               <p className="text-[10px] text-[#8E867E] font-medium">Emerald lehenga</p>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgRehearsal from '../../assets/sangeet_rehearsal.jpg';
+
 interface SongItem {
   id: string;
   title: string;
@@ -26,9 +28,6 @@ export const Act6SangeetStudioScreen: React.FC = () => {
         onClick={() => setScreen('act6_crew')}
         className="bg-[#221D1A] text-white px-6 pt-3 pb-5 flex flex-col shrink-0 cursor-pointer"
       >
-        <div className="flex justify-between items-center text-xs text-white/40 pb-1">
-          <span>9:41</span>
-        </div>
         <h1 className="text-[32px] font-serif font-bold text-white mt-2 leading-none">Sangeet studio</h1>
         <p className="text-xs text-white/60 mt-2 font-medium">Sat 13 Feb · 6 pm · Meera is running this</p>
       </div>
@@ -75,11 +74,11 @@ export const Act6SangeetStudioScreen: React.FC = () => {
             Meera posts the choreography video, everyone films their part and uploads it. Next call Sunday, 8 pm IST — which is 6:30 am for you.
           </p>
 
-          {/* Solid Placeholder Boxes */}
+          {/* Rehearsal video snapshots */}
           <div className="flex items-center gap-3 pt-1">
-            <div className="w-[52px] h-[52px] rounded-xl bg-[#EADFCF]" />
-            <div className="w-[52px] h-[52px] rounded-xl bg-[#EADFCF]" />
-            <div className="w-[52px] h-[52px] rounded-xl bg-[#EADFCF]" />
+            <img src={imgRehearsal} alt="Rehearsal 1" className="w-[52px] h-[52px] rounded-xl object-cover border border-[#EADFCF]" />
+            <img src={imgRehearsal} alt="Rehearsal 2" className="w-[52px] h-[52px] rounded-xl object-cover border border-[#EADFCF]" />
+            <img src={imgRehearsal} alt="Rehearsal 3" className="w-[52px] h-[52px] rounded-xl object-cover border border-[#EADFCF]" />
             <div className="w-[52px] h-[52px] rounded-xl border-2 border-dashed border-[#D4C9BC] bg-transparent text-[#9C9388] flex items-center justify-center cursor-pointer">
               <span className="text-base font-semibold">+</span>
             </div>

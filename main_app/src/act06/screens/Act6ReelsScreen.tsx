@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 import { Heart, CornerUpRight, Music } from 'lucide-react';
 
+import imgMandapam from '../../assets/mandapam.jpg';
+
 export const Act6ReelsScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [activeTab, setActiveTab] = useState<'For you' | 'Muhurtham' | 'Sangeet' | 'Decor'>('For you');
@@ -36,12 +38,20 @@ export const Act6ReelsScreen: React.FC = () => {
 
       {/* Main Reels Video Viewport */}
       <View style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-        {/* Simulated Video Frame with solid dark background */}
+        {/* Simulated Video Frame with real wedding preview */}
         <div 
           onClick={handleNext}
-          className="w-full h-full relative overflow-hidden bg-[#2D221D] flex items-center justify-center cursor-pointer select-none"
+          className="w-full h-full relative overflow-hidden flex items-center justify-center cursor-pointer select-none"
+          style={{
+            backgroundImage: `url(${imgMandapam})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
-          <span className="text-xs font-mono font-bold text-white/40 tracking-[0.16em] uppercase">
+          {/* Black gradient overlay for text and icons readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/45 pointer-events-none"></div>
+
+          <span className="relative z-10 text-xs font-mono font-bold text-white/70 tracking-[0.16em] uppercase">
             VIDEO · 0:24
           </span>
 

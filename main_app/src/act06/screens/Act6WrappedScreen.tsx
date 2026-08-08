@@ -9,7 +9,7 @@ export const Act6WrappedScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#721B2F', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-white/60">
-        <span>9:41</span>
+        <span></span>
         <button
           onClick={() => setScreen('act6_share_moment')}
           className="text-xs font-bold text-white bg-transparent border-none cursor-pointer hover:text-white/80"

@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 import { X, Clock, Heart } from 'lucide-react';
 
+import imgMandapam from '../../assets/mandapam.jpg';
+import imgArPreview from '../../assets/ar_stage_preview.jpg';
+
 interface DecorCardItem {
   id: string;
   mandapName: string;
@@ -11,6 +14,7 @@ interface DecorCardItem {
   availableDate: string;
   matchBadge: string;
   familyBadge: string;
+  image: string;
 }
 
 const mockDecorCards: DecorCardItem[] = [
@@ -22,6 +26,7 @@ const mockDecorCards: DecorCardItem[] = [
     availableDate: 'free 14 Feb',
     matchBadge: 'Matches your board',
     familyBadge: 'Amma will like this',
+    image: imgMandapam,
   },
   {
     id: 'd2',
@@ -31,6 +36,7 @@ const mockDecorCards: DecorCardItem[] = [
     availableDate: 'free 14 Feb',
     matchBadge: 'High visual match',
     familyBadge: 'Patti approved style',
+    image: imgArPreview,
   },
   {
     id: 'd3',
@@ -40,6 +46,7 @@ const mockDecorCards: DecorCardItem[] = [
     availableDate: 'free 14 Feb',
     matchBadge: 'Fits budget perfectly',
     familyBadge: 'Traditional favorite',
+    image: imgMandapam,
   },
 ];
 
@@ -79,9 +86,18 @@ export const Act6SwipeScreen: React.FC = () => {
         
         {/* Card Container */}
         <div className="w-full max-w-[340px] bg-white rounded-[20px] overflow-hidden border border-[#EADFCF] flex flex-col">
-          {/* Main Visual Box (Solid beige box with centered text) */}
-          <div className="aspect-[1.1] bg-[#EADFCF] flex items-center justify-center p-6 text-center select-none">
-            <span className="text-[10px] font-bold text-[#9C9388] tracking-[0.12em] uppercase font-sans">
+          {/* Main Visual Box (Image with centered text label) */}
+          <div 
+            className="aspect-[1.1] relative flex items-end justify-start p-5 select-none overflow-hidden"
+            style={{
+              backgroundImage: card.image ? `url(${card.image})` : undefined,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            {/* Dark overlay for readability */}
+            <div className="absolute inset-0 bg-black/35 pointer-events-none"></div>
+            <span className="relative z-10 text-[11px] font-bold text-white tracking-[0.12em] uppercase font-sans bg-black/40 px-3 py-1.5 rounded-lg backdrop-blur-xs">
               {card.mandapName}
             </span>
           </div>

@@ -9,7 +9,7 @@ export const Act6CrewScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button
           onClick={() => setScreen('act6_wrapped')}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
@@ -75,20 +75,35 @@ export const Act6CrewScreen: React.FC = () => {
             { name: 'Amma', role: 'Guest list · 620 names', progress: '1 of 2', complete: false },
             { name: 'Arjun', role: "Groom's side travel", progress: '0 of 1', complete: false },
             { name: 'Chithappa', role: 'Nadaswaram · his gift', progress: '1 of 1', complete: true },
-          ].map((m) => (
-            <div key={m.name} className="bg-white p-4 rounded-[20px] border border-[#EADFCF] flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
-                <div>
-                  <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">{m.name}</h4>
-                  <p className="text-[10px] text-[#8E867E] mt-1 font-medium leading-tight">{m.role}</p>
+          ].map((m) => {
+            const colors: Record<string, string> = {
+              Meera: '#7A2234',
+              Appa: '#8C7A6B',
+              Amma: '#D5CBB9',
+              Arjun: '#466349',
+              Chithappa: '#761A2D',
+            };
+            const avatarColor = colors[m.name] || '#8E867E';
+            return (
+              <div key={m.name} className="bg-white p-4 rounded-[20px] border border-[#EADFCF] flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div
+                    className="w-10 h-10 rounded-full shrink-0 flex items-center justify-center text-sm font-bold text-white select-none"
+                    style={{ backgroundColor: avatarColor }}
+                  >
+                    {m.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">{m.name}</h4>
+                    <p className="text-[10px] text-[#8E867E] mt-1 font-medium leading-tight">{m.role}</p>
+                  </div>
                 </div>
+                <span className={`text-xs font-semibold ${m.complete ? 'text-[#2E7D32]' : 'text-[#C9A227]'} whitespace-nowrap`}>
+                  {m.progress}
+                </span>
               </div>
-              <span className={`text-xs font-semibold ${m.complete ? 'text-[#2E7D32]' : 'text-[#C9A227]'} whitespace-nowrap`}>
-                {m.progress}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Caption Box */}

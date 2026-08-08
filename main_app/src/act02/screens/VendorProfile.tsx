@@ -27,17 +27,17 @@ export const VendorProfile: React.FC = () => {
           className="w-full h-40 bg-[#EAE1D2] rounded-2xl relative border border-[#DFD5C4] overflow-hidden cursor-pointer mb-3 p-3 flex flex-col justify-between"
         >
           {/* Top overlay row */}
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#786E65]">
+          <div className="relative flex items-center justify-center text-[11px] font-mono text-[#786E65]">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 goBack();
               }}
-              className="text-[#2B2523] hover:opacity-75 cursor-pointer font-bold"
+              className="absolute left-0 top-1/2 -translate-y-1/2 text-[#2B2523] hover:opacity-75 cursor-pointer font-bold z-10"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
-            <span className="uppercase tracking-widest text-[10.5px] font-medium text-[#786E65] mx-auto -ml-4">
+            <span className="uppercase tracking-widest text-[10.5px] font-medium text-[#786E65]">
               HERO · 1 OF 24
             </span>
           </div>

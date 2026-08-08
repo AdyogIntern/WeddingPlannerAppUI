@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { CalloutBox, PrimaryButton, SerifTitle, TextMuted } from '../components/SharedUI';
 
+import sareeImg from '../../assets/saree.jpg';
+import jewelleryImg from '../../assets/jewellery.jpg';
+import receptionImg from '../../assets/reception_look.jpg';
+import sangeetImg from '../../assets/sangeet_look.jpg';
+
 export const Attire: React.FC = () => {
   const { navigate, showToast } = useApp();
   const [activeMode, setActiveMode] = useState<'Buy' | 'Rent'>('Buy');
 
   const products = {
     Buy: [
-      { id: '1', title: 'Korvai, arakku red', price: '₹1.42L · 9 yd', subtitle: 'Handwoven in Kanchipuram' },
-      { id: '2', title: 'Traditional gold zari', price: '₹2.10L · 9 yd', subtitle: 'Pure zari certified' },
-      { id: '3', title: "Groom's veshti set", price: '₹38,000', subtitle: 'Pure silk with angavastram' },
-      { id: '4', title: 'Temple jewellery, rented', price: '₹22,000 / 3 days', subtitle: '22k gold plated silver' },
+      { id: '1', title: 'Korvai, arakku red', price: '₹1.42L · 9 yd', subtitle: 'Handwoven in Kanchipuram', image: sareeImg },
+      { id: '2', title: 'Traditional gold zari', price: '₹2.10L · 9 yd', subtitle: 'Pure zari certified', image: sareeImg },
+      { id: '3', title: "Groom's veshti set", price: '₹38,000', subtitle: 'Pure silk with angavastram', image: receptionImg },
+      { id: '4', title: 'Temple jewellery, rented', price: '₹22,000 / 3 days', subtitle: '22k gold plated silver', image: jewelleryImg },
     ],
     Rent: [
-      { id: '1', title: 'Temple jewellery set', price: '₹22,000 / 3 days', subtitle: '22k gold plated silver' },
-      { id: '2', title: 'Groom sherwani & dhoti', price: '₹18,000 / 3 days', subtitle: 'Custom size altered' },
-      { id: '3', title: 'Bridal diamond vaddanam', price: '₹35,000 / 3 days', subtitle: 'Insured transit delivery' },
-      { id: '4', title: 'Reception lehenga', price: '₹28,000 / 3 days', subtitle: 'Includes dry clean & drop' },
+      { id: '1', title: 'Temple jewellery set', price: '₹22,000 / 3 days', subtitle: '22k gold plated silver', image: jewelleryImg },
+      { id: '2', title: 'Groom sherwani & dhoti', price: '₹18,000 / 3 days', subtitle: 'Custom size altered', image: receptionImg },
+      { id: '3', title: 'Bridal diamond vaddanam', price: '₹35,000 / 3 days', subtitle: 'Insured transit delivery', image: jewelleryImg },
+      { id: '4', title: 'Reception lehenga', price: '₹28,000 / 3 days', subtitle: 'Includes dry clean & drop', image: sangeetImg },
     ],
   };
 
@@ -29,16 +34,6 @@ export const Attire: React.FC = () => {
   return (
     <div className="flex flex-col w-full pb-6 font-sans">
       <div>
-        {/* Top Header matching 12.png */}
-        <div className="flex items-center justify-end py-1 text-[13.5px] font-medium text-[#2B2523]">
-          <button
-            onClick={() => navigate('VendorFilters')}
-            className="text-[13.5px] text-[#786E65] font-normal hover:opacity-75 cursor-pointer"
-          >
-            Filter
-          </button>
-        </div>
-
         {/* Title */}
         <div className="mb-3">
           <SerifTitle>Kanchipuram silk</SerifTitle>
@@ -81,8 +76,12 @@ export const Attire: React.FC = () => {
                 onClick={handleAddToBlueprint}
                 className="p-3 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl cursor-pointer hover:border-[#7A2234] transition relative"
               >
-                {/* Blank light cream/beige image box */}
-                <div className="w-full aspect-square bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2.5"></div>
+                {/* Image box */}
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full aspect-square object-cover rounded-xl border border-[#DFD5C4] mb-2.5"
+                />
                 <h4 className="text-[13px] font-bold text-[#2B2523] leading-snug">
                   {item.title}
                 </h4>
@@ -92,7 +91,6 @@ export const Attire: React.FC = () => {
             );
           })}
         </div>
-
         {/* Flying In Card */}
         <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-4 shadow-2xs">
           <div className="text-[10px] uppercase tracking-wider text-[#91877E] font-semibold mb-1.5">

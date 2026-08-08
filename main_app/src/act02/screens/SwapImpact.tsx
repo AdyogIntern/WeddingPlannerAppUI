@@ -113,10 +113,10 @@ export const SwapImpact: React.FC = () => {
             WHO NEEDS TO KNOW
           </div>
           <div className="flex items-start gap-2.5 mb-2">
-            {/* 2 overlapping blank tan/beige avatars matching 14.png */}
+            {/* Styled overlapping avatars */}
             <div className="flex -space-x-1.5 shrink-0 pt-0.5">
-              <div className="w-5 h-5 rounded-full bg-[#D5C7B3] ring-1 ring-white"></div>
-              <div className="w-5 h-5 rounded-full bg-[#C2B29A] ring-1 ring-white"></div>
+              <div className="w-5 h-5 rounded-full bg-[#7A2234] ring-1 ring-white flex items-center justify-center text-[9px] font-bold text-white select-none">A</div>
+              <div className="w-5 h-5 rounded-full bg-[#8C7A6B] ring-1 ring-white flex items-center justify-center text-[9px] font-bold text-white select-none">P</div>
             </div>
             <div className="text-[13px] font-bold text-[#2B2523] leading-tight">
               Appa owns catering — he'll be notified
