@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgMandapam from '../../assets/mandapam.jpg';
+
 export const Act6VoiceDiscussionScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [messageText, setMessageText] = useState('');
@@ -14,7 +16,7 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button 
           onClick={handleNext}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
@@ -34,7 +36,7 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
         
         {/* Message 1: Appa Voice Note */}
         <div className="flex items-start gap-4 text-left">
-          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+          <div className="w-10 h-10 rounded-full bg-[#7A2234] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">A</div>
           <div className="flex-1 bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
             <div>
               <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Appa · voice note</h4>
@@ -70,17 +72,17 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
         <div className="flex items-start gap-4 justify-end text-left">
           <div className="flex-1 bg-[#F5ECE8] p-5 rounded-[20px] space-y-3 max-w-[280px]">
             <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Priya · video reply</h4>
-            <div className="aspect-[1.6] bg-[#EADFCF] rounded-xl" />
+            <img src={imgMandapam} alt="Mandapam decor video thumbnail" className="w-full aspect-[1.6] object-cover rounded-xl border border-[#EADFCF]" />
             <p className="text-[11px] text-[#8E867E] font-medium leading-normal">
               Filmed her board and pointed at what she means. Ten seconds instead of four paragraphs.
             </p>
           </div>
-          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+          <div className="w-10 h-10 rounded-full bg-[#8C7A6B] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">P</div>
         </div>
 
         {/* Message 3: Quote Card */}
         <div className="flex items-start gap-4 text-left">
-          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+          <div className="w-10 h-10 rounded-full bg-[#C9A227] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">B</div>
           <div className="flex-1 bg-white p-5 rounded-[20px] border-2 border-dashed border-[#C9A227] space-y-2">
             <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Bloom & Thread</h4>
             <p className="text-xs text-[#8E867E] font-medium leading-normal">

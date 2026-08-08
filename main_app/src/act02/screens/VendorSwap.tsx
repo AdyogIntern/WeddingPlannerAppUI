@@ -51,9 +51,16 @@ export const VendorSwap: React.FC = () => {
           {/* Portfolio Image Box matching 13.png with centered text */}
           <div
             onClick={() => navigate('Portfolio')}
-            className="w-full h-36 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-3.5 flex items-center justify-center cursor-pointer hover:opacity-90 transition group"
+            className="w-full h-36 rounded-xl border border-[#DFD5C4] mb-3.5 flex items-center justify-center cursor-pointer hover:opacity-90 transition group relative overflow-hidden"
+            style={{
+              backgroundImage: currentVendor.image ? `url(${currentVendor.image})` : undefined,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           >
-            <span className="text-[10px] uppercase tracking-widest font-bold text-[#786E65] bg-[#FAF7F0] px-3 py-1 rounded shadow-2xs group-hover:bg-[#7A2234] group-hover:text-white transition">
+            {/* Soft overlay to ensure readability */}
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition"></div>
+            <span className="relative z-10 text-[10px] uppercase tracking-widest font-bold text-[#786E65] bg-[#FAF7F0] px-3 py-1 rounded shadow-2xs group-hover:bg-[#7A2234] group-hover:text-white transition">
               PORTFOLIO · 24 IMAGES
             </span>
           </div>
@@ -126,11 +133,11 @@ export const VendorSwap: React.FC = () => {
               ₹1,480/plate · ≈$17.60 · Chennai + Coimbatore
             </p>
             <div className="flex items-center gap-2 pt-2.5 border-t border-[#EAE1D2]">
-              {/* Overlapping blank tan avatars matching 13.png */}
+              {/* Overlapping family avatars */}
               <div className="flex -space-x-1.5">
-                <div className="w-5 h-5 rounded-full bg-[#D5C7B3] ring-1 ring-white"></div>
-                <div className="w-5 h-5 rounded-full bg-[#C2B29A] ring-1 ring-white"></div>
-                <div className="w-5 h-5 rounded-full bg-[#AF9E85] ring-1 ring-white"></div>
+                <div className="w-5 h-5 rounded-full bg-[#7A2234] ring-1 ring-white flex items-center justify-center text-[9px] font-bold text-white select-none">A</div>
+                <div className="w-5 h-5 rounded-full bg-[#8C7A6B] ring-1 ring-white flex items-center justify-center text-[9px] font-bold text-white select-none">P</div>
+                <div className="w-5 h-5 rounded-full bg-[#D5CBB9] ring-1 ring-white flex items-center justify-center text-[9px] font-bold text-white select-none">M</div>
               </div>
               <span className="text-[11.5px] text-[#786E65]">
                 Amma, Appa and Meera like this

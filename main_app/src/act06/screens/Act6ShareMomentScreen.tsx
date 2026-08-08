@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import imgShareMomentBg from '../../assets/share_moment_bg.jpg';
+
 export const Act6ShareMomentScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [selectedFormat, setSelectedFormat] = useState<'story' | 'post' | 'whatsapp' | 'save'>('story');
@@ -14,7 +16,7 @@ export const Act6ShareMomentScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button 
           onClick={handleNext}
           className="text-xs font-bold text-[#8A8580] border-none bg-transparent cursor-pointer hover:text-[#1D1D1F]"
@@ -35,14 +37,15 @@ export const Act6ShareMomentScreen: React.FC = () => {
         {/* Main Auto-Designed Story Card Preview */}
         <div 
           onClick={handleNext}
-          className="w-full h-80 rounded-[24px] bg-[#332A26] p-6 flex flex-col justify-end relative border border-white/5 cursor-pointer select-none"
+          className="w-full h-80 rounded-[24px] p-6 flex flex-col justify-end relative border border-white/5 cursor-pointer select-none overflow-hidden"
+          style={{
+            backgroundImage: `url(${imgShareMomentBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         >
-          {/* Centered label */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-[10px] font-mono font-bold text-white/20 tracking-widest uppercase">
-              YOUR IMAGE
-            </span>
-          </div>
+          {/* Black gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10 pointer-events-none"></div>
 
           <div className="space-y-1.5 z-10 text-white text-left">
             <div className="text-[10px] font-mono font-bold tracking-widest text-[#F5E9C8]">

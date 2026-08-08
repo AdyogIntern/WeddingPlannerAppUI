@@ -13,7 +13,7 @@ export const Act6GiftRegistryScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button 
           onClick={handleNext}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"

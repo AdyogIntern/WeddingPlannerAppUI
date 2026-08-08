@@ -2,8 +2,23 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 
+import img1 from '../../assets/photo_candid.jpg';
+import img2 from '../../assets/photo_romantic.jpg';
+import img3 from '../../assets/photo_drone.jpg';
+import img4 from '../../assets/sadya.jpg';
+import img5 from '../../assets/mandapam.jpg';
+import img6 from '../../assets/reception_look.jpg';
+import img7 from '../../assets/sangeet_look.jpg';
+import img8 from '../../assets/sangeet_rehearsal.jpg';
+import img9 from '../../assets/saree.jpg';
+import img10 from '../../assets/jewellery.jpg';
+import img11 from '../../assets/share_moment_bg.jpg';
+import img12 from '../../assets/ar_stage_preview.jpg';
+
 export const Act6PhotoWallScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
+
+  const wallImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
 
   return (
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
@@ -23,10 +38,15 @@ export const Act6PhotoWallScreen: React.FC = () => {
       {/* Main Content Area */}
       <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
         
-        {/* Photo Grid (3x4) with solid placeholders */}
+        {/* Photo Grid (3x4) with real wedding photos */}
         <div className="grid grid-cols-3 gap-3">
-          {Array.from({ length: 12 }).map((_, idx) => (
-            <div key={idx} className="aspect-square rounded-[16px] bg-[#EADFCF]" />
+          {wallImages.map((imgSrc, idx) => (
+            <img 
+              key={idx} 
+              src={imgSrc} 
+              alt={`Guest photo ${idx + 1}`} 
+              className="w-full aspect-square rounded-[16px] object-cover border border-[#EADFCF]" 
+            />
           ))}
         </div>
 

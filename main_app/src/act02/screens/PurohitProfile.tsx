@@ -4,7 +4,8 @@ import { CalloutBox, PrimaryButton, SerifTitle, TextMuted } from '../components/
 import { ArrowLeft } from 'lucide-react';
 
 export const PurohitProfile: React.FC = () => {
-  const { navigate, goBack } = useApp();
+  const { navigate, goBack, vendors } = useApp();
+  const purohit = vendors.find((v) => v.id === 'purohit-1');
 
   return (
     <div className="flex flex-col w-full pb-6 font-sans">
@@ -88,8 +89,16 @@ export const PurohitProfile: React.FC = () => {
 
         {/* Languages & Travel Card */}
         <div className="p-3.5 bg-[#FAF7F0] border border-[#E5DCCE] rounded-2xl mb-3 flex items-center gap-3">
-          {/* Blank image thumbnail */}
-          <div className="w-8 h-8 rounded-lg bg-[#EAE1D2] border border-[#DFD5C4] shrink-0"></div>
+          {/* Priest Thumbnail Image */}
+          {purohit?.image ? (
+            <img
+              src={purohit.image}
+              alt="Sri Venkatesa Sastrigal"
+              className="w-8 h-8 rounded-lg object-cover border border-[#DFD5C4] shrink-0"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-lg bg-[#EAE1D2] border border-[#DFD5C4] shrink-0"></div>
+          )}
           <div className="text-[12.5px]">
             <div className="font-bold text-[#2B2523]">Speaks Tamil, Sanskrit, English</div>
             <div className="text-[11.5px] text-[#786E65]">Will travel to Coimbatore and Madurai</div>

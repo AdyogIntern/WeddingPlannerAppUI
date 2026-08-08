@@ -1,6 +1,14 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ScreenId } from '../types';
 
+import sadyaImg from '../../assets/sadya.jpg';
+import mandapamImg from '../../assets/mandapam.jpg';
+import priestImg from '../../assets/priest.jpg';
+import sareeImg from '../../assets/saree.jpg';
+import photoCandidImg from '../../assets/photo_candid.jpg';
+import photoRomanticImg from '../../assets/photo_romantic.jpg';
+import photoDroneImg from '../../assets/photo_drone.jpg';
+
 export interface VendorItem {
   id: string;
   name: string;
@@ -38,6 +46,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     tagColor: 'text-emerald-700',
     likedBy: 'Amma, Appa and Meera like this',
     isSaved: true,
+    image: sadyaImg,
   },
   {
     id: 'caterer-2',
@@ -52,6 +61,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     statusTag: 'Free',
     tagColor: 'text-emerald-700',
     isSaved: false,
+    image: sadyaImg,
   },
   {
     id: 'caterer-3',
@@ -68,6 +78,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     votesCount: 3,
     likedBy: 'Amma, Appa and Meera like this',
     isSaved: true,
+    image: sadyaImg,
   },
   {
     id: 'caterer-4',
@@ -82,6 +93,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     statusTag: 'Free',
     tagColor: 'text-emerald-700',
     isSaved: false,
+    image: 'https://images.unsplash.com/photo-1621334721541-370a13974de8?auto=format&fit=crop&w=400&h=400&q=80',
   },
   {
     id: 'photo-1',
@@ -94,6 +106,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     statusTag: 'Free',
     votesCount: 3,
     isSaved: true,
+    image: photoCandidImg,
   },
   {
     id: 'photo-2',
@@ -106,6 +119,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     statusTag: 'Free',
     votesCount: 1,
     isSaved: true,
+    image: photoRomanticImg,
   },
   {
     id: 'photo-3',
@@ -117,6 +131,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     rating: 4.8,
     statusTag: 'On hold',
     isSaved: true,
+    image: photoDroneImg,
   },
   {
     id: 'venue-1',
@@ -128,6 +143,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     rating: 4.8,
     statusTag: 'Free',
     isSaved: true,
+    image: mandapamImg,
   },
   {
     id: 'purohit-1',
@@ -139,6 +155,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     rating: 4.9,
     statusTag: 'Free',
     isSaved: true,
+    image: priestImg,
   },
   {
     id: 'attire-1',
@@ -149,6 +166,7 @@ const INITIAL_VENDORS: VendorItem[] = [
     totalPriceFormatted: '₹1.42L',
     rating: 4.9,
     isSaved: true,
+    image: sareeImg,
   },
 ];
 

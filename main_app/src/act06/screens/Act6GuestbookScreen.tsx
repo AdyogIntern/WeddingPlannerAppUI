@@ -17,7 +17,7 @@ export const Act6GuestbookScreen: React.FC = () => {
     <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
-        <span>9:41</span>
+        <span></span>
         <button
           onClick={() => setScreen('act6_photo_wall')}
           className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
@@ -71,7 +71,7 @@ export const Act6GuestbookScreen: React.FC = () => {
           <div className="space-y-4 text-left">
             {/* Message 1 */}
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="w-10 h-10 rounded-full bg-[#7A2234] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">P</div>
               <div className="flex-1">
                 <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Patti, Coimbatore</h4>
                 <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">
@@ -82,7 +82,7 @@ export const Act6GuestbookScreen: React.FC = () => {
 
             {/* Message 2 */}
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="w-10 h-10 rounded-full bg-[#8C7A6B] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">R</div>
               <div className="flex-1">
                 <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Ravi & Anu, Toronto</h4>
                 <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">
@@ -93,7 +93,7 @@ export const Act6GuestbookScreen: React.FC = () => {
 
             {/* Message 3 */}
             <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="w-10 h-10 rounded-full bg-[#C9A227] shrink-0 flex items-center justify-center text-sm font-bold text-white select-none">M</div>
               <div className="flex-1">
                 <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Meera</h4>
                 <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">

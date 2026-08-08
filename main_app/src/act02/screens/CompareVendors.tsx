@@ -51,8 +51,16 @@ export const CompareVendors: React.FC = () => {
             onClick={() => handlePickVendor('Studio Anantham')}
             className="p-1 rounded-xl cursor-pointer hover:bg-[#FAF7F0] transition group border border-transparent"
           >
-            {/* Blank Thumbnail Box */}
-            <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            {/* Thumbnail Image */}
+            {vendors.find(v => v.id === 'photo-1')?.image ? (
+              <img
+                src={vendors.find(v => v.id === 'photo-1')?.image}
+                alt="Studio Anantham"
+                className="w-full h-16 object-cover rounded-xl border border-[#DFD5C4] mb-2"
+              />
+            ) : (
+              <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            )}
             <h4 className="text-[12.5px] font-bold text-[#2B2523] leading-tight">
               Studio Anantham
             </h4>
@@ -62,8 +70,16 @@ export const CompareVendors: React.FC = () => {
             onClick={() => handlePickVendor('Kadhal Frames')}
             className="p-1 rounded-xl cursor-pointer hover:bg-[#FAF7F0] transition group border border-transparent"
           >
-            {/* Blank Thumbnail Box */}
-            <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            {/* Thumbnail Image */}
+            {vendors.find(v => v.id === 'photo-2')?.image ? (
+              <img
+                src={vendors.find(v => v.id === 'photo-2')?.image}
+                alt="Kadhal Frames"
+                className="w-full h-16 object-cover rounded-xl border border-[#DFD5C4] mb-2"
+              />
+            ) : (
+              <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            )}
             <h4 className="text-[12.5px] font-bold text-[#2B2523] leading-tight">
               Kadhal Frames
             </h4>
@@ -73,8 +89,16 @@ export const CompareVendors: React.FC = () => {
             onClick={() => handlePickVendor('Weddings by Mano')}
             className="p-1 rounded-xl cursor-pointer hover:bg-[#FAF7F0] transition group border border-transparent"
           >
-            {/* Blank Thumbnail Box */}
-            <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            {/* Thumbnail Image */}
+            {vendors.find(v => v.id === 'photo-3')?.image ? (
+              <img
+                src={vendors.find(v => v.id === 'photo-3')?.image}
+                alt="Weddings by Mano"
+                className="w-full h-16 object-cover rounded-xl border border-[#DFD5C4] mb-2"
+              />
+            ) : (
+              <div className="w-full h-16 bg-[#EAE1D2] rounded-xl border border-[#DFD5C4] mb-2"></div>
+            )}
             <h4 className="text-[12.5px] font-bold text-[#2B2523] leading-tight">
               Weddings by Mano
             </h4>
