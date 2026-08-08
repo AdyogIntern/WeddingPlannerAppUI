@@ -1,70 +1,55 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
-import { ChevronLeft, Copy, Check, Mic, MessageSquare, Heart, ArrowRight } from 'lucide-react';
 
 export const Act6GuestbookScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
-  const [copiedTag, setCopiedTag] = useState(false);
   const [selectedTag, setSelectedTag] = useState('#PriyaFoundHerArjun');
-  const [isRecordingVoice, setIsRecordingVoice] = useState(false);
 
   const hashtags = [
     '#PriyaFoundHerArjun',
     '#ArjunKiPriya',
     '#SeattleToChennai',
-    '#PAForever27',
+    '#PAforever27',
   ];
 
-  const handleCopyTag = () => {
-    setCopiedTag(true);
-    setTimeout(() => setCopiedTag(false), 2000);
-  };
-
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
-      <div className="bg-[#FAF8F5] border-b border-[#ECECEC] px-5 py-3 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setScreen('act6_share_moment')}
-            className="p-1.5 rounded-lg bg-white border border-[#ECECEC] text-gray-700 cursor-pointer hover:bg-gray-50 flex items-center gap-1 text-xs font-semibold"
-          >
-            <ChevronLeft size={16} />
-            <span>Share</span>
-          </button>
-          <div>
-            <h1 className="text-base font-serif font-bold text-[#8B1538]">{selectedTag}</h1>
-            <p className="text-[10.5px] text-[#666666]">Live · 214 posts · 62 people</p>
-          </div>
-        </div>
+      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
+        <span>9:41</span>
         <button
-          onClick={handleCopyTag}
-          className="p-1.5 rounded-lg bg-white border border-[#ECECEC] text-[#1D1D1F] cursor-pointer hover:bg-gray-50 flex items-center gap-1 text-xs font-semibold"
+          onClick={() => setScreen('act6_photo_wall')}
+          className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
         >
-          {copiedTag ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
-          <span>{copiedTag ? 'Copied' : 'Copy'}</span>
+          Copy
         </button>
       </div>
 
+      {/* Title block */}
+      <div className="px-6 pb-4 text-left">
+        <h1 className="text-[32px] font-serif font-bold text-[#1D1D1F] leading-tight">{selectedTag}</h1>
+        <p className="text-xs text-[#8E867E] mt-1 font-medium">Live · 214 posts · 62 people</p>
+      </div>
+
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '24px', gap: '14px' }}>
         
         {/* Card: OTHER OPTIONS WE GENERATED */}
-        <div className="bg-white p-4 rounded-2xl border border-[#ECECEC] shadow-2xs space-y-3">
-          <div className="text-[10px] font-bold text-[#666666] tracking-wider uppercase">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             OTHER OPTIONS WE GENERATED
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             {hashtags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold border-none cursor-pointer transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                   selectedTag === tag
-                    ? 'bg-[#8B1538] text-white shadow-xs'
-                    : 'bg-[#FAF8F5] text-[#1D1D1F] border border-[#ECECEC] hover:bg-gray-100'
+                    ? 'bg-[#761A2D] text-white border-[#761A2D]'
+                    : 'bg-white text-[#1D1D1F] border-[#EADFCF] hover:bg-gray-50'
                 }`}
               >
                 {tag}
@@ -72,75 +57,66 @@ export const Act6GuestbookScreen: React.FC = () => {
             ))}
           </div>
 
-          <p className="text-[10.5px] text-green-700 font-medium">
+          <p className="text-xs text-[#8E867E] font-medium leading-relaxed">
             All four checked — none are already in use.
           </p>
         </div>
 
         {/* Card: GUESTBOOK · 41 MESSAGES */}
-        <div className="bg-white p-4 rounded-2xl border border-[#ECECEC] shadow-2xs space-y-3">
-          <div className="text-[10px] font-bold text-[#666666] tracking-wider uppercase flex items-center justify-between">
-            <span>GUESTBOOK · 41 MESSAGES</span>
-            <MessageSquare size={12} className="text-[#8B1538]" />
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
+            GUESTBOOK · 41 MESSAGES
           </div>
 
-          <div className="space-y-3 text-xs text-[#1D1D1F]">
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1">
-              <div className="flex justify-between items-center font-bold text-[#1D1D1F]">
-                <span>Patti, Coimbatore</span>
-                <span className="text-[9.5px] text-[#666666]">2h ago</span>
+          <div className="space-y-4 text-left">
+            {/* Message 1 */}
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="flex-1">
+                <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Patti, Coimbatore</h4>
+                <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">
+                  I have waited a long time for this. Come home soon.
+                </p>
               </div>
-              <p className="text-[11px] text-[#4A4244] italic">
-                "I have waited a long time for this. Come home soon."
-              </p>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1">
-              <div className="flex justify-between items-center font-bold text-[#1D1D1F]">
-                <span>Ravi & Anu, Toronto</span>
-                <span className="text-[9.5px] text-[#666666]">5h ago</span>
+            {/* Message 2 */}
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="flex-1">
+                <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Ravi & Anu, Toronto</h4>
+                <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">
+                  Watching the muhurtham at 2 am with filter coffee. Wouldn't miss it.
+                </p>
               </div>
-              <p className="text-[11px] text-[#4A4244] italic">
-                "Watching the muhurtham at 2 am with filter coffee. Wouldn't miss it."
-              </p>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1">
-              <div className="flex justify-between items-center font-bold text-[#1D1D1F]">
-                <span>Meera</span>
-                <span className="text-[9.5px] text-[#666666]">1d ago</span>
+            {/* Message 3 */}
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+              <div className="flex-1">
+                <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Meera</h4>
+                <p className="text-xs text-[#1D1D1F] mt-1 leading-normal">
+                  Nobody is allowed to post before the photographer does.
+                </p>
               </div>
-              <p className="text-[11px] text-[#4A4244] italic">
-                "Nobody is allowed to post before the photographer does."
-              </p>
             </div>
           </div>
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E6D8C4] text-[10.5px] text-[#4A4244] leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed">
           The guestbook opens with the invitation and closes with the thank-you cards. It becomes the keepsake page later.
         </div>
       </View>
 
       {/* Sticky Bottom Action */}
-      <div className="p-3.5 bg-white border-t border-[#ECECEC] shrink-0 flex gap-2">
-        <button
-          onClick={() => setIsRecordingVoice(!isRecordingVoice)}
-          className={`flex-1 py-3 rounded-2xl text-xs font-bold border-none cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-xs ${
-            isRecordingVoice ? 'bg-red-600 text-white animate-pulse' : 'bg-[#8B1538] text-white hover:bg-[#72102D]'
-          }`}
-        >
-          <Mic size={16} />
-          <span>{isRecordingVoice ? 'Recording...' : 'Add voice note'}</span>
-        </button>
-
+      <div className="p-6 bg-white border-t border-[#EADFCF] shrink-0">
         <button
           onClick={() => setScreen('act6_photo_wall')}
-          className="px-4 py-3 rounded-2xl text-xs font-bold bg-[#C9A227] text-[#1D1D1F] border-none cursor-pointer hover:bg-[#b59120] flex items-center justify-center gap-1.5 shadow-xs whitespace-nowrap"
+          className="w-full py-4 bg-[#761A2D] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#621423] transition-colors flex items-center justify-center"
         >
-          <span>11. Photo Wall</span>
-          <ArrowRight size={15} />
+          Add a voice note
         </button>
       </div>
     </View>

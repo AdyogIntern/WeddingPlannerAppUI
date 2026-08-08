@@ -1,118 +1,100 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
-import { Heart, Send, Bookmark, Play, Plus, Check, Sparkles } from 'lucide-react';
+import { Heart, CornerUpRight, Music } from 'lucide-react';
 
 export const Act6ReelsScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
   const [activeTab, setActiveTab] = useState<'For you' | 'Muhurtham' | 'Sangeet' | 'Decor'>('For you');
   const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(2140);
-  const [addedToBlueprint, setAddedToBlueprint] = useState(false);
 
-  const handleLike = () => {
-    setLiked(!liked);
-    setLikeCount(liked ? likeCount - 1 : likeCount + 1);
+  const handleNext = () => {
+    setScreen('act6_ar_preview');
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#1A1616', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#251C17', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Filter Tabs */}
-      <div className="px-4 py-3 flex items-center gap-2 overflow-x-auto shrink-0 bg-[#1A1616]/80 backdrop-blur-md z-20">
+      <div className="px-6 py-4 flex items-center justify-between shrink-0 bg-[#251C17]">
         {(['For you', 'Muhurtham', 'Sangeet', 'Decor'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border-none cursor-pointer transition-all ${
-              activeTab === tab 
-                ? 'bg-white text-[#1D1D1F] font-bold shadow-xs' 
-                : 'bg-white/10 text-white/70 hover:bg-white/20'
-            }`}
+            className="bg-transparent border-none cursor-pointer flex flex-col items-center"
           >
-            {tab}
+            <span className={`text-sm font-semibold transition-all ${
+              activeTab === tab ? 'text-white font-bold' : 'text-white/50'
+            }`}>
+              {tab}
+            </span>
+            {activeTab === tab && (
+              <div className="w-6 h-0.5 bg-[#C9A227] mt-1 rounded-full" />
+            )}
           </button>
         ))}
       </div>
 
       {/* Main Reels Video Viewport */}
       <View style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-        {/* Simulated Video Frame */}
-        <div className="w-full h-full relative overflow-hidden bg-gradient-to-b from-[#2A2526] via-[#121212] to-[#1D1617] flex items-center justify-center">
-          <img 
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
-            alt="Leela Palace Wedding" 
-            className="w-full h-full object-cover opacity-90"
-          />
-
-          {/* Video Duration Badge */}
-          <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold text-white/90">
+        {/* Simulated Video Frame with solid dark background */}
+        <div 
+          onClick={handleNext}
+          className="w-full h-full relative overflow-hidden bg-[#2D221D] flex items-center justify-center cursor-pointer select-none"
+        >
+          <span className="text-xs font-mono font-bold text-white/40 tracking-[0.16em] uppercase">
             VIDEO · 0:24
-          </div>
+          </span>
 
           {/* Right Floating Action Sidebar Icons */}
-          <div className="absolute right-4 bottom-24 flex flex-col items-center gap-5 z-20 text-white">
+          <div className="absolute right-6 bottom-16 flex flex-col items-center gap-6 z-20 text-white animate-fade-in">
             <button 
-              onClick={handleLike}
-              className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer group"
+              onClick={(e) => { e.stopPropagation(); setLiked(!liked); }}
+              className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer text-white"
             >
-              <div className={`p-2.5 rounded-full ${liked ? 'bg-red-600 text-white' : 'bg-black/40 text-white group-hover:bg-black/60'} backdrop-blur-md transition-all`}>
-                <Heart size={20} className={liked ? 'fill-white' : ''} />
-              </div>
-              <span className="text-[10px] font-bold">{likeCount > 1000 ? `${(likeCount/1000).toFixed(1)}k` : likeCount}</span>
+              <Heart size={22} className={liked ? 'fill-[#761A2D] text-[#761A2D]' : 'text-white'} />
+              <span className="text-[10px] font-bold mt-1">2.1k</span>
             </button>
 
-            <button className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer group">
-              <div className="p-2.5 rounded-full bg-black/40 text-white group-hover:bg-black/60 backdrop-blur-md">
-                <Send size={18} />
-              </div>
-              <span className="text-[10px] font-bold">Send</span>
+            <button 
+              onClick={(e) => { e.stopPropagation(); handleNext(); }}
+              className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer text-white"
+            >
+              <CornerUpRight size={22} className="text-white" />
+              <span className="text-[10px] font-bold mt-1">Send</span>
             </button>
 
-            <button className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer group">
-              <div className="p-2.5 rounded-full bg-black/40 text-white group-hover:bg-black/60 backdrop-blur-md">
-                <Bookmark size={18} />
-              </div>
-              <span className="text-[10px] font-bold">Save</span>
+            <button 
+              onClick={(e) => { e.stopPropagation(); handleNext(); }}
+              className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer text-white"
+            >
+              <Music size={20} className="text-white" />
+              <span className="text-[10px] font-bold mt-1">Save</span>
             </button>
           </div>
 
           {/* Bottom Overlay Info & Action Buttons */}
-          <div className="absolute bottom-4 left-4 right-16 z-20 text-white space-y-2.5">
+          <div className="absolute bottom-6 left-6 right-20 z-20 text-white space-y-4">
             <div>
-              <h2 className="text-sm font-bold text-white flex items-center gap-1.5">
-                <span>Bloom & Thread</span>
-                <span className="text-white/60">• mandap, Feb 2026</span>
+              <h2 className="text-sm font-bold text-white leading-tight">
+                Bloom & Thread · mandap, Feb 2026
               </h2>
-              <p className="text-[11px] text-white/80 mt-1 leading-snug">
+              <p className="text-[11px] text-white/80 mt-1.5 leading-relaxed font-medium">
                 420-guest Iyengar muhurtham at the Leela. Kanakambaram, banana stems, no drapes.
               </p>
             </div>
 
-            {/* Action Buttons: Add to Muhurtham, AR Mandap 3D & Board */}
-            <div className="flex items-center gap-2 pt-1 flex-wrap">
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3 pt-1">
               <button
-                onClick={() => setAddedToBlueprint(!addedToBlueprint)}
-                className={`px-3 py-2 rounded-full text-xs font-bold border-none cursor-pointer flex items-center gap-1.5 transition-all ${
-                  addedToBlueprint 
-                    ? 'bg-green-600 text-white' 
-                    : 'bg-white text-[#1D1D1F] hover:bg-gray-100'
-                }`}
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                className="px-5 py-3 rounded-xl text-xs font-bold bg-white text-[#1D1D1F] border-none cursor-pointer hover:bg-gray-100 font-sans"
               >
-                {addedToBlueprint ? <Check size={14} /> : <Plus size={14} />}
-                <span>{addedToBlueprint ? 'Added' : 'Add · ₹1.6L'}</span>
+                Add to Muhurtham · ₹1.6L
               </button>
 
               <button
-                onClick={() => setScreen('act6_ar_preview')}
-                className="px-3.5 py-2 rounded-full text-xs font-bold bg-[#C9A227] text-[#1D1D1F] border-none cursor-pointer hover:bg-[#b59120] flex items-center gap-1 shadow-xs"
-              >
-                <Sparkles size={13} />
-                <span>AR Mandap 3D</span>
-              </button>
-
-              <button
-                onClick={() => setScreen('act6_board')}
-                className="px-3 py-2 rounded-full text-xs font-bold bg-black/40 text-white border border-white/30 backdrop-blur-md cursor-pointer hover:bg-black/60"
+                onClick={(e) => { e.stopPropagation(); setScreen('act6_board'); }}
+                className="px-5 py-3 rounded-xl text-xs font-bold bg-transparent text-white border border-white/60 cursor-pointer hover:bg-white/10 font-sans"
               >
                 Board
               </button>
@@ -121,10 +103,36 @@ export const Act6ReelsScreen: React.FC = () => {
         </div>
       </View>
 
-      {/* Explainer Footer Card */}
-      <div className="p-4 bg-[#FAF7F2] text-[#4A4244] text-[10.5px] border-t border-[#ECECEC] shrink-0 text-center leading-relaxed">
-        Every clip is a real wedding your team ran, and every clip has a price and a booking button attached. Browsing joy that converts.
-      </div>
+      {/* Light Bottom Info Area */}
+      <View style={{ backgroundColor: '#FAF6EE', flexShrink: 0 }}>
+        {/* Explainer Footer Card */}
+        <div className="p-6">
+          <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed text-center">
+            Every clip is a real wedding your team ran, and every clip has a price and a booking button attached. Browsing joy that converts.
+          </div>
+        </div>
+
+        {/* Local Bottom Navigation Bar */}
+        <div className="flex items-center justify-between border-t border-gray-200/80 px-6 py-4 bg-white">
+          {[
+            { label: 'Today', active: false },
+            { label: 'Blueprint', active: false },
+            { label: 'Discover', active: true },
+            { label: 'Family', active: false },
+            { label: 'Money', active: false },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={handleNext}
+              className="bg-transparent border-none cursor-pointer flex flex-col items-center justify-center flex-1"
+            >
+              <span className={`text-[11px] font-bold ${item.active ? 'text-[#761A2D]' : 'text-[#A39C93]'}`}>
+                {item.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </View>
     </View>
   );
 };

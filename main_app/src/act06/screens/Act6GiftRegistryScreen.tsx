@@ -1,119 +1,113 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
-import { ChevronLeft, Gift, Heart, Share2, Check, ArrowRight } from 'lucide-react';
 
 export const Act6GiftRegistryScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
-  const [shared, setShared] = useState(false);
+
+  const handleNext = () => {
+    setScreen('act6_board');
+  };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
-      <div className="bg-[#FAF8F5] border-b border-[#ECECEC] px-5 py-3 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setScreen('act6_sangeet_kitty')}
-            className="p-1.5 rounded-lg bg-white border border-[#ECECEC] text-gray-700 cursor-pointer hover:bg-gray-50 flex items-center gap-1 text-xs font-semibold"
-          >
-            <ChevronLeft size={16} />
-            <span>Sangeet Kitty</span>
-          </button>
-          <div>
-            <h1 className="text-lg font-serif font-bold text-[#1D1D1F]">Gift registry</h1>
-            <p className="text-[10.5px] text-[#666666]">Shared with the invitation</p>
-          </div>
-        </div>
-        <button className="px-3 py-1 rounded-full bg-white border border-[#ECECEC] text-xs font-semibold text-gray-700 cursor-pointer">
+      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
+        <span>9:41</span>
+        <button 
+          onClick={handleNext}
+          className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
+        >
           Edit
         </button>
       </div>
 
+      {/* Title block */}
+      <div className="px-6 pb-4 text-left">
+        <h1 className="text-[32px] font-serif font-bold text-[#1D1D1F] leading-tight">Gift registry</h1>
+        <p className="text-xs text-[#8E867E] mt-1 font-medium">Shared with the invitation</p>
+      </div>
+
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '24px', gap: '14px' }}>
         
         {/* Card: WHAT THE COUPLE WOULD LOVE */}
-        <div className="bg-white p-4 rounded-2xl border border-[#ECECEC] shadow-2xs space-y-3">
-          <div className="text-[10px] font-bold text-[#666666] tracking-wider uppercase flex items-center gap-1">
-            <Gift size={12} className="text-[#8B1538]" />
-            <span>WHAT THE COUPLE WOULD LOVE</span>
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-left space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
+            WHAT THE COUPLE WOULD LOVE
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {/* Item 1 */}
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1.5">
+            <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#1D1D1F]">Honeymoon in Sri Lanka</span>
-                <span className="font-bold text-[#8B1538]">₹2.4L</span>
+                <span className="font-bold text-[#1D1D1F]">₹2.4L</span>
               </div>
-              <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8B1538] h-full rounded-full" style={{ width: '62%' }} />
+              <div className="w-full bg-[#FAF2EE] h-1.5 rounded-full overflow-hidden">
+                <div className="bg-[#761A2D] h-full rounded-full" style={{ width: '62%' }} />
               </div>
-              <span className="text-[10px] text-[#666666] block text-right font-medium">62% funded</span>
+              <span className="text-[10px] text-[#8E867E] font-medium block">62% funded</span>
             </div>
 
             {/* Item 2 */}
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1.5">
+            <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#1D1D1F]">First home fund</span>
-                <span className="font-bold text-[#8B1538]">₹5.0L</span>
+                <span className="font-bold text-[#1D1D1F]">₹5L</span>
               </div>
-              <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8B1538] h-full rounded-full" style={{ width: '18%' }} />
+              <div className="w-full bg-[#FAF2EE] h-1.5 rounded-full overflow-hidden">
+                <div className="bg-[#761A2D] h-full rounded-full" style={{ width: '18%' }} />
               </div>
-              <span className="text-[10px] text-[#666666] block text-right font-medium">18% funded</span>
+              <span className="text-[10px] text-[#8E867E] font-medium block">18% funded</span>
             </div>
 
             {/* Item 3 */}
-            <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECECEC] space-y-1">
+            <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#1D1D1F]">Gift to Udhavum Karangal</span>
-                <span className="font-bold text-green-700">₹41,000 so far</span>
+                <span className="font-bold text-[#1D1D1F]">A gift to Udhavum Karangal</span>
+                <span className="font-bold text-[#1D1D1F]">Any amount</span>
               </div>
-              <span className="text-[10px] text-[#666666]">Any amount contribution</span>
+              <div className="w-full bg-[#FAF2EE] h-1.5 rounded-full overflow-hidden">
+                <div className="bg-[#761A2D] h-full rounded-full" style={{ width: '100%' }} />
+              </div>
+              <span className="text-[10px] text-[#8E867E] font-medium block">₹41,000 so far</span>
             </div>
           </div>
         </div>
 
         {/* Card: OR THE TRADITIONAL WAY */}
-        <div className="bg-white p-4 rounded-2xl border border-[#ECECEC] shadow-2xs space-y-2.5">
-          <div className="text-[10px] font-bold text-[#666666] tracking-wider uppercase">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-left space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             OR THE TRADITIONAL WAY
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             {['Silver items', 'Kanchipuram silk', 'Brass vessels'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full bg-[#FAF7F2] text-[#4A4244] border border-[#E6D8C4] text-xs font-semibold">
+              <span key={tag} className="px-4 py-2.5 rounded-xl bg-white text-[#1D1D1F] border border-[#EADFCF] text-xs font-bold">
                 {tag}
               </span>
             ))}
           </div>
+
+          <p className="text-xs text-[#8E867E] font-medium leading-relaxed">
+            Elders can still give what they always give. Nobody is embarrassed.
+          </p>
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#E6D8C4] text-[10.5px] text-[#4A4244] leading-relaxed">
-          South Asian guests want to give. Give them options they feel good about, and stop three pressure cookers arriving at the hall.
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed text-left">
+          Overseas guests hate carrying gifts on a flight and love giving something that gets used. This screen also tells you exactly which honeymoon to sell them.
         </div>
       </View>
 
       {/* Sticky Bottom Action */}
-      <div className="p-3.5 bg-white border-t border-[#ECECEC] shrink-0 flex gap-2">
+      <div className="p-6 bg-white border-t border-[#EADFCF] shrink-0">
         <button
-          onClick={() => setShared(true)}
-          className={`flex-1 py-3 rounded-2xl text-xs font-bold border-none cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-xs ${
-            shared ? 'bg-green-700 text-white' : 'bg-[#8B1538] text-white hover:bg-[#72102D]'
-          }`}
+          onClick={handleNext}
+          className="w-full py-4 bg-[#761A2D] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#621423] transition-colors flex items-center justify-center"
         >
-          {shared ? <Check size={16} /> : <Share2 size={16} />}
-          <span>{shared ? 'Registry shared!' : 'Share with 620 guests'}</span>
-        </button>
-
-        <button
-          onClick={() => setScreen('act6_board')}
-          className="px-4 py-3 rounded-2xl text-xs font-bold bg-[#C9A227] text-[#1D1D1F] border-none cursor-pointer hover:bg-[#b59120] flex items-center justify-center gap-1.5 shadow-xs whitespace-nowrap"
-        >
-          <span>1. Live Board</span>
-          <ArrowRight size={15} />
+          Share with 620 guests
         </button>
       </div>
     </View>
