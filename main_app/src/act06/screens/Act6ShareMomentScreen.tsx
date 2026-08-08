@@ -11,13 +11,13 @@ export const Act6ShareMomentScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
-      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0">
-        <div />
+      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
+        <span>9:41</span>
         <button 
           onClick={handleNext}
-          className="text-sm font-semibold text-[#8A8580] border-none bg-transparent cursor-pointer hover:text-[#1D1D1F]"
+          className="text-xs font-bold text-[#8A8580] border-none bg-transparent cursor-pointer hover:text-[#1D1D1F]"
         >
           Skip
         </button>
@@ -26,25 +26,25 @@ export const Act6ShareMomentScreen: React.FC = () => {
       {/* Title block */}
       <div className="px-6 pb-4">
         <h1 className="text-[32px] font-serif font-bold text-[#1D1D1F] leading-tight">Share this moment</h1>
-        <p className="text-xs text-[#8A8580] mt-1 font-medium">Auto-designed · your board's colours</p>
+        <p className="text-xs text-[#8E867E] mt-1 font-medium">Auto-designed · your board's colours</p>
       </div>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', paddingHorizontal: '24px', paddingBottom: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '24px', gap: '14px' }}>
         
         {/* Main Auto-Designed Story Card Preview */}
         <div 
           onClick={handleNext}
-          className="w-full h-80 rounded-[32px] bg-[#332A26] p-6 flex flex-col justify-end relative shadow-sm border border-white/5 cursor-pointer"
+          className="w-full h-80 rounded-[24px] bg-[#332A26] p-6 flex flex-col justify-end relative border border-white/5 cursor-pointer select-none"
         >
           {/* Centered label */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-[11px] font-mono font-bold text-white/20 tracking-widest uppercase">
+            <span className="text-[10px] font-mono font-bold text-white/20 tracking-widest uppercase">
               YOUR IMAGE
             </span>
           </div>
 
-          <div className="space-y-1.5 z-10 text-white">
+          <div className="space-y-1.5 z-10 text-white text-left">
             <div className="text-[10px] font-mono font-bold tracking-widest text-[#F5E9C8]">
               14 · 02 · 2027
             </div>
@@ -68,8 +68,8 @@ export const Act6ShareMomentScreen: React.FC = () => {
               onClick={() => setSelectedFormat(fmt.id)}
               className={`flex-1 py-2.5 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
                 selectedFormat === fmt.id
-                  ? 'bg-[#8B1538] text-white border-[#8B1538] shadow-xs'
-                  : 'bg-white text-[#1D1D1F] border-[#ECECEC] hover:bg-gray-50'
+                  ? 'bg-[#761A2D] text-white border-[#761A2D]'
+                  : 'bg-white text-[#1D1D1F] border-[#EADFCF] hover:bg-gray-50'
               }`}
             >
               {fmt.label}
@@ -78,21 +78,21 @@ export const Act6ShareMomentScreen: React.FC = () => {
         </div>
 
         {/* Card: FOUR TEMPLATES, YOUR PALETTE */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] shadow-2xs space-y-4">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             FOUR TEMPLATES, YOUR PALETTE
           </div>
 
           <div className="grid grid-cols-4 gap-3">
-            <div className="aspect-square rounded-[14px] bg-[#332A26] border border-black/5" />
-            <div className="aspect-square rounded-[14px] bg-[#8B1538] border border-black/5" />
-            <div className="aspect-square rounded-[14px] bg-[#FAF2EE] border border-black/5" />
-            <div className="aspect-square rounded-[14px] bg-[#2E7D32] border border-black/5" />
+            <div className="aspect-square rounded-[14px] bg-[#332A26]" />
+            <div className="aspect-square rounded-[14px] bg-[#8B1538]" />
+            <div className="aspect-square rounded-[14px] bg-[#FAF2EE] border border-[#EADFCF]" />
+            <div className="aspect-square rounded-[14px] bg-[#2E7D32]" />
           </div>
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed">
           Every milestone is a shareable card, tagged with your wedding hashtag and — quietly — a referral link. This is how one wedding becomes three.
         </div>
       </View>

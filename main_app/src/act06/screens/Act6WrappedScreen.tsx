@@ -8,18 +8,18 @@ export const Act6WrappedScreen: React.FC = () => {
   return (
     <View style={{ flex: 1, backgroundColor: '#721B2F', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
-      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-white/90">
-        <div />
+      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-white/60">
+        <span>9:41</span>
         <button
           onClick={() => setScreen('act6_share_moment')}
-          className="text-sm font-semibold text-white bg-transparent border-none cursor-pointer hover:opacity-80"
+          className="text-xs font-bold text-white bg-transparent border-none cursor-pointer hover:text-white/80"
         >
           Share ↗
         </button>
       </div>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', paddingHorizontal: '24px', paddingBottom: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '24px', gap: '14px' }}>
         
         {/* Title Block */}
         <div className="space-y-1 mt-2">
@@ -29,11 +29,10 @@ export const Act6WrappedScreen: React.FC = () => {
           <h1 className="text-4xl font-serif font-bold text-white leading-tight">
             Your planning,<br />wrapped.
           </h1>
-          <p className="text-xs text-white/50 mt-1 font-medium">183 days of coordination across 3 continents</p>
         </div>
 
         {/* Card 1: DECISIONS MADE */}
-        <div className="bg-white/5 border border-white/15 p-5 rounded-[24px] text-white space-y-2">
+        <div className="bg-white/5 border border-white/15 p-5 rounded-[20px] text-white space-y-2">
           <div className="text-[9px] font-bold text-white/60 tracking-wider uppercase font-mono">
             DECISIONS MADE
           </div>
@@ -43,14 +42,14 @@ export const Act6WrappedScreen: React.FC = () => {
 
         {/* Grid Stats: VENDORS SEEN & SAVED VS BAND */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white/5 border border-white/15 p-5 rounded-[24px] text-white space-y-2">
+          <div className="bg-white/5 border border-white/15 p-5 rounded-[20px] text-white space-y-2">
             <div className="text-[9px] font-bold text-white/60 tracking-wider uppercase font-mono">
               VENDORS SEEN
             </div>
             <div className="text-3xl font-serif font-bold">218</div>
           </div>
 
-          <div className="bg-white/5 border border-white/15 p-5 rounded-[24px] text-white space-y-2">
+          <div className="bg-white/5 border border-white/15 p-5 rounded-[20px] text-white space-y-2">
             <div className="text-[9px] font-bold text-white/60 tracking-wider uppercase font-mono">
               SAVED VS BAND
             </div>
@@ -59,7 +58,7 @@ export const Act6WrappedScreen: React.FC = () => {
         </div>
 
         {/* Card 4: MOST DEBATED DECISION */}
-        <div className="bg-white/5 border border-white/15 p-5 rounded-[24px] text-white space-y-2.5">
+        <div className="bg-white/5 border border-white/15 p-5 rounded-[20px] text-white space-y-2.5">
           <div className="text-[9px] font-bold text-white/60 tracking-wider uppercase font-mono">
             MOST DEBATED DECISION
           </div>
@@ -70,7 +69,7 @@ export const Act6WrappedScreen: React.FC = () => {
         </div>
 
         {/* Card 5: YOUR PLANNING HOUR */}
-        <div className="bg-white/5 border border-white/15 p-5 rounded-[24px] text-white space-y-2.5">
+        <div className="bg-white/5 border border-white/15 p-5 rounded-[20px] text-white space-y-2.5">
           <div className="text-[9px] font-bold text-white/60 tracking-wider uppercase font-mono">
             YOUR PLANNING HOUR
           </div>
@@ -88,7 +87,7 @@ export const Act6WrappedScreen: React.FC = () => {
       <div className="p-6 shrink-0">
         <button
           onClick={() => setScreen('act6_share_moment')}
-          className="w-full py-4 bg-[#FAF8F5] text-[#8B1538] rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-gray-100 transition-colors shadow-xs"
+          className="w-full py-4 bg-[#FAF6EE] text-[#721B2F] rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#EADFCF] transition-colors"
         >
           Share to my story
         </button>

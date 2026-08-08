@@ -5,29 +5,14 @@ import { useWeddingStore } from '../store/useWeddingStore';
 export const Act6PhotoWallScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
 
-  const photoThumbnails = [
-    'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
-    'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80',
-  ];
-
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
       <div 
         onClick={() => setScreen('act6_happening_now')}
-        className="bg-[#221D1A] text-white px-6 pt-5 pb-5 flex flex-col shrink-0 cursor-pointer"
+        className="bg-[#221D1A] text-white px-6 pt-3 pb-5 flex flex-col shrink-0 cursor-pointer text-left"
       >
-        <div className="flex justify-between items-center text-xs text-white/50">
+        <div className="flex justify-between items-center text-xs text-white/40 pb-1">
           <span>Sun 14 Feb · 8:12 am</span>
           <span className="font-bold tracking-wide text-white uppercase">Live</span>
         </div>
@@ -36,24 +21,22 @@ export const Act6PhotoWallScreen: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', padding: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
         
-        {/* Photo Grid (3x4) with real guest photo thumbnails */}
+        {/* Photo Grid (3x4) with solid placeholders */}
         <div className="grid grid-cols-3 gap-3">
-          {photoThumbnails.map((src, idx) => (
-            <div key={idx} className="aspect-square rounded-2xl bg-[#EFE8DC] overflow-hidden">
-              <img src={src} alt={`Guest Photo ${idx + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-200" />
-            </div>
+          {Array.from({ length: 12 }).map((_, idx) => (
+            <div key={idx} className="aspect-square rounded-[16px] bg-[#EADFCF]" />
           ))}
         </div>
 
         {/* Card: HOW GUESTS ADD TO IT */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] text-[#1D1D1F] flex items-center gap-4 shadow-2xs">
-          <div className="w-[52px] h-[52px] bg-[#1E1718] rounded-2xl flex items-center justify-center shrink-0">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-[#1D1D1F] flex items-center gap-4 text-left">
+          <div className="w-[52px] h-[52px] bg-[#251C17] rounded-[16px] flex items-center justify-center shrink-0 select-none">
             <span className="text-[10px] font-mono font-bold text-white tracking-widest">QR</span>
           </div>
           <div>
-            <h4 className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">HOW GUESTS ADD TO IT</h4>
+            <h4 className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">HOW GUESTS ADD TO IT</h4>
             <p className="text-xs text-[#1D1D1F] mt-1.5 leading-normal">
               A QR code on every table. No app, no login — the photos land here in seconds.
             </p>
@@ -61,8 +44,8 @@ export const Act6PhotoWallScreen: React.FC = () => {
         </div>
 
         {/* Card: MODERATION */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] text-[#1D1D1F] space-y-3 shadow-2xs">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-[#1D1D1F] space-y-3 text-left">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             MODERATION
           </div>
           <p className="text-xs text-[#1D1D1F] leading-relaxed">
@@ -71,16 +54,16 @@ export const Act6PhotoWallScreen: React.FC = () => {
         </div>
 
         {/* Explainer Footer */}
-        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed text-left">
           The photo wall is free for the family and pure acquisition for you: every guest who uploads sees who ran this wedding.
         </div>
       </View>
 
       {/* Sticky Bottom Action */}
-      <div className="p-6 bg-white border-t border-[#ECECEC] shrink-0">
+      <div className="p-6 bg-white border-t border-[#EADFCF] shrink-0">
         <button
           onClick={() => setScreen('act6_happening_now')}
-          className="w-full py-4 bg-[#8B1538] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#72102D] transition-colors flex items-center justify-center shadow-xs"
+          className="w-full py-4 bg-[#761A2D] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#621423] transition-colors flex items-center justify-center"
         >
           Review 4 photos
         </button>

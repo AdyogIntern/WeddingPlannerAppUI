@@ -7,32 +7,25 @@ export const Act6ArPreviewScreen: React.FC = () => {
   const [selectedStyle, setSelectedStyle] = useState<'kanakambaram' | 'jasmine' | 'temple'>('kanakambaram');
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Simulated Camera Area */}
       <div 
         onClick={() => setScreen('act6_lookbook')}
-        className="w-full aspect-[1.1] bg-[#221E1F] relative overflow-hidden flex items-center justify-center cursor-pointer"
+        className="w-full aspect-[1.1] bg-[#2D221D] relative overflow-hidden flex items-center justify-center cursor-pointer select-none"
       >
-        {/* Real background image of hall decor */}
-        <img 
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
-          alt="AR Camera View"
-          className="w-full h-full object-cover opacity-50"
-        />
-
         {/* AR Preview Pill in top right */}
-        <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-xl border border-white/20">
+        <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-[10px] border border-white/10">
           <span className="text-[10px] font-mono font-bold text-[#1D1D1F] tracking-wide">
             AR preview
           </span>
         </div>
 
-        <span className="absolute text-xs font-mono font-bold text-white/50 tracking-widest uppercase pointer-events-none">
+        <span className="absolute text-xs font-mono font-bold text-white/45 tracking-[0.12em] uppercase pointer-events-none">
           CAMERA · LEELA PALACE HALL
         </span>
 
         {/* Text Overlay at bottom of Camera View */}
-        <div className="absolute bottom-5 left-6 text-white space-y-0.5 pointer-events-none">
+        <div className="absolute bottom-5 left-6 text-white space-y-0.5 pointer-events-none text-left">
           <h2 className="text-sm font-bold text-white leading-tight">
             Mandap · Bloom & Thread
           </h2>
@@ -43,7 +36,7 @@ export const Act6ArPreviewScreen: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', padding: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
         
         {/* Horizontal Chips */}
         <div className="flex items-center gap-3">
@@ -57,8 +50,8 @@ export const Act6ArPreviewScreen: React.FC = () => {
               onClick={() => setSelectedStyle(style.id as any)}
               className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                 selectedStyle === style.id
-                  ? 'bg-[#8B1538] text-white border-[#8B1538] shadow-xs'
-                  : 'bg-white text-[#1D1D1F] border-[#ECECEC] hover:bg-gray-50'
+                  ? 'bg-[#761A2D] text-white border-[#761A2D]'
+                  : 'bg-white text-[#1D1D1F] border-[#EADFCF] hover:bg-gray-50'
               }`}
             >
               {style.label}
@@ -67,8 +60,8 @@ export const Act6ArPreviewScreen: React.FC = () => {
         </div>
 
         {/* Card: WHAT CHANGES IF YOU SWITCH */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] shadow-2xs space-y-4">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             WHAT CHANGES IF YOU SWITCH
           </div>
 
@@ -91,8 +84,8 @@ export const Act6ArPreviewScreen: React.FC = () => {
         </div>
 
         {/* Card: SEND AS A VIDEO */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] shadow-2xs space-y-3">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-3">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             SEND AS A VIDEO
           </div>
           <p className="text-xs text-[#1D1D1F] leading-relaxed">
@@ -101,17 +94,17 @@ export const Act6ArPreviewScreen: React.FC = () => {
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed">
           The vendor sends measurements once; every family sees their own hall. It is the closest thing to standing in the room.
         </div>
 
       </View>
 
       {/* Sticky Bottom Action Button */}
-      <div className="p-6 bg-white border-t border-[#ECECEC] shrink-0">
+      <div className="p-6 bg-white border-t border-[#EADFCF] shrink-0">
         <button
           onClick={() => setScreen('act6_lookbook')}
-          className="w-full py-4 bg-[#8B1538] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#72102D] transition-colors flex items-center justify-center shadow-xs"
+          className="w-full py-4 bg-[#761A2D] text-white rounded-2xl text-sm font-bold border-none cursor-pointer hover:bg-[#621423] transition-colors flex items-center justify-center"
         >
           Put this in the Blueprint
         </button>

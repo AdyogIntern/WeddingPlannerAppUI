@@ -6,18 +6,21 @@ export const Act6WidgetScreen: React.FC = () => {
   const { setScreen } = useWeddingStore();
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Lockscreen Time Bar */}
       <div 
         onClick={() => setScreen('act6_voice_discussion')}
-        className="px-6 pt-6 pb-6 text-center text-white shrink-0 bg-[#1A1311] cursor-pointer flex flex-col items-center gap-1.5"
+        className="px-6 pt-6 pb-6 text-center text-white shrink-0 bg-[#251C17] cursor-pointer flex flex-col items-center gap-1"
       >
         <span className="text-[11px] text-white/50 font-bold uppercase tracking-wider">
           Wednesday 3 August
         </span>
 
+        {/* Large Time Text */}
+        <h1 className="text-7xl font-sans font-light tracking-tight text-white my-2">9:41</h1>
+
         {/* iOS Lock Screen Widget Card */}
-        <div className="w-full max-w-[340px] bg-white/10 backdrop-blur-md p-4 mt-4 rounded-[20px] border border-white/10 text-white space-y-1.5 text-left">
+        <div className="w-full max-w-[340px] bg-white/10 backdrop-blur-md p-4 mt-2 rounded-[20px] border border-white/10 text-white space-y-1.5 text-left">
           <div className="flex justify-between items-center text-[9px] font-bold text-white/60 tracking-wider font-mono">
             <span>PRIYA & ARJUN</span>
             <span>38%</span>
@@ -32,17 +35,17 @@ export const Act6WidgetScreen: React.FC = () => {
         </div>
 
         {/* Lock Screen Notification Pill */}
-        <div className="w-full max-w-[340px] bg-white/10 backdrop-blur-md py-3 px-4 rounded-[16px] border border-white/10 text-white text-left text-xs font-semibold">
+        <div className="w-full max-w-[340px] bg-white/10 backdrop-blur-md py-3 px-4 mt-3 rounded-[16px] border border-white/10 text-white text-left text-xs font-semibold">
           Appa approved the venue · 6:40 am IST
         </div>
       </div>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', padding: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', padding: '16px', gap: '14px' }}>
         
         {/* Card: ALSO LIVES IN */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] text-[#1D1D1F] space-y-4 shadow-2xs">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-[#1D1D1F] space-y-4 text-left">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             ALSO LIVES IN
           </div>
 
@@ -60,8 +63,8 @@ export const Act6WidgetScreen: React.FC = () => {
         </div>
 
         {/* Card: NOTIFICATIONS, DELIBERATELY QUIET */}
-        <div className="bg-white p-5 rounded-[24px] border border-[#ECECEC] text-[#1D1D1F] space-y-3 shadow-2xs">
-          <div className="text-[10px] font-bold text-[#A8A39D] tracking-wider uppercase font-mono">
+        <div className="bg-white p-5 rounded-[20px] border border-[#EADFCF] text-[#1D1D1F] space-y-3 text-left">
+          <div className="text-[10px] font-bold text-[#A39C93] tracking-[0.08em] uppercase font-sans">
             NOTIFICATIONS, DELIBERATELY QUIET
           </div>
           <p className="text-xs text-[#1D1D1F] leading-relaxed">
@@ -70,7 +73,7 @@ export const Act6WidgetScreen: React.FC = () => {
         </div>
 
         {/* Explainer Box */}
-        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed text-left">
           A countdown is the one piece of urgency a couple actually wants. Everything else stays out of their notification tray.
         </div>
       </View>

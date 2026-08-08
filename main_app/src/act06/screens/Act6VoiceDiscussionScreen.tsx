@@ -11,40 +11,38 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FAF8F5', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF6EE', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Header */}
-      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0">
-        <div />
+      <div className="px-6 pt-5 pb-2 flex items-center justify-between shrink-0 text-xs font-semibold text-[#8A8580]">
+        <span>9:41</span>
         <button 
           onClick={handleNext}
-          className="text-sm font-semibold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
+          className="text-xs font-bold text-[#8A8580] bg-transparent border-none cursor-pointer hover:text-[#1D1D1F]"
         >
           Mute
         </button>
       </div>
 
       {/* Title Block */}
-      <div className="px-6 pb-4">
+      <div className="px-6 pb-4 text-left">
         <h1 className="text-[32px] font-serif font-bold text-[#1D1D1F] leading-tight">Mandap decor</h1>
-        <p className="text-xs text-[#8A8580] mt-1 font-medium">Discussion · 8 messages</p>
+        <p className="text-xs text-[#8E867E] mt-1 font-medium">Discussion · 8 messages</p>
       </div>
 
       {/* Main Chat Stream Area */}
-      <View style={{ flex: 1, overflowY: 'auto', paddingHorizontal: '24px', paddingBottom: '24px', gap: '16px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '24px', gap: '14px' }}>
         
         {/* Message 1: Appa Voice Note */}
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-[#EFE8DC] overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Appa" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 bg-white p-5 rounded-[24px] border border-[#ECECEC] shadow-2xs space-y-4">
+        <div className="flex items-start gap-4 text-left">
+          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+          <div className="flex-1 bg-white p-5 rounded-[20px] border border-[#EADFCF] space-y-4">
             <div>
               <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Appa · voice note</h4>
             </div>
 
             {/* Audio Waveform Player */}
             <div className="flex items-center gap-3">
-              <button className="w-9 h-9 rounded-full bg-[#8B1538] text-white border-none flex items-center justify-center cursor-pointer shrink-0">
+              <button className="w-9 h-9 rounded-full bg-[#761A2D] text-white border-none flex items-center justify-center cursor-pointer shrink-0">
                 <span className="text-[10px] ml-0.5">▶</span>
               </button>
               {/* Waveform graphic */}
@@ -57,7 +55,7 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
                   />
                 ))}
               </div>
-              <span className="text-[11px] font-mono font-semibold text-[#8A8580]">0:38</span>
+              <span className="text-[11px] font-mono font-semibold text-[#8E867E]">0:38</span>
             </div>
 
             {/* Transcript Box */}
@@ -69,52 +67,46 @@ export const Act6VoiceDiscussionScreen: React.FC = () => {
         </div>
 
         {/* Message 2: Priya Video Reply */}
-        <div className="flex items-start gap-4 justify-end">
-          <div className="flex-1 bg-[#FAF2EE] p-5 rounded-[24px] border-none shadow-2xs space-y-3 max-w-[280px]">
+        <div className="flex items-start gap-4 justify-end text-left">
+          <div className="flex-1 bg-[#F5ECE8] p-5 rounded-[20px] space-y-3 max-w-[280px]">
             <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Priya · video reply</h4>
-            <div className="aspect-[1.6] bg-[#EFE8DC] rounded-xl overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80" alt="Video Preview" className="w-full h-full object-cover" />
-            </div>
-            <p className="text-[11px] text-[#8A8580] font-medium leading-normal">
+            <div className="aspect-[1.6] bg-[#EADFCF] rounded-xl" />
+            <p className="text-[11px] text-[#8E867E] font-medium leading-normal">
               Filmed her board and pointed at what she means. Ten seconds instead of four paragraphs.
             </p>
           </div>
-          <div className="w-10 h-10 rounded-full bg-[#EFE8DC] overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Priya" className="w-full h-full object-cover" />
-          </div>
+          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
         </div>
 
         {/* Message 3: Quote Card */}
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-[#EFE8DC] overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=100&q=80" alt="Bloom & Thread" className="w-full h-full object-cover" />
-          </div>
-          <div className="flex-1 bg-white p-5 rounded-[24px] border-2 border-dashed border-[#C9A227] shadow-2xs space-y-2">
+        <div className="flex items-start gap-4 text-left">
+          <div className="w-10 h-10 rounded-full bg-[#EADFCF] shrink-0" />
+          <div className="flex-1 bg-white p-5 rounded-[20px] border-2 border-dashed border-[#C9A227] space-y-2">
             <h4 className="text-xs font-bold text-[#1D1D1F] leading-tight">Bloom & Thread</h4>
-            <p className="text-xs text-[#8A8580] font-medium leading-normal">
+            <p className="text-xs text-[#8E867E] font-medium leading-normal">
               ₹1.85L for the mix. Two reference photos attached.
             </p>
           </div>
         </div>
 
         {/* Explainer Footer */}
-        <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed">
+        <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed">
           Appa will send a voice note. Priya will send a video. Neither will write a paragraph. The transcript is what makes it a decision record.
         </div>
       </View>
 
       {/* Input Bar */}
-      <div className="p-3 bg-white border-t border-[#ECECEC] shrink-0 flex items-center gap-2">
+      <div className="p-3 bg-white border-t border-[#EADFCF] shrink-0 flex items-center gap-2">
         <input 
           type="text" 
           placeholder="Message..."
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
-          className="flex-1 bg-[#FAF8F5] px-3.5 py-2.5 rounded-xl border border-[#ECECEC] text-xs outline-none text-[#1D1D1F]"
+          className="flex-1 bg-[#FAF6EE] px-3.5 py-2.5 rounded-xl border border-[#EADFCF] text-xs outline-none text-[#1D1D1F]"
         />
         <button 
           onClick={handleNext}
-          className="w-10 h-10 rounded-xl bg-[#8B1538] text-white border-none flex items-center justify-center cursor-pointer shrink-0"
+          className="w-10 h-10 rounded-xl bg-[#761A2D] text-white border-none flex items-center justify-center cursor-pointer shrink-0"
         >
           <span className="text-base">🎙️</span>
         </button>

@@ -13,9 +13,9 @@ export const Act6ReelsScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#221E1F', height: '100%', boxSizing: 'border-box' }}>
+    <View style={{ flex: 1, backgroundColor: '#251C17', height: '100%', boxSizing: 'border-box' }}>
       {/* Top Filter Tabs */}
-      <div className="px-6 py-4 flex items-center justify-between shrink-0 bg-[#221E1F]">
+      <div className="px-6 py-4 flex items-center justify-between shrink-0 bg-[#251C17]">
         {(['For you', 'Muhurtham', 'Sangeet', 'Decor'] as const).map((tab) => (
           <button
             key={tab}
@@ -36,28 +36,22 @@ export const Act6ReelsScreen: React.FC = () => {
 
       {/* Main Reels Video Viewport */}
       <View style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-        {/* Simulated Video Frame with beautiful cover image */}
+        {/* Simulated Video Frame with solid dark background */}
         <div 
           onClick={handleNext}
-          className="w-full h-full relative overflow-hidden bg-[#221E1F] flex items-center justify-center cursor-pointer"
+          className="w-full h-full relative overflow-hidden bg-[#2D221D] flex items-center justify-center cursor-pointer select-none"
         >
-          <img 
-            src="https://images.unsplash.com/photo-1519225495810-7517c296517a?auto=format&fit=crop&w=800&q=80" 
-            alt="Mandap video"
-            className="w-full h-full object-cover opacity-60"
-          />
-
-          <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold text-white/90">
+          <span className="text-xs font-mono font-bold text-white/40 tracking-[0.16em] uppercase">
             VIDEO · 0:24
-          </div>
+          </span>
 
           {/* Right Floating Action Sidebar Icons */}
-          <div className="absolute right-6 bottom-16 flex flex-col items-center gap-6 z-20 text-white">
+          <div className="absolute right-6 bottom-16 flex flex-col items-center gap-6 z-20 text-white animate-fade-in">
             <button 
               onClick={(e) => { e.stopPropagation(); setLiked(!liked); }}
               className="flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer text-white"
             >
-              <Heart size={22} className={liked ? 'fill-[#8B1538] text-[#8B1538]' : 'text-white'} />
+              <Heart size={22} className={liked ? 'fill-[#761A2D] text-[#761A2D]' : 'text-white'} />
               <span className="text-[10px] font-bold mt-1">2.1k</span>
             </button>
 
@@ -110,10 +104,10 @@ export const Act6ReelsScreen: React.FC = () => {
       </View>
 
       {/* Light Bottom Info Area */}
-      <View style={{ backgroundColor: '#FAF8F5', flexShrink: 0 }}>
+      <View style={{ backgroundColor: '#FAF6EE', flexShrink: 0 }}>
         {/* Explainer Footer Card */}
         <div className="p-6">
-          <div className="bg-[#FAF2EE] p-5 rounded-[24px] text-xs text-[#8B1538] font-medium leading-relaxed text-center">
+          <div className="bg-[#F5ECE8] p-5 rounded-[20px] text-xs text-[#4A3525] font-medium leading-relaxed text-center">
             Every clip is a real wedding your team ran, and every clip has a price and a booking button attached. Browsing joy that converts.
           </div>
         </div>
@@ -132,7 +126,7 @@ export const Act6ReelsScreen: React.FC = () => {
               onClick={handleNext}
               className="bg-transparent border-none cursor-pointer flex flex-col items-center justify-center flex-1"
             >
-              <span className={`text-[11px] font-bold ${item.active ? 'text-[#8B1538]' : 'text-[#A8A39D]'}`}>
+              <span className={`text-[11px] font-bold ${item.active ? 'text-[#761A2D]' : 'text-[#A39C93]'}`}>
                 {item.label}
               </span>
             </button>
