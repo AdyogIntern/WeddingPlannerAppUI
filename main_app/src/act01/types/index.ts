@@ -68,14 +68,14 @@ export interface WeddingFunction {
 }
 
 export interface OnboardingData {
-  weddingDate: string; // e.g. "14 Feb 2027"
-  dateOptionType: 'fixed' | 'exploring' | 'muhurtham_help';
-  country: string; // e.g. "Seattle, United States"
-  city: string; // e.g. "Chennai"
-  guestCount: number; // e.g. 420
+  weddingDate?: string; // e.g. "14 Feb 2027"
+  dateOptionType?: 'fixed' | 'exploring' | 'muhurtham_help' | '';
+  country?: string; // e.g. "Seattle, United States"
+  city?: string; // e.g. "Chennai"
+  guestCount?: number | null; // e.g. 420
   weddingType: WeddingType; // e.g. "Traditional"
   community: string; // e.g. "Iyengar"
-  currency: Currency; // e.g. "USD"
+  currency?: Currency | ''; // e.g. "USD"
   rawBudgetAmount: number; // e.g. 48000
   budgetINR: number; // e.g. 4030000 (approx INR)
   functionsRequired: string[]; // e.g. ["Nichayathartham", "Panda Kaal", "Mehendi & Sangeet", "Muhurtham", "Reception"]

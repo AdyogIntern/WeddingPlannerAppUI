@@ -47,6 +47,27 @@ export const OnboardingQuestionsScreen: React.FC = () => {
     }
   };
 
+  const isQuestionAnswered = () => {
+    switch (questionIndex) {
+      case 0:
+        return !!onboarding.dateOptionType;
+      case 1:
+        return !!onboarding.country;
+      case 2:
+        return !!onboarding.city;
+      case 3:
+        return onboarding.guestCount !== undefined && onboarding.guestCount !== null;
+      case 4:
+        return !!currency;
+      case 5:
+        return onboarding.topPriorities && onboarding.topPriorities.length > 0;
+      case 6:
+        return onboarding.deciders && onboarding.deciders.length > 0;
+      default:
+        return false;
+    }
+  };
+
   return (
     <View 
       style={{ 
@@ -108,27 +129,52 @@ export const OnboardingQuestionsScreen: React.FC = () => {
       {/* Main Question Content Viewport */}
       <View style={{ flex: 1, overflowY: 'auto', paddingRight: '2px', paddingBottom: '8px', maxWidth: '420px', width: '100%', margin: '0 auto' }}>
         {/* Question Title & Subtitle */}
-        <Text variant="serifTitle" style={{ fontSize: '19px', color: colors.textDarkHeading, marginBottom: '4px' }}>
+        <Text 
+          variant="serifTitle" 
+          style={{ 
+            fontSize: '19px', 
+            color: colors.textDarkHeading, 
+            marginBottom: '4px',
+            textAlign: 'center',
+            display: 'block',
+            width: '100%'
+          }}
+        >
           {currentQ.title}
         </Text>
-        <Text style={{ fontSize: '11px', color: colors.textDarkBody, marginBottom: '12px', lineHeight: '1.35' }}>
+        <Text 
+          style={{ 
+            fontSize: '11px', 
+            color: colors.textDarkBody, 
+            marginBottom: '16px', 
+            lineHeight: '1.35',
+            textAlign: 'center',
+            display: 'block',
+            width: '100%'
+          }}
+        >
           {currentQ.subtitle}
         </Text>
 
         {/* ================= QUESTION 1: Wedding Date ================= */}
         {questionIndex === 0 && (
           <View style={{ gap: '8px' }}>
-            <View 
+            <TouchableOpacity 
+              onPress={() => updateOnboarding({ dateOptionType: 'fixed', weddingDate: '14 Feb 2027' })}
               style={{
-                backgroundColor: colors.infoBoxBg,
+                backgroundColor: onboarding.dateOptionType === 'fixed' ? '#FAF3E8' : colors.cardBackgroundLight,
                 padding: '10px 12px',
                 borderRadius: '12px',
-                border: '1px solid #E6D8C4',
+                border: onboarding.dateOptionType === 'fixed' 
+                  ? `1.5px solid ${colors.cardSelectedBorder}` 
+                  : `1px solid ${colors.cardBackgroundBorder}`,
                 marginBottom: '8px',
                 width: '88%',
                 maxWidth: '340px',
                 margin: '0 auto 8px auto',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
               }}
             >
               <Text style={{ fontSize: '10.5px', fontWeight: '700', color: colors.burgundyPrimary, marginBottom: '4px' }}>
@@ -151,7 +197,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
               <Text style={{ fontSize: '9.5px', color: '#5C1A29', marginTop: '6px', fontWeight: '500' }}>
                 Sunday · Uthiram nakshatram · Strong auspicious muhurtham day
               </Text>
-            </View>
+            </TouchableOpacity>
 
             <OptionCard 
               title="Only the month is fixed (Nov 2026 - Feb 2027)" 
@@ -228,7 +274,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
           <View style={{ gap: '12px', alignItems: 'center' }}>
             <div className="w-[88%] max-w-[340px] mx-auto bg-white p-4 rounded-2xl border border-[#EFE7DC] text-center shadow-xs">
               <span className="text-3xl font-serif font-bold text-[#702334]">
-                {onboarding.guestCount}
+                {onboarding.guestCount !== null && onboarding.guestCount !== undefined ? onboarding.guestCount : '—'}
               </span>
               <span className="text-xs text-gray-500 font-semibold block mt-1">
                 EXPECTED WEDDING GUESTS
@@ -244,13 +290,13 @@ export const OnboardingQuestionsScreen: React.FC = () => {
                 min={50}
                 max={1200}
                 step={25}
-                value={onboarding.guestCount}
+                value={onboarding.guestCount !== null && onboarding.guestCount !== undefined ? onboarding.guestCount : 420}
                 onChange={(e) => updateOnboarding({ guestCount: parseInt(e.target.value) })}
                 className="w-full accent-[#702334] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-gray-500 mt-1 font-semibold">
                 <span>50 Intimate</span>
-                <span>420 Standard</span>
+                <span>{onboarding.guestCount !== null && onboarding.guestCount !== undefined ? 'Drag to adjust' : 'Tap slider to select'}</span>
                 <span>1,200 Grand</span>
               </div>
             </div>
@@ -279,15 +325,28 @@ export const OnboardingQuestionsScreen: React.FC = () => {
 
             {/* Budget Amount Banner */}
             <div className="w-[88%] max-w-[340px] mx-auto bg-white p-4 rounded-2xl border border-[#EFE7DC] text-center shadow-xs">
-              <div className="text-2xl font-serif font-bold text-[#702334]">
-                {currency} ${onboarding.rawBudgetAmount.toLocaleString()}
-              </div>
-              <div className="text-xs font-semibold text-gray-600 mt-1">
-                ≈ ₹{(onboarding.budgetINR / 100000).toFixed(1)} Lakhs INR
-              </div>
-              <p className="text-[10px] text-gray-500 mt-1.5 leading-snug">
-                Rate calculated at ₹{currencyRates[currency]} / {currency} · Stored & costed in INR
-              </p>
+              {currency ? (
+                <>
+                  <div className="text-2xl font-serif font-bold text-[#702334]">
+                    {currency} ${onboarding.rawBudgetAmount.toLocaleString()}
+                  </div>
+                  <div className="text-xs font-semibold text-gray-600 mt-1">
+                    ≈ ₹{(onboarding.budgetINR / 100000).toFixed(1)} Lakhs INR
+                  </div>
+                  <p className="text-[10px] text-gray-500 mt-1.5 leading-snug">
+                    Rate calculated at ₹{currencyRates[currency as Currency]} / {currency} · Stored & costed in INR
+                  </p>
+                </>
+              ) : (
+                <div className="py-1">
+                  <div className="text-base font-serif font-semibold text-gray-400">
+                    No currency selected
+                  </div>
+                  <div className="text-[10px] text-gray-500 mt-1">
+                    Select a currency to calculate your budget
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Comparison Hint */}
@@ -367,8 +426,18 @@ export const OnboardingQuestionsScreen: React.FC = () => {
 
       <View style={{ marginTop: 'auto', paddingTop: '12px', width: '100%', paddingBottom: '8px', alignSelf: 'center', display: 'flex', justifyContent: 'center' }}>
         <button 
-          onClick={nextQuestion}
-          className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer shadow-2xs hover:bg-[#521422] transition-colors text-center block"
+          onClick={() => {
+            if (isQuestionAnswered()) {
+              nextQuestion();
+            }
+          }}
+          disabled={!isQuestionAnswered()}
+          style={{
+            opacity: isQuestionAnswered() ? 1 : 0.5,
+            cursor: isQuestionAnswered() ? 'pointer' : 'not-allowed',
+            transition: 'all 0.2s ease'
+          }}
+          className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none shadow-2xs hover:bg-[#521422] transition-colors text-center block"
         >
           {questionIndex === TOTAL_QUESTIONS - 1 ? 'Build my Blueprint' : 'Continue'}
         </button>
