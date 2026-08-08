@@ -79,12 +79,12 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
   setQuestionIndex: (index) => set({ questionIndex: Math.max(0, Math.min(6, index)) }),
 
   nextQuestion: () => {
-    const { questionIndex } = get();
+    const { questionIndex, setScreen } = get();
     if (questionIndex < 6) {
       set({ questionIndex: questionIndex + 1 });
     } else {
-      // Finished 7 questions -> Go to Screen 5 (Generating Blueprint)
-      get().startGeneratingBlueprint();
+      // After completing 7 questions, navigate to registration screen
+      setScreen('registration');
     }
   },
 
@@ -156,6 +156,11 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
       weddingScore: 50,
     });
   },
+
+  // Navigation actions
+  goToRegistration: () => set({ currentScreen: 'registration' }),
+  goToGenerating: () => set({ currentScreen: 'generating' }),
+  goToVision: () => set({ currentScreen: 'generating' }),
 
   startGeneratingBlueprint: () => {
     set({ 
