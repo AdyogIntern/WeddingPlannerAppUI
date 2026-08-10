@@ -13,6 +13,8 @@ interface Screen27Props {
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
   onBack?: () => void;
+  activeTab: 'overview' | 'dispute';
+  onTabChange: (tab: 'overview' | 'dispute') => void;
 }
 
 export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
@@ -23,10 +25,11 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
   onViewTransactionDetails,
   currency,
   onToggleCurrency,
-  onBack
+  onBack,
+  activeTab,
+  onTabChange
 }) => {
   const isINR = currency === 'INR';
-  const [activeTab, setActiveTab] = useState<'overview' | 'dispute'>('overview');
   const [releasedIds, setReleasedIds] = useState<string[]>([]);
   const [caseNoteAdded, setCaseNoteAdded] = useState(false);
 
@@ -47,7 +50,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
         }
         headerMeta={activeTab === 'dispute' ? disputeCase.caseNumber : undefined}
         showBack={true}
-        onBack={activeTab === 'dispute' ? () => setActiveTab('overview') : onBack}
+        onBack={activeTab === 'dispute' ? () => onTabChange('overview') : onBack}
         backLabel="Payments"
       />
 

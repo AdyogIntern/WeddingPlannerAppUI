@@ -12,7 +12,8 @@ export type ScreenId =
   | 'PurohitProfile'
   | 'Attire'
   | 'VendorSwap'
-  | 'SwapImpact';
+  | 'SwapImpact'
+  | 'ReturnGifts';
 
 export interface ScreenMeta {
   id: ScreenId;

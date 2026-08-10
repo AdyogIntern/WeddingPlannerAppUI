@@ -262,7 +262,7 @@ export const EverythingYouNeed: React.FC = () => {
             </button>
             <button
               type="button"
-              onClick={() => handleCategoryClick('Paper', 'SavedVendors')}
+              onClick={() => handleCategoryClick('Paper', 'ReturnGifts')}
               className="text-left cursor-pointer hover:text-[#7A2234] transition font-medium"
             >
               Paper & gifts <span className="text-[#91877E] font-normal">· 26</span>

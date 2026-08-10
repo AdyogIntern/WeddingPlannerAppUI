@@ -114,4 +114,7 @@ export type AppScreen =
   | 'blueprint_home' 
   | 'function_details' 
   | 'compare_plans' 
+  | 'share_plan'
+  | 'invitation'
+  | 'visa_letter'
   | 'registration';
