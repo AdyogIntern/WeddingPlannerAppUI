@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.weddingblueprint',
-  appName: 'WeddingBlueprint',
+  appId: 'com.weddingblueprint.app',
+  appName: 'Wedding Blueprint',
   webDir: 'dist'
 };
 

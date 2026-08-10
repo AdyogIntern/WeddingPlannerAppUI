@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Send, Check } from 'lucide-react';
+import { Send, Check, ChevronLeft } from 'lucide-react';
+import { useApp } from '../context/AppContext';
 
 interface Props {
   onNavigateNext?: () => void;
 }
 
 export const ReturnGiftsScreen: React.FC<Props> = ({ onNavigateNext }) => {
+  const { goBack } = useApp();
   const [selectedCard, setSelectedCard] = useState<number>(0);
   const [sent, setSent] = useState(false);
 
@@ -16,8 +18,18 @@ export const ReturnGiftsScreen: React.FC<Props> = ({ onNavigateNext }) => {
 
   return (
     <div className="min-h-full bg-[#FAF7F2] text-[#1F1A17] flex flex-col pb-8">
+      {/* Navigation Header */}
+      <div className="w-full px-5 pt-4 pb-0 bg-[#FAF7F2] flex items-center shrink-0">
+        <button
+          onClick={() => goBack()}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#4A423A] hover:text-[#7A2232] text-[12px] font-bold border border-[#E8E0D5] shadow-sm hover:border-[#7A2232] transition-colors cursor-pointer"
+        >
+          <ChevronLeft className="w-4 h-4" /> Back
+        </button>
+      </div>
+
       {/* Header */}
-      <div className="px-5 pt-6 pb-4">
+      <div className="px-5 pt-4 pb-4">
         <h1 className="font-serif-title text-[28px] leading-tight font-medium text-[#1F1A17] tracking-tight">
           Return gifts
         </h1>
@@ -142,15 +154,6 @@ export const ReturnGiftsScreen: React.FC<Props> = ({ onNavigateNext }) => {
           Send for Amma to approve
         </button>
 
-        {onNavigateNext && (
-          <button 
-            onClick={onNavigateNext}
-            className="w-full py-3.5 px-4 bg-[#7A2232] text-white font-bold text-[13.5px] rounded-xl hover:bg-[#5A1924] active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span>Proceed to Step 12: Muhurtham Day Timeline</span>
-            <span>→</span>
-          </button>
-        )}
       </div>
     </div>
   );

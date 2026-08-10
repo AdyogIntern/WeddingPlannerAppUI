@@ -5,7 +5,7 @@ import { PrimaryButton, SecondaryButton } from '../reusable/Buttons';
 interface RaiseDisputeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmitDispute: () => void;
+  onSubmitDispute: (reason: string, photoCount: number) => void;
   vendorName: string;
   amountINR: string;
 }
@@ -27,7 +27,7 @@ export const RaiseDisputeModal: React.FC<RaiseDisputeModalProps> = ({
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      onSubmitDispute();
+      onSubmitDispute(reason, photoCount);
       onClose();
     }, 1000);
   };

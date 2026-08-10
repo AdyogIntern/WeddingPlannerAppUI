@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">WeddingBlueprint</string>
-    <string name="title_activity_main">WeddingBlueprint</string>
-    <string name="package_name">com.weddingblueprint</string>
-    <string name="custom_url_scheme">com.weddingblueprint</string>
+    <string name="app_name">Wedding Blueprint</string>
+    <string name="title_activity_main">Wedding Blueprint</string>
+    <string name="package_name">com.weddingblueprint.app</string>
+    <string name="custom_url_scheme">com.weddingblueprint.app</string>
 </resources>

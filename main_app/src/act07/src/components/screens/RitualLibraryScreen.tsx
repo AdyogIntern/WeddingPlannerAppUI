@@ -150,7 +150,7 @@ export const RitualLibraryScreen: React.FC<Props> = ({
               onClick={onViewRunsheet}
               className="mt-1 py-3.5 px-4 bg-[#7A2232] text-white font-bold text-[13px] rounded-xl hover:bg-[#5A1924] active:scale-[0.99] transition-all text-center shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Confirm & Proceed to Step 3: Ritual Explanation Detail</span>
+              <span>Continue</span>
               <span>→</span>
             </button>
           )}

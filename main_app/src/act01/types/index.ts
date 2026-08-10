@@ -92,6 +92,18 @@ export interface NudgeCard {
   badge?: string;
 }
 
+export interface Contributor {
+  id: string;
+  name: string;
+  amountINR: string; // e.g. "₹22.1L"
+  amountUSD?: string;
+  percentage: number;
+  categories: string;
+  color: string;
+  avatar?: string;
+  isUser?: boolean;
+}
+
 export interface PlanVersion {
   id: 'priya' | 'amma';
   title: string; // "Priya's version" | "Amma's version"
@@ -114,4 +126,9 @@ export type AppScreen =
   | 'blueprint_home' 
   | 'function_details' 
   | 'compare_plans' 
+  | 'share_plan'
+  | 'invitation'
+  | 'visa_letter'
+  | 'who_pays'
+  | 'records'
   | 'registration';

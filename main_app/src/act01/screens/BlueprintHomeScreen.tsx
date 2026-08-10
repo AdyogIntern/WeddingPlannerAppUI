@@ -18,8 +18,14 @@ import {
   ArrowRight,
   MessageSquare,
   FileText,
-  Copy
+  Copy,
+  Mail,
+  Lock
 } from 'lucide-react';
+
+import { GuestsDashboardScreen } from './GuestsDashboardScreen';
+
+type TabType = 'timeline' | 'budget' | 'family' | 'guests';
 
 export const BlueprintHomeScreen: React.FC = () => {
   const { 
@@ -36,8 +42,9 @@ export const BlueprintHomeScreen: React.FC = () => {
   // Active Bottom Tab: 'today' | 'blueprint' | 'vendors' | 'family' | 'rituals'
   const [activeBottomTab, setActiveBottomTab] = useState<'today' | 'blueprint' | 'vendors' | 'family' | 'rituals'>('blueprint');
 
-  // Sub-tab inside Blueprint: 'timeline' | 'budget' | 'family' | 'guests'
-  const [activeSubTab, setActiveSubTab] = useState<'timeline' | 'budget' | 'family' | 'guests'>('timeline');
+  const searchParams = new URLSearchParams(window.location.search);
+  const initialTab = searchParams.get('tab') as TabType || 'timeline';
+  const [activeSubTab, setActiveSubTab] = useState<TabType>(initialTab);
 
   const [copiedLink, setCopiedLink] = useState(false);
   const [sentWhatsApp, setSentWhatsApp] = useState(false);
@@ -405,6 +412,40 @@ export const BlueprintHomeScreen: React.FC = () => {
               ))}
             </div>
 
+            {/* Share Invitation Section */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold text-gray-900">Share Invitation</h3>
+              <div 
+                onClick={() => setScreen('invitation')}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#671B2B] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#FFF0F3] text-[#671B2B] flex items-center justify-center shrink-0">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Digital Invitation</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">WhatsApp card, email, or print-ready</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Who Pays What Section */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold text-gray-900">Financials</h3>
+              <div 
+                onClick={() => setScreen('who_pays')}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#671B2B] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#F4EFEA] text-[#7A1C31] flex items-center justify-center shrink-0">
+                  <Lock size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Who pays what</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">4 people paying across INR and USD. Only Appa and you can see this.</p>
+                </div>
+              </div>
+            </div>
+
             {/* 3 Main Action Cards */}
             <div className="space-y-2">
               <h3 className="text-xs font-bold text-gray-900">Share the Blueprint</h3>
@@ -501,11 +542,10 @@ export const BlueprintHomeScreen: React.FC = () => {
 
         {/* VIEW 5: GUESTS SUBTAB */}
         {activeBottomTab === 'blueprint' && activeSubTab === 'guests' && (
-          <div className="space-y-2.5">
-            <div className="bg-white p-4 rounded-2xl border border-[#E5E0D8] text-center">
-              <div className="text-3xl font-serif font-bold text-[#671B2B]">420</div>
-              <div className="text-xs font-semibold text-gray-600 mt-0.5">Total Confirmed Guest List</div>
-            </div>
+          <div className="flex-1 mt-4">
+            <GuestsDashboardScreen 
+              onGenerateVisaLetters={() => setScreen('visa_letter')}
+            />
           </div>
         )}
 

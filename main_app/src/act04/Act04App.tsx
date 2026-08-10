@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 // Removed MobileFrame
-import { BottomTabBar, ScreenId } from './components/Navigation/BottomTabBar';
+import { ScreenId } from './components/Navigation/BottomTabBar';
 import { Screen25_BudgetDashboard } from './screens/BudgetDashboard';
 import { Screen26_PaymentSchedule } from './screens/PaymentSchedule';
 import { Screen27_EscrowProtection } from './screens/EscrowProtection';
@@ -26,6 +26,7 @@ import {
 import { PaymentModal } from './components/Modals/PaymentModal';
 import { DocumentViewerModal } from './components/Modals/DocumentViewerModal';
 import { SendToFamilyModal } from './components/Modals/SendToFamilyModal';
+import { RaiseDisputeModal } from './components/Modals/RaiseDisputeModal';
 import { DocumentItem, PaymentScheduleItem } from './types';
 
 export default function App() {
@@ -60,7 +61,8 @@ export default function App() {
   const [budgetItems] = useState(INITIAL_BUDGET_ITEMS);
   const [scheduleItems] = useState(INITIAL_PAYMENT_SCHEDULE);
   const [escrowItems, setEscrowItems] = useState(INITIAL_ESCROW_ITEMS);
-  const [disputeCase] = useState(INITIAL_DISPUTE_CASE);
+  const [disputeCase, setDisputeCase] = useState(INITIAL_DISPUTE_CASE);
+  const [escrowTab, setEscrowTab] = useState<'overview' | 'dispute'>('overview');
   const [contributors] = useState(INITIAL_CONTRIBUTORS);
   const [documents] = useState(INITIAL_DOCUMENTS);
   const [bookingDetails] = useState(INITIAL_BOOKING_DETAILS);
@@ -85,6 +87,10 @@ export default function App() {
 
   const [familyModalOpen, setFamilyModalOpen] = useState(false);
   const [familyRecipient, setFamilyRecipient] = useState('Appa');
+
+  const [disputeModalOpen, setDisputeModalOpen] = useState(false);
+  const [disputeVendor, setDisputeVendor] = useState('');
+  const [disputeAmount, setDisputeAmount] = useState('');
 
   // Toggle Currency
   const handleToggleCurrency = () => {
@@ -111,7 +117,9 @@ export default function App() {
 
   // Open Dispute screen
   const handleRaiseDispute = (vendor: string, amount: string) => {
-    // No-op; the EscrowProtection screen handles its own dispute tab display.
+    setDisputeVendor(vendor);
+    setDisputeAmount(amount);
+    setDisputeModalOpen(true);
   };
 
   // Open Document Modal
@@ -157,7 +165,6 @@ export default function App() {
             <Screen25_BudgetDashboard
               budgetItems={budgetItems}
               onNavigateToSchedule={() => navigateTo('screen26')}
-              onNavigateToWhoPays={() => navigateTo('screen28')}
               onPayEscrow={() => handleOpenPayment()}
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
@@ -173,6 +180,7 @@ export default function App() {
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
+              onNavigateToRecords={() => navigateTo('screen29')}
             />
           )}
 
@@ -186,16 +194,8 @@ export default function App() {
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
-            />
-          )}
-
-          {activeScreen === 'screen28' && (
-            <Screen28_WhoPaysWhat
-              contributors={contributors}
-              onSendToAppa={() => handleSendToFamily('Appa')}
-              currency={currency}
-              onToggleCurrency={handleToggleCurrency}
-              onBack={handleBack}
+              activeTab={escrowTab}
+              onTabChange={setEscrowTab}
             />
           )}
 
@@ -222,9 +222,6 @@ export default function App() {
             />
           )}
         </div>
-
-        {/* Sticky Bottom Navigation Bar */}
-        <BottomTabBar activeScreen={activeScreen} onSelectScreen={handleSelectTab} />
       </div>
 
       {/* Interactive Modals */}
@@ -238,6 +235,35 @@ export default function App() {
         vendorName={selectedPaymentItem.vendor}
         amountINR={selectedPaymentItem.amountINR}
         amountUSD={selectedPaymentItem.amountUSD}
+      />
+
+      <RaiseDisputeModal
+        isOpen={disputeModalOpen}
+        onClose={() => setDisputeModalOpen(false)}
+        onSubmitDispute={(reason, photoCount) => {
+          setDisputeModalOpen(false);
+          setDisputeCase({
+            ...INITIAL_DISPUTE_CASE,
+            caseNumber: `Case #${Math.floor(1000 + Math.random() * 9000)}`,
+            vendor: disputeVendor,
+            category: 'catering',
+            amountHeld: `${disputeAmount} HELD · NOT RELEASED`,
+            reason: reason,
+            timeline: [
+              {
+                id: 't1',
+                title: `You raised it with ${photoCount} photos`,
+                timestamp: 'Just now',
+                completed: true
+              },
+              ...INITIAL_DISPUTE_CASE.timeline.slice(1)
+            ]
+          });
+          setEscrowTab('dispute');
+          navigateTo('screen27');
+        }}
+        vendorName={disputeVendor}
+        amountINR={disputeAmount}
       />
 
       <DocumentViewerModal

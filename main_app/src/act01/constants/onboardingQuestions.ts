@@ -48,6 +48,12 @@ export const onboardingQuestionsList: QuestionDefinition[] = [
     subtitle: 'We’ll set up their access. You can change all of this later.',
     leadSignalNote: 'Weddings planned by 3+ people finish twice as fast',
   },
+  {
+    id: 8,
+    title: 'Suggested Auspicious Dates',
+    subtitle: 'We suggest these panchangam dates for more info before you build your blueprint.',
+    leadSignalNote: 'Optional date suggestion step',
+  },
 ];
 
 export const priorityOptions: { id: PriorityId; label: string; description: string }[] = [

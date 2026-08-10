@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, RNButton } from '../components/RNPrimitives';
 import { colors } from '../theme';
 import muhurthamCeremonyImg from '../../assets/muhurtham_ceremony.jpg';
-
+import { useWeddingStore } from '../store/useWeddingStore';
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -10,6 +10,31 @@ interface WelcomeScreenProps {
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLink }) => {
+  const { language, setLanguage } = useWeddingStore();
+
+  const t = {
+    en: {
+      title: "Plan a Chennai\nwedding from 8,000\nkm away.",
+      subtitle: "Answer ten questions and we'll build your whole wedding — every function, every vendor, every rupee — in about four minutes. Free, no calls, no salesperson.",
+      check1: "Real prices, visible before you talk to anyone",
+      check2: "30 years of vendors, verified in person",
+      check3: "Your family plans with you, from anywhere",
+      btn: "Start my Blueprint",
+      link: "Already planning? Open with a link"
+    },
+    ta: {
+      title: "8,000 கி.மீ தூரத்திலிருந்து\nஒரு சென்னை திருமணத்தை\nதிட்டமிடுங்கள்.",
+      subtitle: "பத்து கேள்விகளுக்கு பதிலளிக்கவும், உங்கள் முழு திருமணத்தையும் நாங்கள் உருவாக்குவோம் — ஒவ்வொரு நிகழ்வும், ஒவ்வொரு விற்பனையாளரும், ஒவ்வொரு ரூபாயும் — சுமார் நான்கு நிமிடங்களில். இலவசம், அழைப்புகள் இல்லை, விற்பனையாளர் இல்லை.",
+      check1: "யாரிடமும் பேசுவதற்கு முன் உண்மையான விலைகளை பார்க்கலாம்",
+      check2: "30 வருட விற்பனையாளர்கள், நேரில் சரிபார்க்கப்பட்டவர்கள்",
+      check3: "உங்கள் குடும்பம் உங்களுடன் எங்கிருந்தும் திட்டமிடலாம்",
+      btn: "எனது திட்டத்தை தொடங்கு",
+      link: "ஏற்கனவே திட்டமிடுகிறீர்களா? ஒரு இணைப்புடன் திறக்கவும்"
+    }
+  };
+
+  const content = t[language];
+
   return (
     <View 
       style={{ 
@@ -39,16 +64,35 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
             fontFamily: 'system-ui, sans-serif'
           }}
         />
-        <Text 
-          style={{ 
-            color: 'rgba(255, 255, 255, 0.65)', 
-            fontSize: '12.5px', 
-            fontWeight: '600', 
-            fontFamily: 'system-ui, sans-serif' 
-          }}
-        >
-          EN · தமிழ்
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text 
+            onPress={() => setLanguage('en')}
+            style={{ 
+              color: language === 'en' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)', 
+              fontSize: '12.5px', 
+              fontWeight: language === 'en' ? '700' : '600', 
+              fontFamily: 'system-ui, sans-serif',
+              cursor: 'pointer'
+            }}
+          >
+            EN
+          </Text>
+          <Text style={{ color: 'rgba(255, 255, 255, 0.65)', fontSize: '12.5px', marginHorizontal: '4px', fontWeight: '600', fontFamily: 'system-ui, sans-serif' }}>
+            ·
+          </Text>
+          <Text 
+            onPress={() => setLanguage('ta')}
+            style={{ 
+              color: language === 'ta' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)', 
+              fontSize: '12.5px', 
+              fontWeight: language === 'ta' ? '700' : '600', 
+              fontFamily: 'system-ui, sans-serif',
+              cursor: 'pointer'
+            }}
+          >
+            தமிழ்
+          </Text>
+        </View>
       </View>
 
       {/* Main Content Area */}
@@ -95,7 +139,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
               whiteSpace: 'pre-line'
             }}
           >
-            {"Plan a Chennai\nwedding from 8,000\nkm away."}
+            {content.title}
           </Text>
 
           {/* Subtitle / Paragraph */}
@@ -109,7 +153,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
               fontFamily: 'system-ui, sans-serif'
             }}
           >
-            Answer ten questions and we'll build your whole wedding — every function, every vendor, every rupee — in about four minutes. Free, no calls, no salesperson.
+            {content.subtitle}
           </Text>
 
           {/* Feature Checkpoints */}
@@ -117,21 +161,21 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
             <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
               <Text style={{ color: '#D8B365', fontSize: '15px', fontWeight: 'bold', marginRight: '10px', marginTop: '-1px' }}>✓</Text>
               <Text style={{ color: 'rgba(255, 255, 255, 0.95)', fontSize: '14px', lineHeight: '1.4', flex: 1, fontWeight: '400', fontFamily: 'system-ui, sans-serif' }}>
-                Real prices, visible before you talk to anyone
+                {content.check1}
               </Text>
             </View>
 
             <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
               <Text style={{ color: '#D8B365', fontSize: '15px', fontWeight: 'bold', marginRight: '10px', marginTop: '-1px' }}>✓</Text>
               <Text style={{ color: 'rgba(255, 255, 255, 0.95)', fontSize: '14px', lineHeight: '1.4', flex: 1, fontWeight: '400', fontFamily: 'system-ui, sans-serif' }}>
-                30 years of vendors, verified in person
+                {content.check2}
               </Text>
             </View>
 
             <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
               <Text style={{ color: '#D8B365', fontSize: '15px', fontWeight: 'bold', marginRight: '10px', marginTop: '-1px' }}>✓</Text>
               <Text style={{ color: 'rgba(255, 255, 255, 0.95)', fontSize: '14px', lineHeight: '1.4', flex: 1, fontWeight: '400', fontFamily: 'system-ui, sans-serif' }}>
-                Your family plans with you, from anywhere
+                {content.check3}
               </Text>
             </View>
           </View>
@@ -151,7 +195,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
         }}
       >
         <RNButton 
-          title="Start my Blueprint" 
+          title={content.btn} 
           variant="white"
           onPress={onStart}
           style={{ height: '48px', borderRadius: '16px' }}
@@ -161,7 +205,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
           onClick={onOpenLink}
           className="mt-3.5 text-[13px] text-white/70 hover:text-white transition-colors cursor-pointer bg-transparent border-none outline-none font-normal"
         >
-          Already planning? Open with a link
+          {content.link}
         </button>
       </View>
     </View>
