@@ -17,6 +17,53 @@ export const OnboardingQuestionsScreen: React.FC = () => {
     setCurrency 
   } = useWeddingStore();
 
+  const days = Array.from({ length: 31 }, (_, i) => String(i + 1));
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const years = ['2026', '2027', '2028', '2029', '2030'];
+
+  const getParsedDate = () => {
+    const dateStr = onboarding.weddingDate || '';
+    const parts = dateStr.split(' ');
+    if (parts.length === 3) {
+      return {
+        day: parts[0],
+        month: parts[1],
+        year: parts[2]
+      };
+    }
+    return { day: '14', month: 'Feb', year: '2027' };
+  };
+
+  const getDayOfWeek = (d: string, m: string, y: string) => {
+    const monthIndex = months.indexOf(m);
+    if (monthIndex === -1) return '';
+    const dateObj = new Date(parseInt(y), monthIndex, parseInt(d));
+    const daysArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysArr[dateObj.getDay()];
+  };
+
+  const getAuspiciousNote = (d: string, m: string, y: string) => {
+    const dayOfWeek = getDayOfWeek(d, m, y);
+    if (d === '14' && m === 'Feb' && y === '2027') {
+      return `${dayOfWeek} · Uthiram nakshatram · Strong auspicious muhurtham day`;
+    }
+    const dayOfWeekStr = dayOfWeek ? `${dayOfWeek} · ` : '';
+    const isWeekend = dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday';
+    if (isWeekend) {
+      return `${dayOfWeekStr}Good weekend alignment · Check auspiciousness in details`;
+    }
+    return `${dayOfWeekStr}Weekday wedding · Check auspiciousness in details`;
+  };
+
+  const { day: currentDay, month: currentMonth, year: currentYear } = getParsedDate();
+
+  const handleDateChange = (newDay: string, newMonth: string, newYear: string) => {
+    updateOnboarding({
+      dateOptionType: 'fixed',
+      weddingDate: `${newDay} ${newMonth} ${newYear}`
+    });
+  };
+
   const TOTAL_QUESTIONS = onboardingQuestionsList.length; // 7
   const currentQ = onboardingQuestionsList[questionIndex] || onboardingQuestionsList[0];
   const progressPercent = ((questionIndex + 1) / TOTAL_QUESTIONS) * 100;
@@ -160,7 +207,11 @@ export const OnboardingQuestionsScreen: React.FC = () => {
         {questionIndex === 0 && (
           <View style={{ gap: '8px' }}>
             <TouchableOpacity 
-              onPress={() => updateOnboarding({ dateOptionType: 'fixed', weddingDate: '14 Feb 2027' })}
+              onPress={() => {
+                if (onboarding.dateOptionType !== 'fixed') {
+                  updateOnboarding({ dateOptionType: 'fixed', weddingDate: `${currentDay} ${currentMonth} ${currentYear}` });
+                }
+              }}
               style={{
                 backgroundColor: onboarding.dateOptionType === 'fixed' ? '#FAF3E8' : colors.cardBackgroundLight,
                 padding: '10px 12px',
@@ -181,21 +232,69 @@ export const OnboardingQuestionsScreen: React.FC = () => {
                 We have a date
               </Text>
               <View style={{ flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
-                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center">
-                  <div className="text-[9px] text-gray-500 font-semibold uppercase">DAY</div>
-                  <div className="text-base font-bold text-gray-900">14</div>
+                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center relative">
+                  <div className="text-[9px] text-gray-500 font-semibold uppercase mb-0.5">DAY</div>
+                  <select 
+                    value={currentDay}
+                    onChange={(e) => handleDateChange(e.target.value, currentMonth, currentYear)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full bg-transparent border-0 text-center font-bold text-gray-900 text-base focus:ring-0 focus:outline-none cursor-pointer p-0"
+                    style={{
+                      border: 'none',
+                      textAlign: 'center',
+                      textAlignLast: 'center',
+                      width: '100%',
+                      padding: 0,
+                    }}
+                  >
+                    {days.map(d => (
+                      <option key={d} value={d}>{d}</option>
+                    ))}
+                  </select>
                 </div>
-                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center">
-                  <div className="text-[9px] text-gray-500 font-semibold uppercase">MONTH</div>
-                  <div className="text-base font-bold text-gray-900">Feb</div>
+                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center relative">
+                  <div className="text-[9px] text-gray-500 font-semibold uppercase mb-0.5">MONTH</div>
+                  <select 
+                    value={currentMonth}
+                    onChange={(e) => handleDateChange(currentDay, e.target.value, currentYear)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full bg-transparent border-0 text-center font-bold text-gray-900 text-base focus:ring-0 focus:outline-none cursor-pointer p-0"
+                    style={{
+                      border: 'none',
+                      textAlign: 'center',
+                      textAlignLast: 'center',
+                      width: '100%',
+                      padding: 0,
+                    }}
+                  >
+                    {months.map(m => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
+                  </select>
                 </div>
-                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center">
-                  <div className="text-[9px] text-gray-500 font-semibold uppercase">YEAR</div>
-                  <div className="text-base font-bold text-gray-900">2027</div>
+                <div className="flex-1 bg-white p-2 rounded-lg border border-[#E0D5C5] text-center relative">
+                  <div className="text-[9px] text-gray-500 font-semibold uppercase mb-0.5">YEAR</div>
+                  <select 
+                    value={currentYear}
+                    onChange={(e) => handleDateChange(currentDay, currentMonth, e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full bg-transparent border-0 text-center font-bold text-gray-900 text-base focus:ring-0 focus:outline-none cursor-pointer p-0"
+                    style={{
+                      border: 'none',
+                      textAlign: 'center',
+                      textAlignLast: 'center',
+                      width: '100%',
+                      padding: 0,
+                    }}
+                  >
+                    {years.map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
                 </div>
               </View>
               <Text style={{ fontSize: '9.5px', color: '#5C1A29', marginTop: '6px', fontWeight: '500' }}>
-                Sunday · Uthiram nakshatram · Strong auspicious muhurtham day
+                {getAuspiciousNote(currentDay, currentMonth, currentYear)}
               </Text>
             </TouchableOpacity>
 
