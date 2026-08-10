@@ -12,6 +12,8 @@ import { InvitationScreen } from './screens/InvitationScreen';
 import { VisaLetterScreen } from './screens/VisaLetterScreen';
 import { Wifi, Battery } from 'lucide-react';
 import { RegistrationFormScreen } from './screens/RegistrationFormScreen';
+import { WhoPaysWhatScreen } from './screens/WhoPaysWhatScreen';
+import { RecordsScreen } from './screens/RecordsScreen';
 
 export default function App() {
   const { 
@@ -53,6 +55,10 @@ export default function App() {
         return <InvitationScreen />;
       case 'visa_letter':
         return <VisaLetterScreen />;
+      case 'who_pays':
+        return <WhoPaysWhatScreen />;
+      case 'records':
+        return <RecordsScreen />;
       case 'registration':
         return <RegistrationFormScreen />;
     }

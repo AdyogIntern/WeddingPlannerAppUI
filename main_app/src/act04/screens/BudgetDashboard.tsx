@@ -6,7 +6,6 @@ import { BudgetItem } from '../types';
 interface Screen25Props {
   budgetItems: BudgetItem[];
   onNavigateToSchedule: (category?: string) => void;
-  onNavigateToWhoPays: () => void;
   onPayEscrow: () => void;
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
@@ -16,7 +15,6 @@ interface Screen25Props {
 export const Screen25_BudgetDashboard: React.FC<Screen25Props> = ({
   budgetItems,
   onNavigateToSchedule,
-  onNavigateToWhoPays,
   currency,
   onToggleCurrency,
   onBack

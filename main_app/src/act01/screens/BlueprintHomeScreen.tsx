@@ -19,7 +19,8 @@ import {
   MessageSquare,
   FileText,
   Copy,
-  Mail
+  Mail,
+  Lock
 } from 'lucide-react';
 
 import { GuestsDashboardScreen } from './GuestsDashboardScreen';
@@ -424,6 +425,23 @@ export const BlueprintHomeScreen: React.FC = () => {
                 <div>
                   <h3 className="text-xs font-bold text-gray-900">Digital Invitation</h3>
                   <p className="text-[10px] text-gray-500 mt-0.5">WhatsApp card, email, or print-ready</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Who Pays What Section */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold text-gray-900">Financials</h3>
+              <div 
+                onClick={() => setScreen('who_pays')}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#671B2B] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#F4EFEA] text-[#7A1C31] flex items-center justify-center shrink-0">
+                  <Lock size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Who pays what</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">4 people paying across INR and USD. Only Appa and you can see this.</p>
                 </div>
               </div>
             </div>
