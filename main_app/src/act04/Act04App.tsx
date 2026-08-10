@@ -24,7 +24,6 @@ import {
 } from './data/mockData';
 
 import { PaymentModal } from './components/Modals/PaymentModal';
-import { RaiseDisputeModal } from './components/Modals/RaiseDisputeModal';
 import { DocumentViewerModal } from './components/Modals/DocumentViewerModal';
 import { SendToFamilyModal } from './components/Modals/SendToFamilyModal';
 import { DocumentItem, PaymentScheduleItem } from './types';
@@ -78,10 +77,6 @@ export default function App() {
     amountUSD: '$5,360'
   });
 
-  const [disputeModalOpen, setDisputeModalOpen] = useState(false);
-  const [disputeVendor, setDisputeVendor] = useState('Sri Amirtham Catering');
-  const [disputeAmount, setDisputeAmount] = useState('₹1.58L');
-
   const [docModalOpen, setDocModalOpen] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState<{ title: string; details: string }>({
     title: 'GST invoice · Sri Amirtham',
@@ -114,17 +109,29 @@ export default function App() {
     setPaymentModalOpen(true);
   };
 
-  // Open Dispute Modal
+  // Open Dispute screen
   const handleRaiseDispute = (vendor: string, amount: string) => {
-    setDisputeVendor(vendor);
-    setDisputeAmount(amount);
-    setDisputeModalOpen(true);
+    // No-op; the EscrowProtection screen handles its own dispute tab display.
   };
 
   // Open Document Modal
   const handlePreviewDoc = (title: string, details: string) => {
     setSelectedDoc({ title, details });
     setDocModalOpen(true);
+  };
+
+  const handleDownloadDoc = (title: string, details: string) => {
+    const fileName = `${title.replace(/\s+/g, '_')}.txt`;
+    const fileContent = `Document: ${title}\nDetails: ${details}\n\nThis is a downloadable copy of the document from the Vivaha app.`;
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = fileName;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(url);
   };
 
   // Open Send To Family Modal
@@ -175,6 +182,7 @@ export default function App() {
               disputeCase={disputeCase}
               onRaiseDispute={handleRaiseDispute}
               onReleaseEscrow={handleReleaseEscrow}
+              onViewTransactionDetails={() => navigateTo('screen30')}
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
@@ -195,17 +203,19 @@ export default function App() {
             <Screen29_PaperworkRemittance
               documents={documents}
               onPreviewDoc={(doc: DocumentItem) => handlePreviewDoc(doc.title, doc.details)}
+              onDownloadDoc={(doc: DocumentItem) => handleDownloadDoc(doc.title, doc.details)}
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
             />
           )}
-
+ 
           {activeScreen === 'screen30' && (
             <Screen30_BookingConfirmation
               bookingDetails={bookingDetails}
               onSendToFamily={handleSendToFamily}
               onPreviewDoc={handlePreviewDoc}
+              onDownloadDoc={handleDownloadDoc}
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
@@ -230,20 +240,10 @@ export default function App() {
         amountUSD={selectedPaymentItem.amountUSD}
       />
 
-      <RaiseDisputeModal
-        isOpen={disputeModalOpen}
-        onClose={() => setDisputeModalOpen(false)}
-        onSubmitDispute={() => {
-          setDisputeModalOpen(false);
-          navigateTo('screen27');
-        }}
-        vendorName={disputeVendor}
-        amountINR={disputeAmount}
-      />
-
       <DocumentViewerModal
         isOpen={docModalOpen}
         onClose={() => setDocModalOpen(false)}
+        onDownload={() => handleDownloadDoc(selectedDoc.title, selectedDoc.details)}
         title={selectedDoc.title}
         details={selectedDoc.details}
       />

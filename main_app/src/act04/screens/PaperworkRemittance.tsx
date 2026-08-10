@@ -7,6 +7,7 @@ import { DocumentItem } from '../types';
 interface Screen29Props {
   documents: DocumentItem[];
   onPreviewDoc: (doc: DocumentItem) => void;
+  onDownloadDoc: (doc: DocumentItem) => void;
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
   onBack?: () => void;
@@ -15,6 +16,7 @@ interface Screen29Props {
 export const Screen29_PaperworkRemittance: React.FC<Screen29Props> = ({
   documents,
   onPreviewDoc,
+  onDownloadDoc,
   currency,
   onToggleCurrency,
   onBack
@@ -114,7 +116,7 @@ export const Screen29_PaperworkRemittance: React.FC<Screen29Props> = ({
                 title={doc.title}
                 details={doc.details}
                 onPreview={() => onPreviewDoc(doc)}
-                onDownload={() => onPreviewDoc(doc)}
+                onDownload={() => onDownloadDoc(doc)}
               />
             ))}
           </div>

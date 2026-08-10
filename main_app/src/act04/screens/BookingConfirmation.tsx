@@ -9,6 +9,7 @@ interface Screen30Props {
   bookingDetails: BookingDetails;
   onSendToFamily: (recipient: string) => void;
   onPreviewDoc: (title: string, details: string) => void;
+  onDownloadDoc: (title: string, details: string) => void;
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
   onBack?: () => void;
@@ -18,6 +19,7 @@ export const Screen30_BookingConfirmation: React.FC<Screen30Props> = ({
   bookingDetails,
   onSendToFamily,
   onPreviewDoc,
+  onDownloadDoc,
   currency,
   onToggleCurrency,
   onBack
@@ -146,7 +148,11 @@ export const Screen30_BookingConfirmation: React.FC<Screen30Props> = ({
               Progress moved <strong className="text-[#1A1613]">38% → 50%</strong>. {bookingDetails.progressChange.unlockedReward}
             </div>
           </div>
-
+ 
+          <SecondaryButton onClick={() => setSubView('pack')}>
+            Record
+          </SecondaryButton>
+ 
           {/* CTA */}
           <PrimaryButton onClick={() => onSendToFamily('Family')}>
             Tell the family
@@ -159,26 +165,31 @@ export const Screen30_BookingConfirmation: React.FC<Screen30Props> = ({
             title="Signed contract"
             details="Countersigned by us · 6 pages"
             onPreview={() => onPreviewDoc('Signed contract', 'Countersigned by us · 6 pages')}
+            onDownload={() => onDownloadDoc('Signed contract', 'Countersigned by us · 6 pages')}
           />
           <DocumentCard
             title="Cancellation terms"
             details="Full refund until 14 Dec, 50% until 14 Jan"
             onPreview={() => onPreviewDoc('Cancellation terms', 'Full refund until 14 Dec')}
+            onDownload={() => onDownloadDoc('Cancellation terms', 'Full refund until 14 Dec')}
           />
           <DocumentCard
             title="What is included"
             details="Hall, dining, 200 parking, power backup"
             onPreview={() => onPreviewDoc('What is included', 'Hall, dining, 200 parking')}
+            onDownload={() => onDownloadDoc('What is included', 'Hall, dining, 200 parking')}
           />
           <DocumentCard
             title="Escrow receipt"
             details="₹4.5L held · release 16 Feb"
             onPreview={() => onPreviewDoc('Escrow receipt', '₹4.5L held · release 16 Feb')}
+            onDownload={() => onDownloadDoc('Escrow receipt', '₹4.5L held · release 16 Feb')}
           />
           <DocumentCard
             title="GST invoice"
             details="₹1,44,000 · GSTIN on file"
             onPreview={() => onPreviewDoc('GST invoice', '₹1,44,000 · GSTIN on file')}
+            onDownload={() => onDownloadDoc('GST invoice', '₹1,44,000 · GSTIN on file')}
           />
 
           {/* Your Contact on this booking */}

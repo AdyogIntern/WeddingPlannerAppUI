@@ -9,6 +9,7 @@ interface Screen27Props {
   disputeCase: DisputeCase;
   onRaiseDispute: (vendor: string, amount: string) => void;
   onReleaseEscrow: (id: string) => void;
+  onViewTransactionDetails: () => void;
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
   onBack?: () => void;
@@ -19,6 +20,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
   disputeCase,
   onRaiseDispute,
   onReleaseEscrow,
+  onViewTransactionDetails,
   currency,
   onToggleCurrency,
   onBack
@@ -98,10 +100,17 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
             </div>
 
             <div className="h-[1px] bg-[#EBE5DC]/80 my-4" />
-
+ 
             <p className="text-[13px] text-[#7A716A] leading-relaxed">
               The vendor sees the money is committed. It reaches them 48 hours after the function, once you or Appa confirm it went well.
             </p>
+ 
+            <button
+              onClick={onViewTransactionDetails}
+              className="w-full mt-4 py-3 px-4 bg-[#7A1C31] text-white font-medium text-[14px] rounded-xl hover:bg-[#621627] active:scale-[0.98] transition-all cursor-pointer"
+            >
+              Transaction detail
+            </button>
           </div>
 
           {/* Release Requested Card (Sri Amirtham Catering) */}
@@ -131,7 +140,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
                   Release
                 </button>
                 <button
-                  onClick={() => onRaiseDispute('Sri Amirtham Catering', isINR ? '₹1.58L' : '$1,880')}
+                  onClick={() => setActiveTab('dispute')}
                   className="flex-1 py-2.5 px-4 bg-white border border-[#D5CBC0] text-[#1A1613] font-medium text-[14px] rounded-xl hover:bg-[#F2ECE4] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Raise an issue

@@ -5,6 +5,7 @@ import { PrimaryButton, SecondaryButton } from '../reusable/Buttons';
 interface DocumentViewerModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onDownload?: () => void;
   title: string;
   details: string;
 }
@@ -12,6 +13,7 @@ interface DocumentViewerModalProps {
 export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
   isOpen,
   onClose,
+  onDownload,
   title,
   details
 }) => {
@@ -84,7 +86,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
           <SecondaryButton onClick={onClose} icon={<Share2 className="w-4 h-4" />}>
             Share Link
           </SecondaryButton>
-          <PrimaryButton onClick={onClose} icon={<Download className="w-4 h-4" />}>
+          <PrimaryButton onClick={onDownload ?? onClose} icon={<Download className="w-4 h-4" />}>
             Download PDF
           </PrimaryButton>
         </div>
