@@ -26,7 +26,8 @@ export const BlueprintHomeScreen: React.FC = () => {
     setSelectedFunctionId, 
     getTotalCostINR, 
     getTotalCostInCurrency, 
-    currency 
+    currency,
+    addFunction
   } = useWeddingStore();
 
   // Active Bottom Tab: 'today' | 'blueprint' | 'vendors' | 'family' | 'rituals'
@@ -243,123 +244,87 @@ export const BlueprintHomeScreen: React.FC = () => {
         {/* VIEW 2: BLUEPRINT TIMELINE */}
         {activeBottomTab === 'blueprint' && activeSubTab === 'timeline' && (
           <div className="space-y-3">
-            {/* Function 1: Nichayathartham */}
-            <div 
-              onClick={() => handleOpenFunction('f1')}
-              className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs hover:border-[#671B2B] transition-all cursor-pointer"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-sm font-serif font-bold text-gray-900">Nichayathartham</h3>
-                  <p className="text-[10px] text-gray-500 mt-0.5">
-                    Fri 12 Feb · morning · 120 guests · Engagement & formal announcement
-                  </p>
+            {functions.map(fn => (
+              <div 
+                key={fn.id}
+                onClick={() => handleOpenFunction(fn.id)}
+                className={`bg-white p-3.5 rounded-2xl shadow-2xs cursor-pointer transition-all ${
+                  fn.name === 'Muhurtham' ? 'border-2 border-[#671B2B] space-y-2.5' : 'border border-[#E5E0D8] hover:border-[#671B2B]'
+                }`}
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-sm font-serif font-bold text-gray-900">{fn.name}</h3>
+                    <p className="text-[10px] text-gray-500 mt-0.5">
+                      {fn.date} · {fn.timeSlot} · {fn.guests} guests
+                    </p>
+                  </div>
+                  {fn.name === 'Nichayathartham' && (
+                    <span className="bg-[#E8F5E9] text-[#2E7D32] text-[9px] font-bold px-2 py-0.5 rounded-md tracking-wider">
+                      BOOKED
+                    </span>
+                  )}
+                  {fn.name === 'Muhurtham' && (
+                    <span className="bg-[#FFF8E1] text-[#B78103] border border-[#FFE082] text-[9px] font-bold px-2 py-0.5 rounded-md tracking-wider">
+                      4 SLOTS OPEN
+                    </span>
+                  )}
+                  {fn.name !== 'Nichayathartham' && fn.name !== 'Muhurtham' && fn.owner && (
+                    <span className="text-[10px] font-semibold text-gray-500">
+                      {fn.owner}
+                    </span>
+                  )}
                 </div>
-                <span className="bg-[#E8F5E9] text-[#2E7D32] text-[9px] font-bold px-2 py-0.5 rounded-md tracking-wider">
-                  BOOKED
-                </span>
-              </div>
 
-              {/* Tag Pills */}
-              <div className="flex flex-wrap gap-1.5 mt-2.5">
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  Venue · Raintree Hall
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md flex items-center gap-1">
-                  Catering <Check size={10} className="text-green-600" />
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  Photo — 3 shortlisted
-                </span>
+                {fn.name === 'Muhurtham' && (
+                  <>
+                    <div className="flex flex-wrap gap-1.5 mt-2.5">
+                      <span className="bg-[#FFF0F3] text-[#671B2B] border border-[#F8C8D4] text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1">
+                        Venue <Check size={10} />
+                      </span>
+                      <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                        + Catering
+                      </span>
+                      <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                        + Purohit
+                      </span>
+                      <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                        + Nadaswaram
+                      </span>
+                      <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                        + Decor
+                      </span>
+                    </div>
+                    <div className="border-t border-dashed border-gray-200 pt-2 flex items-center gap-2 mt-2">
+                      <div className="w-5 h-5 rounded-full bg-[#E5E0D8] text-[9px] font-bold text-gray-700 flex items-center justify-center shrink-0">
+                        RG
+                      </div>
+                      <p className="text-[10px] text-gray-500 font-medium">
+                        Appa owns this function's venue & catering
+                      </p>
+                    </div>
+                  </>
+                )}
+                
+                {fn.name === 'Nichayathartham' && (
+                  <div className="flex flex-wrap gap-1.5 mt-2.5">
+                    <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                      Venue · Raintree Hall
+                    </span>
+                    <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md flex items-center gap-1">
+                      Catering <Check size={10} className="text-green-600" />
+                    </span>
+                    <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
+                      Photo — 3 shortlisted
+                    </span>
+                  </div>
+                )}
               </div>
-            </div>
-
-            {/* Function 2: Muhurtham (Main Featured Card) */}
-            <div 
-              onClick={() => handleOpenFunction('f4')}
-              className="bg-white p-3.5 rounded-2xl border-2 border-[#671B2B] shadow-2xs cursor-pointer space-y-2.5"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-sm font-serif font-bold text-gray-900">Muhurtham</h3>
-                  <p className="text-[10px] text-gray-500 mt-0.5">
-                    Sun 14 Feb · 06:30–09:00 muhurtham · 420 guests
-                  </p>
-                </div>
-                <span className="bg-[#FFF8E1] text-[#B78103] border border-[#FFE082] text-[9px] font-bold px-2 py-0.5 rounded-md tracking-wider">
-                  4 SLOTS OPEN
-                </span>
-              </div>
-
-              {/* Slot Pills */}
-              <div className="flex flex-wrap gap-1.5">
-                <span className="bg-[#FFF0F3] text-[#671B2B] border border-[#F8C8D4] text-[10px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1">
-                  Venue <Check size={10} />
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  + Catering
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  + Purohit
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  + Nadaswaram
-                </span>
-                <span className="bg-[#FAF8F5] text-gray-700 border border-[#E5E0D8] text-[10px] font-medium px-2 py-0.5 rounded-md">
-                  + Decor
-                </span>
-              </div>
-
-              {/* Dashed Owner Divider */}
-              <div className="border-t border-dashed border-gray-200 pt-2 flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-[#E5E0D8] text-[9px] font-bold text-gray-700 flex items-center justify-center shrink-0">
-                  RG
-                </div>
-                <p className="text-[10px] text-gray-500 font-medium">
-                  Appa owns this function's venue & catering
-                </p>
-              </div>
-            </div>
-
-            {/* Function 3: Mehendi & Sangeet */}
-            <div 
-              onClick={() => handleOpenFunction('f3')}
-              className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs hover:border-[#671B2B] transition-all cursor-pointer"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-sm font-serif font-bold text-gray-900">Mehendi & Sangeet</h3>
-                  <p className="text-[10px] text-gray-500 mt-0.5">
-                    Sat 13 Feb · evening · 180 guests
-                  </p>
-                </div>
-                <span className="text-[10px] font-semibold text-gray-500">
-                  Meera
-                </span>
-              </div>
-            </div>
-
-            {/* Function 4: Sumangali Prarthanai */}
-            <div 
-              onClick={() => handleOpenFunction('f2')}
-              className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs hover:border-[#671B2B] transition-all cursor-pointer"
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-sm font-serif font-bold text-gray-900">Sumangali Prarthanai</h3>
-                  <p className="text-[10px] text-gray-500 mt-0.5">
-                    Sat 13 Feb · morning · 45 guests
-                  </p>
-                </div>
-                <span className="text-[10px] font-semibold text-gray-500">
-                  Patti
-                </span>
-              </div>
-            </div>
+            ))}
 
             {/* Add a Function Dashed Button */}
             <button
-              onClick={() => handleOpenFunction('f5')}
+              onClick={() => addFunction()}
               className="w-full py-3 rounded-2xl border-2 border-dashed border-[#C9A227]/70 text-center bg-white/40 text-xs font-bold text-[#671B2B] flex items-center justify-center gap-1.5 cursor-pointer hover:bg-white transition-all"
             >
               <Plus size={14} />

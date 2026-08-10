@@ -12,7 +12,9 @@ export const FunctionDetailScreen: React.FC = () => {
   const { 
     functions, 
     selectedFunctionId, 
-    setScreen, 
+    setScreen,
+    removeFunction,
+    updateFunction
   } = useWeddingStore();
 
   const selectedFn = functions.find(f => f.id === selectedFunctionId) || functions[2] || functions[3]; // Default to Mehendi & Sangeet
@@ -24,8 +26,36 @@ export const FunctionDetailScreen: React.FC = () => {
   const [boardType, setBoardType] = useState<'board' | 'timeline'>('board');
 
   // Edit states
-  const [timeSlot, setTimeSlot] = useState<'Evening' | 'Afternoon' | 'Morning'>('Evening');
+  const [fnName, setFnName] = useState(selectedFn.name);
+  const [timeSlot, setTimeSlot] = useState<'Evening' | 'Afternoon' | 'Morning'>(
+    selectedFn.timeSlot.includes('Morning') ? 'Morning' : selectedFn.timeSlot.includes('Afternoon') ? 'Afternoon' : 'Evening'
+  );
   const [guestCount, setGuestCount] = useState<number>(selectedFn.guests || 180);
+  const [newSlotName, setNewSlotName] = useState('');
+  const [localSlots, setLocalSlots] = useState(selectedFn.slots.map(s => s.category));
+
+  const handleSave = () => {
+    const updatedSlots = localSlots.map((category, index) => {
+      const existing = selectedFn.slots.find(s => s.category === category);
+      if (existing) return existing;
+      return {
+        id: `s${Date.now()}-${index}`,
+        category,
+        vendorName: 'To be decided',
+        status: 'open' as const,
+        costINR: 0,
+        costUSD: 0,
+      };
+    });
+
+    updateFunction(selectedFn.id, {
+      name: fnName,
+      timeSlot: timeSlot === 'Evening' ? 'Evening (16:00 - 23:00)' : timeSlot === 'Afternoon' ? 'Afternoon (12:00 - 16:00)' : 'Morning (08:00 - 11:00)',
+      guests: guestCount,
+      slots: updatedSlots
+    });
+    setScreen('blueprint_home');
+  };
 
   return (
     <View 
@@ -91,9 +121,12 @@ export const FunctionDetailScreen: React.FC = () => {
           <div className="space-y-3.5">
             {/* Header Title Section */}
             <div>
-              <h1 className="text-xl font-serif font-bold text-gray-900 leading-tight">
-                {selectedFn.name || 'Mehendi & Sangeet'}
-              </h1>
+              <input
+                type="text"
+                value={fnName}
+                onChange={e => setFnName(e.target.value)}
+                className="text-xl font-serif font-bold text-gray-900 leading-tight bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#671B2B] w-full pb-1 mb-1"
+              />
               <p className="text-[11px] text-gray-500 mt-0.5 font-medium">
                 {selectedFn.date || 'Sat 13 Feb'} · {selectedFn.owner || 'Meera'} owns this function
               </p>
@@ -164,27 +197,37 @@ export const FunctionDetailScreen: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap gap-2 pt-1">
-                <span className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold">
-                  Venue
-                </span>
-                <span className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold">
-                  Mehendi artist
-                </span>
-                <span className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold">
-                  DJ
-                </span>
-                <span className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold">
-                  Choreographer
-                </span>
-                <span className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold">
-                  Snacks
-                </span>
-                <span className="bg-white text-gray-600 border border-dashed border-[#B49A6C] px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer hover:bg-gray-50">
-                  + Photographer
-                </span>
-                <span className="bg-white text-gray-600 border border-dashed border-[#B49A6C] px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer hover:bg-gray-50">
-                  + Anchor
-                </span>
+                {localSlots.map((slotName, i) => (
+                  <span key={i} className="bg-[#FAF0F2] text-[#671B2B] px-3 py-1.5 rounded-xl border border-[#F2D6DC] text-xs font-semibold flex items-center gap-1.5">
+                    {slotName}
+                    <button 
+                      onClick={() => setLocalSlots(prev => prev.filter((_, idx) => idx !== i))}
+                      className="text-[#671B2B] hover:text-[#B91C1C] bg-transparent border-none p-0 cursor-pointer flex items-center"
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-2 mt-2">
+                <input
+                  type="text"
+                  value={newSlotName}
+                  onChange={e => setNewSlotName(e.target.value)}
+                  placeholder="e.g. DJ, Anchor"
+                  className="flex-1 bg-gray-50 border border-[#E5E0D8] rounded-xl px-3 py-1.5 text-xs text-gray-700 focus:outline-none focus:border-[#B49A6C]"
+                />
+                <button
+                  onClick={() => {
+                    if (newSlotName.trim()) {
+                      setLocalSlots([...localSlots, newSlotName.trim()]);
+                      setNewSlotName('');
+                    }
+                  }}
+                  className="bg-white text-gray-600 border border-dashed border-[#B49A6C] px-4 py-1.5 rounded-xl text-xs font-semibold cursor-pointer hover:bg-gray-50"
+                >
+                  + Add
+                </button>
               </div>
             </div>
 
@@ -195,7 +238,10 @@ export const FunctionDetailScreen: React.FC = () => {
                 <p className="text-[10px] text-gray-500 mt-0.5">Frees ₹4.1L</p>
               </div>
               <button
-                onClick={() => setScreen('blueprint_home')}
+                onClick={() => {
+                  removeFunction(selectedFn.id);
+                  setScreen('blueprint_home');
+                }}
                 className="text-xs font-bold text-[#B91C1C] bg-transparent border-none cursor-pointer hover:underline"
               >
                 Remove
@@ -206,6 +252,14 @@ export const FunctionDetailScreen: React.FC = () => {
             <div className="bg-[#F5EBEB] p-3.5 rounded-2xl border border-[#F2D6DC] text-[10.5px] text-[#671B2B] leading-relaxed">
               Every edit is versioned with who made it and when — useful six months later when nobody remembers who agreed to {guestCount} guests.
             </div>
+
+            {/* CONFIRM CHANGES BUTTON */}
+            <button
+              onClick={handleSave}
+              className="w-full py-3.5 mt-2 rounded-2xl bg-[#671B2B] text-white text-[13px] font-bold text-center cursor-pointer shadow-md hover:bg-[#8A253A] transition-colors"
+            >
+              Confirm changes
+            </button>
           </div>
         )}
 

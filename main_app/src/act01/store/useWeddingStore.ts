@@ -49,6 +49,9 @@ interface WeddingStoreState {
   setSelectedFunctionId: (id: string) => void;
   updateSlotStatus: (functionId: string, slotId: string, status: SlotStatus) => void;
   reorderFunctions: (startIndex: number, endIndex: number) => void;
+  removeFunction: (id: string) => void;
+  addFunction: () => void;
+  updateFunction: (id: string, data: Partial<WeddingFunction>) => void;
   mergeAgreedDecisions: () => void;
   startGeneratingBlueprint: () => void;
   setGeneratingProgress: (progress: number, text: string) => void;
@@ -143,6 +146,31 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
     const [removed] = list.splice(startIndex, 1);
     list.splice(endIndex, 0, removed);
     set({ functions: list });
+  },
+
+  removeFunction: (id) => {
+    set({ functions: get().functions.filter(f => f.id !== id) });
+  },
+
+  addFunction: () => {
+    const newFn = {
+      id: `f${Date.now()}`,
+      name: 'New Function (Mehendi, Dance etc.)',
+      date: 'TBD',
+      timeSlot: 'TBD',
+      guests: 100,
+      owner: 'TBD',
+      estimatedCostINR: 100000,
+      estimatedCostUSD: 1200,
+      slots: [],
+    };
+    set({ functions: [...get().functions, newFn] });
+  },
+
+  updateFunction: (id, data) => {
+    set({
+      functions: get().functions.map(fn => fn.id === id ? { ...fn, ...data } : fn)
+    });
   },
 
   mergeAgreedDecisions: () => {
