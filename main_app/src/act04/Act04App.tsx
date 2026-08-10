@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 // Removed MobileFrame
-import { BottomTabBar, ScreenId } from './components/Navigation/BottomTabBar';
+import { ScreenId } from './components/Navigation/BottomTabBar';
 import { Screen25_BudgetDashboard } from './screens/BudgetDashboard';
 import { Screen26_PaymentSchedule } from './screens/PaymentSchedule';
 import { Screen27_EscrowProtection } from './screens/EscrowProtection';
@@ -165,7 +165,6 @@ export default function App() {
             <Screen25_BudgetDashboard
               budgetItems={budgetItems}
               onNavigateToSchedule={() => navigateTo('screen26')}
-              onNavigateToWhoPays={() => navigateTo('screen28')}
               onPayEscrow={() => handleOpenPayment()}
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
@@ -181,6 +180,7 @@ export default function App() {
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
+              onNavigateToRecords={() => navigateTo('screen29')}
             />
           )}
 
@@ -196,16 +196,6 @@ export default function App() {
               onBack={handleBack}
               activeTab={escrowTab}
               onTabChange={setEscrowTab}
-            />
-          )}
-
-          {activeScreen === 'screen28' && (
-            <Screen28_WhoPaysWhat
-              contributors={contributors}
-              onSendToAppa={() => handleSendToFamily('Appa')}
-              currency={currency}
-              onToggleCurrency={handleToggleCurrency}
-              onBack={handleBack}
             />
           )}
 
@@ -232,9 +222,6 @@ export default function App() {
             />
           )}
         </div>
-
-        {/* Sticky Bottom Navigation Bar */}
-        <BottomTabBar activeScreen={activeScreen} onSelectScreen={handleSelectTab} />
       </div>
 
       {/* Interactive Modals */}

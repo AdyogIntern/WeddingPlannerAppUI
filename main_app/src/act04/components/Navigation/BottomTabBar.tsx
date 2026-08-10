@@ -23,8 +23,6 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({
     { id: 'screen25' as ScreenId, label: 'Budget', icon: PieChart },
     { id: 'screen26' as ScreenId, label: 'Schedule', icon: CalendarDays },
     { id: 'screen27' as ScreenId, label: 'Escrow', icon: ShieldCheck },
-    { id: 'screen28' as ScreenId, label: 'Who Pays', icon: Users },
-    { id: 'screen29' as ScreenId, label: 'Records', icon: FileText },
     { id: 'screen30' as ScreenId, label: 'Booking', icon: CheckCircle2 }
   ];
 
