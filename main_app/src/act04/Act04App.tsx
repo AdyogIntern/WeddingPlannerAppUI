@@ -24,7 +24,6 @@ import {
 } from './data/mockData';
 
 import { PaymentModal } from './components/Modals/PaymentModal';
-import { RaiseDisputeModal } from './components/Modals/RaiseDisputeModal';
 import { DocumentViewerModal } from './components/Modals/DocumentViewerModal';
 import { SendToFamilyModal } from './components/Modals/SendToFamilyModal';
 import { DocumentItem, PaymentScheduleItem } from './types';
@@ -33,6 +32,7 @@ export default function App() {
   const [screenHistory, setScreenHistory] = useState<ScreenId[]>(['screen25']);
   const activeScreen = screenHistory[screenHistory.length - 1] || 'screen25';
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR');
+  const [escrowInitialTab, setEscrowInitialTab] = useState<'overview' | 'dispute'>('overview');
 
   const navigateTo = (screen: ScreenId) => {
     if (activeScreen !== screen) {
@@ -53,6 +53,9 @@ export default function App() {
     if (screen === 'screen25') {
       setScreenHistory(['screen25']);
     } else if (screen !== activeScreen) {
+      if (screen === 'screen27') {
+        setEscrowInitialTab('overview');
+      }
       setScreenHistory((prev) => [...prev, screen]);
     }
   };
@@ -77,10 +80,6 @@ export default function App() {
     amountINR: '₹4,50,000',
     amountUSD: '$5,360'
   });
-
-  const [disputeModalOpen, setDisputeModalOpen] = useState(false);
-  const [disputeVendor, setDisputeVendor] = useState('Sri Amirtham Catering');
-  const [disputeAmount, setDisputeAmount] = useState('₹1.58L');
 
   const [docModalOpen, setDocModalOpen] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState<{ title: string; details: string }>({
@@ -114,11 +113,9 @@ export default function App() {
     setPaymentModalOpen(true);
   };
 
-  // Open Dispute Modal
+  // Open Dispute view
   const handleRaiseDispute = (vendor: string, amount: string) => {
-    setDisputeVendor(vendor);
-    setDisputeAmount(amount);
-    setDisputeModalOpen(true);
+    setEscrowInitialTab('dispute');
   };
 
   // Open Document Modal
@@ -223,22 +220,12 @@ export default function App() {
         onClose={() => setPaymentModalOpen(false)}
         onSuccess={() => {
           setPaymentModalOpen(false);
+          setEscrowInitialTab('overview');
           navigateTo('screen27');
         }}
         vendorName={selectedPaymentItem.vendor}
         amountINR={selectedPaymentItem.amountINR}
         amountUSD={selectedPaymentItem.amountUSD}
-      />
-
-      <RaiseDisputeModal
-        isOpen={disputeModalOpen}
-        onClose={() => setDisputeModalOpen(false)}
-        onSubmitDispute={() => {
-          setDisputeModalOpen(false);
-          navigateTo('screen27');
-        }}
-        vendorName={disputeVendor}
-        amountINR={disputeAmount}
       />
 
       <DocumentViewerModal

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShieldCheck, CheckCircle2, AlertCircle, Clock, ShieldAlert, ArrowLeft, MessageSquarePlus, ChevronRight } from 'lucide-react';
 import { AppHeader } from '../components/Header';
 import { PrimaryButton, SecondaryButton } from '../components/reusable/Buttons';
@@ -12,6 +12,7 @@ interface Screen27Props {
   currency: 'INR' | 'USD';
   onToggleCurrency: () => void;
   onBack?: () => void;
+  initialTab?: 'overview' | 'dispute';
 }
 
 export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
@@ -21,9 +22,14 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
   onReleaseEscrow,
   currency,
   onToggleCurrency,
-  onBack
+  onBack,
+  initialTab = 'overview'
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'dispute'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'dispute'>(initialTab);
+
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
   const [releasedIds, setReleasedIds] = useState<string[]>([]);
   const [caseNoteAdded, setCaseNoteAdded] = useState(false);
 
@@ -130,7 +136,10 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
                   Release
                 </button>
                 <button
-                  onClick={() => onRaiseDispute('Sri Amirtham Catering', '₹1.58L')}
+                  onClick={() => {
+                    setActiveTab('dispute');
+                    onRaiseDispute('Sri Amirtham Catering', '₹1.58L');
+                  }}
                   className="flex-1 py-2.5 px-4 bg-white border border-[#D5CBC0] text-[#1A1613] font-medium text-[14px] rounded-xl hover:bg-[#F2ECE4] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Raise an issue
