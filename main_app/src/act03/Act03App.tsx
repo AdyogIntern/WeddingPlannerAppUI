@@ -5,7 +5,6 @@ import { FamilyPage } from './pages/FamilyPage';
 import { VotingPage } from './pages/VotingPage';
 import { TasksPage } from './pages/TasksPage';
 
-
 export default function App() {
   return (
     <div className="w-full min-h-full bg-[#FDFCF0] font-sans antialiased text-[#2C2420]">
@@ -16,7 +15,6 @@ export default function App() {
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="*" element={<Navigate to="invite" replace />} />
       </Routes>
-
     </div>
   );
 }

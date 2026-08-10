@@ -62,6 +62,7 @@ const COMMENTS: CommentMessage[] = [
 export const VotingPage: React.FC = () => {
   const navigate = useNavigate();
   const [options, setOptions] = useState<VotingOption[]>(INITIAL_OPTIONS);
+  const [comments, setComments] = useState<CommentMessage[]>(COMMENTS);
   const [inputVal, setInputVal] = useState('');
 
   const handleSelectOption = (id: string) => {
@@ -71,13 +72,31 @@ export const VotingPage: React.FC = () => {
         selected: opt.id === id,
       }))
     );
+    // Smooth transition: redirect to the task page after a brief delay so the user sees the visual selection state
+    setTimeout(() => {
+      navigate('/act3/tasks');
+    }, 250);
   };
 
   const handleSendComment = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (inputVal.trim()) {
-      navigate('/act3/tasks');
+      const newComment: CommentMessage = {
+        id: `c_${Date.now()}`,
+        author: 'Me',
+        initials: 'M',
+        timestamp: 'Just now',
+        text: inputVal.trim(),
+        isVendor: false,
+        isTinted: false,
+      };
+      setComments([...comments, newComment]);
+      setInputVal('');
     }
+  };
+
+  const handleDeleteComment = (id: string) => {
+    setComments(comments.filter((c) => c.id !== id));
   };
 
   return (
@@ -102,12 +121,16 @@ export const VotingPage: React.FC = () => {
         {/* Discussion Section */}
         <div>
           <h2 className="text-[17px] font-medium text-[#2C2420] mt-6 mb-3">
-            Discussion · 5
+            Discussion · {comments.length}
           </h2>
 
           <div className="space-y-3">
-            {COMMENTS.map((c) => (
-              <DiscussionCard key={c.id} comment={c} />
+            {comments.map((c) => (
+              <DiscussionCard
+                key={c.id}
+                comment={c}
+                onDelete={() => handleDeleteComment(c.id)}
+              />
             ))}
           </div>
         </div>

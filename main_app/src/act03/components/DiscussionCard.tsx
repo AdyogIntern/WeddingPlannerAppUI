@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trash2 } from 'lucide-react';
 import { Avatar } from './Avatar';
 
 export interface CommentMessage {
@@ -13,9 +14,10 @@ export interface CommentMessage {
 
 interface DiscussionCardProps {
   comment: CommentMessage;
+  onDelete?: () => void;
 }
 
-export const DiscussionCard: React.FC<DiscussionCardProps> = ({ comment }) => {
+export const DiscussionCard: React.FC<DiscussionCardProps> = ({ comment, onDelete }) => {
   return (
     <div className="flex gap-2.5 items-start">
       <Avatar initials={comment.initials} size="sm" className="mt-1" />
@@ -36,6 +38,15 @@ export const DiscussionCard: React.FC<DiscussionCardProps> = ({ comment }) => {
               {comment.isVendor ? '· vendor' : `· ${comment.timestamp}`}
             </span>
           </div>
+          {onDelete && (
+            <button
+              onClick={onDelete}
+              className="text-[#867A6E] hover:text-[#C02626] transition-colors p-0.5 rounded-md hover:bg-black/5 cursor-pointer"
+              aria-label="Delete comment"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
         <p className="text-[13px] text-[#2C2420] mt-1 leading-snug">
           {comment.text}
