@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, RNButton } from '../components/RNPrimitives';
 import { colors } from '../theme';
+import muhurthamCeremonyImg from '../../assets/muhurtham_ceremony.jpg';
+
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -67,19 +69,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
             marginBottom: '20px'
           }}
         >
-          <Text 
+          <img 
+            src={muhurthamCeremonyImg} 
+            alt="Traditional Muhurtham Ceremony" 
             style={{ 
-              fontSize: '10.5px', 
-              letterSpacing: '0.22em', 
-              color: 'rgba(255, 255, 255, 0.35)',
-              fontWeight: '500',
-              textTransform: 'uppercase',
-              fontFamily: 'system-ui, sans-serif',
-              zIndex: 2,
-            }}
-          >
-            IMAGE SLOT · MUHURTHAM
-          </Text>
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover' 
+            }} 
+          />
         </View>
 
         {/* Text Content Container (Maintains matching width and horizontal centering) */}
