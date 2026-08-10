@@ -33,6 +33,7 @@ interface WeddingStoreState {
   selectedFunctionId: string;
   weddingScore: number;
   currency: Currency;
+  language: 'en' | 'ta';
   planVersions: { priya: PlanVersion; amma: PlanVersion };
   nudges: NudgeCard[];
   isGenerating: boolean;
@@ -46,6 +47,7 @@ interface WeddingStoreState {
   prevQuestion: () => void;
   updateOnboarding: (data: Partial<OnboardingData>) => void;
   setCurrency: (currency: Currency) => void;
+  setLanguage: (lang: 'en' | 'ta') => void;
   setSelectedFunctionId: (id: string) => void;
   updateSlotStatus: (functionId: string, slotId: string, status: SlotStatus) => void;
   reorderFunctions: (startIndex: number, endIndex: number) => void;
@@ -71,6 +73,7 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
   selectedFunctionId: 'f4', // Muhurtham by default
   weddingScore: 38,
   currency: '' as any,
+  language: 'en',
   planVersions: mockPlanVersions,
   nudges: mockNudgeCards,
   isGenerating: false,
@@ -123,6 +126,8 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
       onboarding: { ...currentOnboarding, currency, budgetINR: updatedINR }
     });
   },
+
+  setLanguage: (lang) => set({ language: lang }),
 
   setSelectedFunctionId: (id) => set({ selectedFunctionId: id }),
 
