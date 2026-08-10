@@ -61,7 +61,8 @@ export default function App() {
   const [budgetItems] = useState(INITIAL_BUDGET_ITEMS);
   const [scheduleItems] = useState(INITIAL_PAYMENT_SCHEDULE);
   const [escrowItems, setEscrowItems] = useState(INITIAL_ESCROW_ITEMS);
-  const [disputeCase] = useState(INITIAL_DISPUTE_CASE);
+  const [disputeCase, setDisputeCase] = useState(INITIAL_DISPUTE_CASE);
+  const [escrowTab, setEscrowTab] = useState<'overview' | 'dispute'>('overview');
   const [contributors] = useState(INITIAL_CONTRIBUTORS);
   const [documents] = useState(INITIAL_DOCUMENTS);
   const [bookingDetails] = useState(INITIAL_BOOKING_DETAILS);
@@ -178,6 +179,8 @@ export default function App() {
               currency={currency}
               onToggleCurrency={handleToggleCurrency}
               onBack={handleBack}
+              activeTab={escrowTab}
+              onTabChange={setEscrowTab}
             />
           )}
 
@@ -233,8 +236,26 @@ export default function App() {
       <RaiseDisputeModal
         isOpen={disputeModalOpen}
         onClose={() => setDisputeModalOpen(false)}
-        onSubmitDispute={() => {
+        onSubmitDispute={(reason, photoCount) => {
           setDisputeModalOpen(false);
+          setDisputeCase({
+            ...INITIAL_DISPUTE_CASE,
+            caseNumber: `Case #${Math.floor(1000 + Math.random() * 9000)}`,
+            vendor: disputeVendor,
+            category: 'catering',
+            amountHeld: `${disputeAmount} HELD · NOT RELEASED`,
+            reason: reason,
+            timeline: [
+              {
+                id: 't1',
+                title: `You raised it with ${photoCount} photos`,
+                timestamp: 'Just now',
+                completed: true
+              },
+              ...INITIAL_DISPUTE_CASE.timeline.slice(1)
+            ]
+          });
+          setEscrowTab('dispute');
           navigateTo('screen27');
         }}
         vendorName={disputeVendor}

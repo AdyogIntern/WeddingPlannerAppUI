@@ -325,7 +325,7 @@ export const GuestRsvpScreen: React.FC<Props> = ({ onNavigateNext }) => {
             onClick={onNavigateNext}
             className="w-full py-3.5 px-4 bg-[#7A2232] text-white font-bold text-[13.5px] rounded-xl hover:bg-[#5A1924] active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Proceed to Step 8: Visa & Invitation Letter</span>
+            <span>Continue</span>
             <span>→</span>
           </button>
         )}

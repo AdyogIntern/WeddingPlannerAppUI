@@ -4,7 +4,7 @@ import { colors } from '../theme';
 import { useWeddingStore, currencyRates } from '../store/useWeddingStore';
 import { onboardingQuestionsList, priorityOptions, countryOptions } from '../constants/onboardingQuestions';
 import { PriorityId, Currency, DeciderId } from '../types';
-import { ChevronLeft, Search, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, Search, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
 
 export const OnboardingQuestionsScreen: React.FC = () => {
   const { 
@@ -110,6 +110,8 @@ export const OnboardingQuestionsScreen: React.FC = () => {
         return onboarding.topPriorities && onboarding.topPriorities.length > 0;
       case 6:
         return onboarding.deciders && onboarding.deciders.length > 0;
+      case 7:
+        return true; // Optional date suggestion step
       default:
         return false;
     }
@@ -153,7 +155,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
           </TouchableOpacity>
 
           <Text style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '0.08em', color: colors.burgundyPrimary, textTransform: 'uppercase' }}>
-            {questionIndex + 1} / {TOTAL_QUESTIONS}
+            {questionIndex === 7 ? 'SUGGESTION' : `${questionIndex + 1} / ${TOTAL_QUESTIONS - 1}`}
           </Text>
 
           <TouchableOpacity 
@@ -162,7 +164,9 @@ export const OnboardingQuestionsScreen: React.FC = () => {
               padding: '6px 12px',
               borderRadius: '20px',
               backgroundColor: '#F5EEE5',
-              border: '1px solid #E6D8C4'
+              border: '1px solid #E6D8C4',
+              opacity: questionIndex === 7 ? 0 : 1,
+              pointerEvents: questionIndex === 7 ? 'none' : 'auto'
             }}
           >
             <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.burgundyPrimary }}>Skip</Text>
@@ -170,7 +174,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
         </View>
 
         {/* Progress Bar */}
-        <RNProgressBar progress={progressPercent} />
+        <RNProgressBar progress={questionIndex === 7 ? 100 : progressPercent} />
       </View>
 
       {/* Main Question Content Viewport */}
@@ -518,9 +522,97 @@ export const OnboardingQuestionsScreen: React.FC = () => {
                 We’ll generate your magic-link invites automatically so nobody has to relay decisions over the phone.
               </p>
             </div>
+            
           </View>
         )}
 
+        {/* ================= QUESTION 8: Auspicious Dates ================= */}
+        {questionIndex === 7 && (
+          <View style={{ gap: '0px' }}>
+            {/* Filter Pills */}
+            <div className="flex flex-row gap-2 mb-6 justify-center">
+              <div className="px-3 py-1.5 bg-[#7A1C31] text-white text-[12px] font-semibold rounded-lg border border-[#7A1C31]">Nov 26 – Jun 27</div>
+              <div className="px-3 py-1.5 bg-transparent text-[#7A1C31] text-[12px] font-medium rounded-lg border border-[#7A1C31]">Iyengar</div>
+              <div className="px-3 py-1.5 bg-transparent text-[#7A1C31] text-[12px] font-medium rounded-lg border border-[#7A1C31]">Morning</div>
+            </div>
+
+            {/* Horoscope Box */}
+            <div className="bg-white border border-[#EBE5DC] rounded-2xl p-4 mb-4 shadow-sm w-full max-w-[340px] mx-auto box-border">
+              <div className="flex justify-between items-start mb-2">
+                <div className="flex gap-2">
+                  <Sparkles className="w-[18px] h-[18px] text-[#7A1C31] mt-0.5 shrink-0" />
+                  <h3 className="font-bold text-[#1A1613] text-[15px] leading-snug">Jathagam Porutham &<br/>Horoscope Match</h3>
+                </div>
+                <div className="bg-[#E6F3E6] px-2 py-1 rounded-md text-right shrink-0 ml-2">
+                  <div className="text-[10px] font-bold text-[#2A7E3B]">10 / 10</div>
+                  <div className="text-[9px] font-bold text-[#2A7E3B] tracking-wide">MATCHED</div>
+                </div>
+              </div>
+              <p className="text-[#625952] text-[13px] leading-relaxed mb-4 mt-1">
+                Patti & Purohit verified: Dina, Gana, Yoni, Rasi, Rajju & Vedha poruthams checked. Sevvai dosham nivarana pooja completed at Thirunageswaram.
+              </p>
+              <div className="h-[1px] bg-[#EBE5DC] my-3 w-full" />
+              <div className="flex justify-between items-center cursor-pointer group mt-1">
+                <span className="text-[12px] text-[#8C827A]">Astrologer Video Call for NRIs</span>
+                <span className="text-[12px] font-bold text-[#7A1C31] flex items-center gap-1 group-hover:underline">
+                  Book Call with Sastrigal <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+
+            {/* Date Option 1 */}
+            <TouchableOpacity
+              onPress={() => updateOnboarding({ weddingDate: '14 Feb 2027', dateOptionType: 'fixed' })}
+              style={{
+                backgroundColor: 'white',
+                border: onboarding.weddingDate === '14 Feb 2027' ? `2px solid #7A1C31` : `1px solid ${colors.cardBackgroundBorder}`,
+                borderRadius: '16px',
+                padding: '16px',
+                marginBottom: '12px',
+                width: '100%',
+                maxWidth: '340px',
+                margin: '0 auto 12px auto',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div className="flex justify-between items-start mb-1">
+                <h4 className="text-[18px] font-bold text-[#1A1613]">Sun 14 Feb 2027</h4>
+                <div className="bg-[#E6F3E6] px-2 py-1 rounded text-[10px] font-bold text-[#2A7E3B] tracking-wider mt-0.5">STRONG</div>
+              </div>
+              <p className="text-[#625952] text-[13px] mb-4">Uthiram nakshatram · Shukla paksha · lagnam 6:34–8:12 am</p>
+              <div className="flex gap-2">
+                <div className="bg-[#FAF3E8] px-2.5 py-1.5 rounded-lg text-[12px] text-[#625952] font-medium">9 venues free</div>
+                <div className="bg-[#FAF3E8] px-2.5 py-1.5 rounded-lg text-[12px] text-[#625952] font-medium">Long weekend in the US</div>
+              </div>
+            </TouchableOpacity>
+
+            {/* Date Option 2 */}
+            <TouchableOpacity
+              onPress={() => updateOnboarding({ weddingDate: '21 Feb 2027', dateOptionType: 'fixed' })}
+              style={{
+                backgroundColor: 'white',
+                border: onboarding.weddingDate === '21 Feb 2027' ? `2px solid #7A1C31` : `1px solid ${colors.cardBackgroundBorder}`,
+                borderRadius: '16px',
+                padding: '16px',
+                marginBottom: '12px',
+                width: '100%',
+                maxWidth: '340px',
+                margin: '0 auto 12px auto',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div className="flex justify-between items-start mb-1">
+                <h4 className="text-[18px] font-bold text-[#1A1613]">Sun 21 Feb 2027</h4>
+                <div className="text-[13px] font-bold text-[#2A7E3B] mt-0.5">Strong</div>
+              </div>
+              <p className="text-[#625952] text-[13px] mb-4">Rohini nakshatram · lagnam 7:02–9:40 am</p>
+              <div className="flex gap-2">
+                <div className="bg-[#FAF3E8] px-2.5 py-1.5 rounded-lg text-[12px] text-[#625952] font-medium">14 venues free</div>
+                <div className="bg-[#FAF3E8] px-2.5 py-1.5 rounded-lg text-[12px] text-[#625952] font-medium">Cheaper — off-peak</div>
+              </div>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
 
       <View style={{ marginTop: 'auto', paddingTop: '12px', width: '100%', paddingBottom: '8px', alignSelf: 'center', display: 'flex', justifyContent: 'center' }}>

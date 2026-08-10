@@ -151,7 +151,7 @@ export const LegalDocsScreen: React.FC<Props> = ({ onNavigateNext }) => {
             onClick={onNavigateNext}
             className="w-full py-3.5 px-4 bg-[#7A2232] text-white font-bold text-[14px] rounded-xl hover:bg-[#5A1924] active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Proceed to Step 9: Muhurtham Live Telecast</span>
+            <span>Continue</span>
             <span>→</span>
           </button>
         </div>

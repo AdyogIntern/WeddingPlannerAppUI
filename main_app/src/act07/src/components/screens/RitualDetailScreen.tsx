@@ -150,7 +150,7 @@ export const RitualDetailScreen: React.FC<Props> = ({ onBack, onSendToPatti, onV
             onClick={onNavigateNext}
             className="w-full py-3.5 px-4 bg-[#7A2232] text-white font-bold text-[13.5px] rounded-xl hover:bg-[#5A1924] active:scale-[0.99] transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Confirm Ritual & Proceed to Step 4: See It For Yourself</span>
+            <span>Continue</span>
             <span>→</span>
           </button>
         )}

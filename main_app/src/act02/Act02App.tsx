@@ -17,6 +17,7 @@ import { PurohitProfile } from './screens/PurohitProfile';
 import { Attire } from './screens/Attire';
 import { VendorSwap } from './screens/VendorSwap';
 import { SwapImpact } from './screens/SwapImpact';
+import { ReturnGiftsScreen } from './screens/ReturnGiftsScreen';
 
 const MainContent: React.FC = () => {
   const { activeScreen } = useApp();
@@ -51,6 +52,8 @@ const MainContent: React.FC = () => {
         return <VendorSwap />;
       case 'SwapImpact':
         return <SwapImpact />;
+      case 'ReturnGifts':
+        return <ReturnGiftsScreen />;
       default:
         return <EverythingYouNeed />;
     }
