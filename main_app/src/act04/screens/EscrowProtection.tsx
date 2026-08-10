@@ -23,6 +23,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
   onToggleCurrency,
   onBack
 }) => {
+  const isINR = currency === 'INR';
   const [activeTab, setActiveTab] = useState<'overview' | 'dispute'>('overview');
   const [releasedIds, setReleasedIds] = useState<string[]>([]);
   const [caseNoteAdded, setCaseNoteAdded] = useState(false);
@@ -39,7 +40,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
         title={activeTab === 'overview' ? 'Held safely' : 'Issue raised'}
         subtitle={
           activeTab === 'overview'
-            ? '₹22.1L in escrow · released only when you say so'
+            ? isINR ? '₹22.1L in escrow · released only when you say so' : '$26.6K in escrow · released only when you say so'
             : `${disputeCase.vendor} · ${disputeCase.category}`
         }
         headerMeta={activeTab === 'dispute' ? disputeCase.caseNumber : undefined}
@@ -49,7 +50,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
       />
 
       {activeTab === 'overview' ? (
-        <div className="px-5 py-3 space-y-5">
+        <div className="px-4 py-3 space-y-5">
           {/* Main Escrow Card 1 (Leela Palace) */}
           <div className="bg-white border border-[#EBE5DC] rounded-2xl p-5 shadow-2xs">
             <div className="flex items-center justify-between mb-4">
@@ -57,7 +58,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
                 Leela Palace · Venue
               </h3>
               <span className="font-semibold text-[17px] text-[#1A1613]">
-                ₹8.4L
+                {isINR ? '₹8.4L' : '$10,000'}
               </span>
             </div>
 
@@ -110,7 +111,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
             </span>
 
             <h3 className="font-semibold text-[16px] text-[#1A1613] mb-2">
-              Sri Amirtham Catering · ₹1.58L
+              Sri Amirtham Catering · {isINR ? '₹1.58L' : '$1,880'}
             </h3>
 
             <p className="text-[13px] text-[#7A716A] mb-4 leading-relaxed">
@@ -130,7 +131,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
                   Release
                 </button>
                 <button
-                  onClick={() => onRaiseDispute('Sri Amirtham Catering', '₹1.58L')}
+                  onClick={() => onRaiseDispute('Sri Amirtham Catering', isINR ? '₹1.58L' : '$1,880')}
                   className="flex-1 py-2.5 px-4 bg-white border border-[#D5CBC0] text-[#1A1613] font-medium text-[14px] rounded-xl hover:bg-[#F2ECE4] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Raise an issue
@@ -165,7 +166,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
         </div>
       ) : (
         /* DISPUTE CASE VIEW (Case #4471) */
-        <div className="px-5 py-3 space-y-5">
+        <div className="px-4 py-3 space-y-5">
           {/* Gold Warning Held Box */}
           <div className="bg-[#FFFDF7] border-2 border-[#E3D1A6] rounded-3xl p-5 shadow-2xs">
             <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#B38600] uppercase tracking-wider mb-2">

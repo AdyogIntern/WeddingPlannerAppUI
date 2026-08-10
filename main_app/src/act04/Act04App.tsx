@@ -6,12 +6,12 @@
 import React, { useState } from 'react';
 // Removed MobileFrame
 import { BottomTabBar, ScreenId } from './components/Navigation/BottomTabBar';
-import { Screen25_BudgetDashboard } from './screens/Screen25_BudgetDashboard';
-import { Screen26_PaymentSchedule } from './screens/Screen26_PaymentSchedule';
-import { Screen27_EscrowProtection } from './screens/Screen27_EscrowProtection';
-import { Screen28_WhoPaysWhat } from './screens/Screen28_WhoPaysWhat';
-import { Screen29_PaperworkRemittance } from './screens/Screen29_PaperworkRemittance';
-import { Screen30_BookingConfirmation } from './screens/Screen30_BookingConfirmation';
+import { Screen25_BudgetDashboard } from './screens/BudgetDashboard';
+import { Screen26_PaymentSchedule } from './screens/PaymentSchedule';
+import { Screen27_EscrowProtection } from './screens/EscrowProtection';
+import { Screen28_WhoPaysWhat } from './screens/WhoPaysWhat';
+import { Screen29_PaperworkRemittance } from './screens/PaperworkRemittance';
+import { Screen30_BookingConfirmation } from './screens/BookingConfirmation';
 
 import {
   INITIAL_BUDGET_ITEMS,

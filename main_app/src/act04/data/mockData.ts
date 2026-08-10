@@ -288,35 +288,138 @@ export const INITIAL_DOCUMENTS: DocumentItem[] = [
   }
 ];
 
-export const INITIAL_BOOKING_DETAILS: BookingDetails = {
-  vendorName: 'Leela Palace',
-  eventType: 'Muhurtham',
-  eventDate: '14 Feb 2027',
-  guests: 420,
-  quoteItems: [
-    { label: 'Hall + dining, 6 am – 1 pm', amount: '₹7,20,000' },
-    { label: 'Power backup, 200 parking', amount: 'Included', included: true },
-    { label: 'Extra hours (2)', amount: '₹80,000' },
-    { label: 'GST 18%', amount: '₹1,44,000' }
-  ],
-  totalINR: '₹9,44,000',
-  totalUSD: '$11,235',
-  savingsNote: '₹56,000 below their published rate — our negotiated rate for platform bookings.',
-  approvals: [
-    { person: 'Appa approved', time: '6:40 am IST' },
-    { person: 'Amma approved', time: '6:52 am IST' }
-  ],
-  contractStatus: 'Contract countersigned by us.',
-  escrowNote: '₹4.5L advance sits in escrow until the morning of the 14th.',
-  progressChange: {
-    from: 38,
-    to: 50,
-    unlockedReward: 'Your pre-wedding shoot is unlocked.'
+export const BOOKING_DETAILS_BY_CATEGORY: Record<string, BookingDetails> = {
+  venue: {
+    vendorName: 'Leela Palace',
+    eventType: 'Muhurtham',
+    eventDate: '14 Feb 2027',
+    guests: 420,
+    quoteItems: [
+      { label: 'Hall + dining, 6 am – 1 pm', amount: '₹7,20,000' },
+      { label: 'Power backup, 200 parking', amount: 'Included', included: true },
+      { label: 'Extra hours (2)', amount: '₹80,000' },
+      { label: 'GST 18%', amount: '₹1,44,000' }
+    ],
+    totalINR: '₹9,44,000',
+    totalUSD: '$11,235',
+    savingsNote: '₹56,000 below their published rate — our negotiated rate for platform bookings.',
+    approvals: [
+      { person: 'Appa approved', time: '6:40 am IST' },
+      { person: 'Amma approved', time: '6:52 am IST' }
+    ],
+    contractStatus: 'Contract countersigned by us.',
+    escrowNote: '₹4.5L advance sits in escrow until the morning of the 14th.',
+    progressChange: {
+      from: 38,
+      to: 50,
+      unlockedReward: 'Your pre-wedding shoot is unlocked.'
+    },
+    relationshipManager: {
+      name: 'Anand K.',
+      role: 'relationship manager',
+      languages: 'Tamil and English',
+      hours: '9 am – 8 pm IST'
+    }
   },
-  relationshipManager: {
-    name: 'Anand K.',
-    role: 'relationship manager',
-    languages: 'Tamil and English',
-    hours: '9 am – 8 pm IST'
+
+  catering: {
+    vendorName: 'Sri Amirtham Catering',
+    eventType: 'Sangeet & Reception',
+    eventDate: '14 Oct 2026',
+    guests: 600,
+    quoteItems: [
+      { label: 'Traditional Banana Leaf Feast (600 plates)', amount: '₹1,20,000' },
+      { label: 'Live Chat & Dessert Counters', amount: '₹30,000' },
+      { label: 'Service Staff & Cutlery', amount: 'Included', included: true },
+      { label: 'GST 5%', amount: '₹8,000' }
+    ],
+    totalINR: '₹1,58,000',
+    totalUSD: '$1,880',
+    savingsNote: '₹12,000 saved on complimentary live ice cream counters.',
+    approvals: [
+      { person: 'Appa approved', time: '9:15 am IST' },
+      { person: 'Priya approved', time: '9:30 am IST' }
+    ],
+    contractStatus: 'Menu tasting locked & confirmed.',
+    escrowNote: '₹1.58L advance sits in escrow until after function confirmation.',
+    progressChange: {
+      from: 50,
+      to: 65,
+      unlockedReward: 'Complimentary dessert bar unlocked.'
+    },
+    relationshipManager: {
+      name: 'Anand K.',
+      role: 'relationship manager',
+      languages: 'Tamil and English',
+      hours: '9 am – 8 pm IST'
+    }
+  },
+
+  photography: {
+    vendorName: 'Studio Anantham',
+    eventType: 'Full Wedding Coverage',
+    eventDate: '01 Nov 2026',
+    guests: 420,
+    quoteItems: [
+      { label: 'Candid & Traditional Photo + Video (3 days)', amount: '₹70,000' },
+      { label: 'Drone Coverage & Cinematic Teaser', amount: '₹10,000' },
+      { label: 'Premium Photo Album (2 sets)', amount: 'Included', included: true },
+      { label: 'GST 5%', amount: '₹5,000' }
+    ],
+    totalINR: '₹85,000',
+    totalUSD: '$1,010',
+    savingsNote: 'Pre-wedding couple shoot included at zero extra cost.',
+    approvals: [
+      { person: 'Arjun approved', time: '11:10 am IST' },
+      { person: 'Priya approved', time: '11:25 am IST' }
+    ],
+    contractStatus: 'Dates reserved & contract signed.',
+    escrowNote: '₹85,000 booking fee sits in escrow until delivery of teaser.',
+    progressChange: {
+      from: 65,
+      to: 75,
+      unlockedReward: 'Free aerial drone reel unlocked.'
+    },
+    relationshipManager: {
+      name: 'Anand K.',
+      role: 'relationship manager',
+      languages: 'Tamil and English',
+      hours: '9 am – 8 pm IST'
+    }
+  },
+
+  decor: {
+    vendorName: 'Bloom & Thread Decor',
+    eventType: 'Mandap & Stage Floral Design',
+    eventDate: '14 Feb 2027',
+    guests: 500,
+    quoteItems: [
+      { label: 'Traditional Jasmine & Marigold Mandap', amount: '₹3,20,000' },
+      { label: 'Grand Entrance Arch & Pathway Lighting', amount: '₹80,000' },
+      { label: 'Ambient LED & Stage Backdrops', amount: 'Included', included: true },
+      { label: 'GST 18%', amount: '₹40,000' }
+    ],
+    totalINR: '₹4,40,000',
+    totalUSD: '$5,240',
+    savingsNote: '₹30,000 discount on combined Muhurtham + Reception decor package.',
+    approvals: [
+      { person: 'Amma approved', time: '2:15 pm IST' },
+      { person: 'Appa approved', time: '2:40 pm IST' }
+    ],
+    contractStatus: '3D Mandap design approved.',
+    escrowNote: '₹4.4L sits in escrow until setup is verified on event day.',
+    progressChange: {
+      from: 75,
+      to: 90,
+      unlockedReward: 'VVIP car flower decoration included.'
+    },
+    relationshipManager: {
+      name: 'Anand K.',
+      role: 'relationship manager',
+      languages: 'Tamil and English',
+      hours: '9 am – 8 pm IST'
+    }
   }
 };
+
+export const INITIAL_BOOKING_DETAILS: BookingDetails = BOOKING_DETAILS_BY_CATEGORY.venue;

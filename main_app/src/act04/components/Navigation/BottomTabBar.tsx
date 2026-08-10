@@ -8,7 +8,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 
-export type ScreenId = 'screen25' | 'screen26' | 'screen27' | 'screen28' | 'screen29' | 'screen30';
+export type ScreenId = 'screen25' | 'screen26' | 'screen27' | 'screen28' | 'screen29' | 'screen30' | 'screen31';
 
 interface BottomTabBarProps {
   activeScreen: ScreenId;
@@ -33,7 +33,7 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({
       <div className="flex items-center justify-around">
         {tabs.map((tab) => {
           const Icon = tab.icon;
-          const isActive = activeScreen === tab.id;
+          const isActive = activeScreen === tab.id || (tab.id === 'screen26' && activeScreen === 'screen31');
           return (
             <button
               key={tab.id}

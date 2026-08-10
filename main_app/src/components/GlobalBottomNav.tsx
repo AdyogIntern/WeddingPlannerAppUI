@@ -19,7 +19,7 @@ export const GlobalBottomNav = () => {
   }
 
   const navItems = [
-    { id: 'act1', path: '/act1', icon: Heart, label: 'Vision' },
+    { id: 'act1', path: '/act1', icon: Heart, label: 'Blueprint' },
     { id: 'act2', path: '/act2', icon: Search, label: 'Vendors' },
     { id: 'act3', path: '/act3', icon: Users, label: 'Guests' },
     { id: 'act4', path: '/act4', icon: CreditCard, label: 'Budget' },

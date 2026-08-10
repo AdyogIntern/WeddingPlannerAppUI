@@ -15,7 +15,10 @@ import {
   ChevronLeft,
   AlertCircle,
   Clock,
-  ArrowRight
+  ArrowRight,
+  MessageSquare,
+  FileText,
+  Copy
 } from 'lucide-react';
 
 export const BlueprintHomeScreen: React.FC = () => {
@@ -35,6 +38,19 @@ export const BlueprintHomeScreen: React.FC = () => {
 
   // Sub-tab inside Blueprint: 'timeline' | 'budget' | 'family' | 'guests'
   const [activeSubTab, setActiveSubTab] = useState<'timeline' | 'budget' | 'family' | 'guests'>('timeline');
+
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [sentWhatsApp, setSentWhatsApp] = useState(false);
+
+  const handleCopyLink = () => {
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  const handleSendWhatsApp = () => {
+    setSentWhatsApp(true);
+    setTimeout(() => setSentWhatsApp(false), 2000);
+  };
 
   const totalINR = getTotalCostINR();
   const totalCurr = getTotalCostInCurrency();
@@ -368,7 +384,7 @@ export const BlueprintHomeScreen: React.FC = () => {
 
         {/* VIEW 4: FAMILY PERMISSIONS SUBTAB */}
         {activeBottomTab === 'blueprint' && activeSubTab === 'family' && (
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             <div className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] space-y-2">
               <div className="text-xs font-bold text-gray-900">Family Co-Planners</div>
               {[
@@ -389,12 +405,97 @@ export const BlueprintHomeScreen: React.FC = () => {
               ))}
             </div>
 
-            <button 
-              onClick={() => setScreen('share_plan')}
-              className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer text-center block"
-            >
-              Invite Family Member via WhatsApp
-            </button>
+            {/* 3 Main Action Cards */}
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold text-gray-900">Share the Blueprint</h3>
+              {/* Card 1: Send on WhatsApp */}
+              <div 
+                onClick={handleSendWhatsApp}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#2E7D32] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0">
+                  <MessageSquare size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Send on WhatsApp</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">
+                    {sentWhatsApp ? 'Link copied to share!' : 'Opens in the browser — no app to install'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Download as PDF */}
+              <div 
+                onClick={() => setScreen('share_plan')}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#671B2B] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#FFF0F3] text-[#671B2B] flex items-center justify-center shrink-0">
+                  <FileText size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Download as PDF</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">14 pages · day-by-day, with costs</p>
+                </div>
+              </div>
+
+              {/* Card 3: Copy view-only link */}
+              <div 
+                onClick={handleCopyLink}
+                className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs flex items-center gap-3 cursor-pointer hover:border-[#D97706] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-[#FEF3C7] text-[#D97706] flex items-center justify-center shrink-0">
+                  <Copy size={18} />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-gray-900">Copy view-only link</h3>
+                  <p className="text-[10px] text-gray-500 mt-0.5">
+                    {copiedLink ? 'Link copied!' : 'Expires in 30 days'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* What they'll see Section */}
+            <div className="space-y-2 pt-1">
+              <h3 className="text-xs font-bold text-gray-900">What they'll see</h3>
+
+              <div className="bg-white p-3.5 rounded-2xl border border-[#E5E0D8] shadow-2xs space-y-2.5">
+                <div className="text-xs font-serif font-bold text-gray-900 border-b border-gray-100 pb-2">
+                  Priya & Arjun · 12–14 Feb 2027
+                </div>
+
+                <div className="space-y-2 text-[11px] text-gray-800">
+                  <div className="flex justify-between items-center">
+                    <span>Nichayathartham · Fri 9 am</span>
+                    <span className="font-bold font-sans">120</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Panda Kaal Muhurtham · Fri 4 pm</span>
+                    <span className="font-bold font-sans">60</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Sumangali Prarthanai · Sat 8 am</span>
+                    <span className="font-bold font-sans">80</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Mehendi & Sangeet · Sat 6 pm</span>
+                    <span className="font-bold font-sans">180</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Muhurtham · Sun 6:30 am</span>
+                    <span className="font-bold font-sans">420</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Reception · Sun 7 pm</span>
+                    <span className="font-bold font-sans">500</span>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-100 pt-2 text-[9.5px] text-gray-400 leading-snug">
+                  Viewers can read and comment. They cannot change anything or see payment details.
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -423,66 +524,6 @@ export const BlueprintHomeScreen: React.FC = () => {
 
       </View>
 
-      {/* ================= FOOTER NAVIGATION BAR ================= */}
-      {/* Matching Screen 02 & Today View reference image exact bottom bar */}
-      <div className="bg-white border-t border-[#E5E0D8] px-4 py-2 flex items-center justify-around shrink-0 z-40 select-none">
-        
-        {/* Tab 1: Today */}
-        <button
-          onClick={() => handleBottomTabChange('today')}
-          className={`flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer transition-colors ${
-            activeBottomTab === 'today' ? 'text-[#671B2B]' : 'text-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <Calendar size={18} strokeWidth={activeBottomTab === 'today' ? 2.5 : 1.8} />
-          <span className="text-[10px] font-bold">Today</span>
-        </button>
-
-        {/* Tab 2: Blueprint */}
-        <button
-          onClick={() => handleBottomTabChange('blueprint')}
-          className={`flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer transition-colors ${
-            activeBottomTab === 'blueprint' ? 'text-[#671B2B]' : 'text-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <LayoutGrid size={18} strokeWidth={activeBottomTab === 'blueprint' ? 2.5 : 1.8} />
-          <span className="text-[10px] font-bold">Blueprint</span>
-        </button>
-
-        {/* Tab 3: Vendors */}
-        <button
-          onClick={() => handleBottomTabChange('vendors')}
-          className={`flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer transition-colors ${
-            activeBottomTab === 'vendors' ? 'text-[#671B2B]' : 'text-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <ShoppingBag size={18} strokeWidth={activeBottomTab === 'vendors' ? 2.5 : 1.8} />
-          <span className="text-[10px] font-bold">Vendors</span>
-        </button>
-
-        {/* Tab 4: Family */}
-        <button
-          onClick={() => handleBottomTabChange('family')}
-          className={`flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer transition-colors ${
-            activeBottomTab === 'family' ? 'text-[#671B2B]' : 'text-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <Users size={18} strokeWidth={activeBottomTab === 'family' ? 2.5 : 1.8} />
-          <span className="text-[10px] font-bold">Family</span>
-        </button>
-
-        {/* Tab 5: Rituals */}
-        <button
-          onClick={() => handleBottomTabChange('rituals')}
-          className={`flex flex-col items-center gap-1 border-none bg-transparent cursor-pointer transition-colors ${
-            activeBottomTab === 'rituals' ? 'text-[#671B2B]' : 'text-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <Sparkles size={18} strokeWidth={activeBottomTab === 'rituals' ? 2.5 : 1.8} />
-          <span className="text-[10px] font-bold">Rituals</span>
-        </button>
-
-      </div>
     </View>
   );
 };
