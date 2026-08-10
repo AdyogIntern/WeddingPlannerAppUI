@@ -172,7 +172,7 @@ export const Screen25_BudgetDashboard: React.FC<Screen25Props> = ({
 
         {/* Upcoming Payments Navigation Card */}
         <div
-          onClick={onNavigateToSchedule}
+          onClick={() => onNavigateToSchedule()}
           className="bg-white border border-[#EBE5DC] rounded-2xl p-3.5 flex items-center justify-between cursor-pointer hover:border-[#D5CBC0] active:scale-[0.99] transition-all shadow-2xs group"
         >
           <div className="flex items-center gap-3">

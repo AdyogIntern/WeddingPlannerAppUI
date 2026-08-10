@@ -26,6 +26,7 @@ import {
 import { PaymentModal } from './components/Modals/PaymentModal';
 import { DocumentViewerModal } from './components/Modals/DocumentViewerModal';
 import { SendToFamilyModal } from './components/Modals/SendToFamilyModal';
+import { RaiseDisputeModal } from './components/Modals/RaiseDisputeModal';
 import { DocumentItem, PaymentScheduleItem } from './types';
 
 export default function App() {
@@ -87,6 +88,10 @@ export default function App() {
   const [familyModalOpen, setFamilyModalOpen] = useState(false);
   const [familyRecipient, setFamilyRecipient] = useState('Appa');
 
+  const [disputeModalOpen, setDisputeModalOpen] = useState(false);
+  const [disputeVendor, setDisputeVendor] = useState('');
+  const [disputeAmount, setDisputeAmount] = useState('');
+
   // Toggle Currency
   const handleToggleCurrency = () => {
     setCurrency((prev) => (prev === 'INR' ? 'USD' : 'INR'));
@@ -112,7 +117,9 @@ export default function App() {
 
   // Open Dispute screen
   const handleRaiseDispute = (vendor: string, amount: string) => {
-    // No-op; the EscrowProtection screen handles its own dispute tab display.
+    setDisputeVendor(vendor);
+    setDisputeAmount(amount);
+    setDisputeModalOpen(true);
   };
 
   // Open Document Modal

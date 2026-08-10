@@ -7,13 +7,9 @@ import { RitualLibraryScreen } from './screens/RitualLibraryScreen';
 import { RitualDetailScreen } from './screens/RitualDetailScreen';
 import { ItIsDoneScreen } from './screens/ItIsDoneScreen';
 import { MuhurthamDayScreen } from './screens/MuhurthamDayScreen';
-import { ReturnGiftsScreen } from './screens/ReturnGiftsScreen';
-import { InvitationScreen } from './screens/InvitationScreen';
 import { LiveStreamScreen } from './screens/LiveStreamScreen';
-import { VisaLetterScreen } from './screens/VisaLetterScreen';
 import { GuestRsvpScreen } from './screens/GuestRsvpScreen';
 import { TripPlannerScreen } from './screens/TripPlannerScreen';
-import { GuestsDashboardScreen } from './screens/GuestsDashboardScreen';
 import { ProxyInspectionScreen } from './screens/ProxyInspectionScreen';
 import { MoiLedgerScreen } from './screens/MoiLedgerScreen';
 import { LegalDocsScreen } from './screens/LegalDocsScreen';
@@ -99,14 +95,13 @@ export const MobileContainer: React.FC = () => {
       case 'guest_rsvp':
         return 'trip_planner';
       case 'legal_docs':
-      case 'visa_letter':
         return 'guest_rsvp';
       case 'live_stream':
         return 'legal_docs';
       case 'moi_ledger':
         return 'live_stream';
       case 'muhurtham_day':
-        return 'return_gifts';
+        return 'moi_ledger';
       case 'it_is_done':
         return 'muhurtham_day';
       default:

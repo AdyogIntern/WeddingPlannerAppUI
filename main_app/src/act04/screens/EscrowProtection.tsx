@@ -143,7 +143,7 @@ export const Screen27_EscrowProtection: React.FC<Screen27Props> = ({
                   Release
                 </button>
                 <button
-                  onClick={() => setActiveTab('dispute')}
+                  onClick={() => onRaiseDispute('Ananda Catering', isINR ? '₹4.2L' : '$5,000')}
                   className="flex-1 py-2.5 px-4 bg-white border border-[#D5CBC0] text-[#1A1613] font-medium text-[14px] rounded-xl hover:bg-[#F2ECE4] active:scale-[0.98] transition-all cursor-pointer"
                 >
                   Raise an issue
