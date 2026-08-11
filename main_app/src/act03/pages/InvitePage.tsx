@@ -33,14 +33,16 @@ const ROLES: RoleOption[] = [
   },
 ];
 
-const CATEGORIES = ['Venue', 'Catering', 'Purohit'];
 const AMOUNTS = ['₹1L', '₹2L', '₹5L', 'Any'];
 
 export const InvitePage: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState<string>('decision_maker');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(['Venue', 'Catering', 'Purohit']);
-  const [selectedAmount, setSelectedAmount] = useState<string>('₹2L');
+  const [selectedRole, setSelectedRole] = useState<string>('');
+  const [categories, setCategories] = useState<string[]>(['Venue', 'Catering', 'Purohit']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedAmount, setSelectedAmount] = useState<string>('');
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState('');
 
   const handleSendInvite = () => {
     navigate('/act3/family');
@@ -110,7 +112,7 @@ export const InvitePage: React.FC = () => {
             He'll own
           </h2>
           <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <Tag
                 key={cat}
                 label={cat}
@@ -118,12 +120,41 @@ export const InvitePage: React.FC = () => {
                 onClick={() => toggleCategory(cat)}
               />
             ))}
-            <button
-              type="button"
-              className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium bg-white border border-[#E5E1D8] text-[#2C2420] hover:bg-[#FDFCF0] transition-colors"
-            >
-              + add
-            </button>
+            {isAddingCategory ? (
+              <input
+                autoFocus
+                type="text"
+                value={newCategory}
+                onChange={e => setNewCategory(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') {
+                    if (newCategory.trim() && !categories.includes(newCategory.trim())) {
+                      setCategories([...categories, newCategory.trim()]);
+                      setSelectedCategories([...selectedCategories, newCategory.trim()]);
+                    }
+                    setIsAddingCategory(false);
+                    setNewCategory('');
+                  }
+                }}
+                onBlur={() => {
+                  if (newCategory.trim() && !categories.includes(newCategory.trim())) {
+                    setCategories([...categories, newCategory.trim()]);
+                  }
+                  setIsAddingCategory(false);
+                  setNewCategory('');
+                }}
+                className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium bg-white border border-[#7B1D21] text-[#2C2420] outline-none w-24 shadow-2xs"
+                placeholder="Name..."
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsAddingCategory(true)}
+                className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium bg-white border border-[#E5E1D8] text-[#2C2420] hover:bg-[#FDFCF0] transition-colors cursor-pointer"
+              >
+                + add
+              </button>
+            )}
           </div>
         </div>
 

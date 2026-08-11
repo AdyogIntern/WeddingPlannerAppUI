@@ -74,11 +74,6 @@ export const GeneratingBlueprintScreen: React.FC = () => {
           <span>Questions</span>
         </button>
 
-        <Text style={{ color: colors.textGold, fontSize: '10px', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-          ACT 1 · THE FIRST FOUR MINUTES
-        </Text>
-
-        <div className="w-16" /> {/* Spacer for symmetry */}
       </View>
 
       {/* Center Animated Rings & Wedding Illustration */}

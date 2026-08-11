@@ -4,7 +4,7 @@ import { useWeddingStore } from '../store/useWeddingStore';
 import { Check } from 'lucide-react';
 
 export const BlueprintGeneratedScreen: React.FC = () => {
-  const { setScreen } = useWeddingStore();
+  const { setScreen, getTotalCostINR, getTotalCostInCurrency, onboarding, functions } = useWeddingStore();
 
   // Tasks state for the interactive checklist
   const [tasks, setTasks] = useState({
@@ -114,7 +114,7 @@ export const BlueprintGeneratedScreen: React.FC = () => {
               whiteSpace: 'pre-line'
             }}
           >
-            {"Three days, five\nfunctions, 420 guests."}
+            {`Three days, ${functions.length}\nfunctions, ${onboarding.guestCount === null ? 0 : onboarding.guestCount || 420} guests.`}
           </Text>
         </View>
       </View>
@@ -140,10 +140,10 @@ export const BlueprintGeneratedScreen: React.FC = () => {
               ESTIMATED
             </Text>
             <Text style={{ fontSize: '20px', fontWeight: '700', color: '#1D1D1F', display: 'block', lineHeight: '1.2' }}>
-              ₹41.8L
+              ₹{(getTotalCostINR() / 100000).toFixed(1)}L
             </Text>
             <Text style={{ fontSize: '11px', fontWeight: '500', color: '#8E8E93', display: 'block', marginTop: '2px' }}>
-              ≈ $49,750
+              ≈ ${getTotalCostInCurrency().toLocaleString()}
             </Text>
           </View>
 

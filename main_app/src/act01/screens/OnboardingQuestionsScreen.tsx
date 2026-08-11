@@ -14,12 +14,15 @@ export const OnboardingQuestionsScreen: React.FC = () => {
     onboarding, 
     updateOnboarding, 
     currency, 
-    setCurrency 
+    setCurrency,
+    startGeneratingBlueprint,
+    setScreen
   } = useWeddingStore();
 
   const days = Array.from({ length: 31 }, (_, i) => String(i + 1));
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const years = ['2026', '2027', '2028', '2029', '2030'];
+  const currentYearNum = new Date().getFullYear();
+  const years = Array.from({ length: 5 }, (_, i) => String(currentYearNum + i));
 
   const getParsedDate = () => {
     const dateStr = onboarding.weddingDate || '';
@@ -31,7 +34,7 @@ export const OnboardingQuestionsScreen: React.FC = () => {
         year: parts[2]
       };
     }
-    return { day: '14', month: 'Feb', year: '2027' };
+    return { day: '14', month: 'Feb', year: currentYearNum.toString() };
   };
 
   const getDayOfWeek = (d: string, m: string, y: string) => {
@@ -46,6 +49,9 @@ export const OnboardingQuestionsScreen: React.FC = () => {
     const dayOfWeek = getDayOfWeek(d, m, y);
     if (d === '14' && m === 'Feb' && y === '2027') {
       return `${dayOfWeek} · Uthiram nakshatram · Strong auspicious muhurtham day`;
+    }
+    if (d === '24' && m === 'Nov' && y === currentYearNum.toString()) {
+      return `${dayOfWeek} · Swathi nakshatram · Strong auspicious muhurtham day`;
     }
     const dayOfWeekStr = dayOfWeek ? `${dayOfWeek} · ` : '';
     const isWeekend = dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday';
@@ -62,6 +68,11 @@ export const OnboardingQuestionsScreen: React.FC = () => {
       dateOptionType: 'fixed',
       weddingDate: `${newDay} ${newMonth} ${newYear}`
     });
+  };
+
+  const generateGoodDate = () => {
+    // Generate a good date for the current year
+    return { day: '24', month: 'Nov', year: currentYearNum.toString() };
   };
 
   const TOTAL_QUESTIONS = onboardingQuestionsList.length; // 7
@@ -158,19 +169,31 @@ export const OnboardingQuestionsScreen: React.FC = () => {
             {questionIndex === 7 ? 'SUGGESTION' : `${questionIndex + 1} / ${TOTAL_QUESTIONS - 1}`}
           </Text>
 
-          <TouchableOpacity 
-            onPress={nextQuestion}
-            style={{ 
-              padding: '6px 12px',
-              borderRadius: '20px',
-              backgroundColor: '#F5EEE5',
-              border: '1px solid #E6D8C4',
-              opacity: questionIndex === 7 ? 0 : 1,
-              pointerEvents: questionIndex === 7 ? 'none' : 'auto'
-            }}
-          >
-            <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.burgundyPrimary }}>Skip</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', gap: '8px', opacity: questionIndex === 7 ? 0 : 1, pointerEvents: questionIndex === 7 ? 'none' : 'auto' }}>
+            <TouchableOpacity 
+              onPress={nextQuestion}
+              style={{ 
+                padding: '6px 12px',
+                borderRadius: '20px',
+                backgroundColor: '#F5EEE5',
+                border: '1px solid #E6D8C4',
+              }}
+            >
+              <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.burgundyPrimary }}>Skip</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              onPress={() => setScreen('registration')}
+              style={{ 
+                padding: '6px 12px',
+                borderRadius: '20px',
+                backgroundColor: '#F5EEE5',
+                border: '1px solid #E6D8C4',
+              }}
+            >
+              <Text style={{ fontSize: '11px', fontWeight: '600', color: colors.burgundyPrimary }}>Skip All</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Progress Bar */}
@@ -303,14 +326,25 @@ export const OnboardingQuestionsScreen: React.FC = () => {
             </TouchableOpacity>
 
             <OptionCard 
-              title="Only the month is fixed (Nov 2026 - Feb 2027)" 
+              title="Only the month is fixed" 
               selected={onboarding.dateOptionType === 'exploring'} 
-              onPress={() => updateOnboarding({ dateOptionType: 'exploring', weddingDate: 'Feb 2027' })} 
+              onPress={() => updateOnboarding({ dateOptionType: 'exploring', weddingDate: `Feb ${currentYearNum}` })} 
             />
             <OptionCard 
-              title="Help me find a muhurtham date (Panchangam recommended)" 
+              title="Just exploring for now" 
+              selected={onboarding.dateOptionType === 'just_exploring'} 
+              onPress={() => updateOnboarding({ dateOptionType: 'just_exploring', weddingDate: 'Flexible' })} 
+            />
+            <OptionCard 
+              title="Help me find a muhurtham date" 
               selected={onboarding.dateOptionType === 'muhurtham_help'} 
-              onPress={() => updateOnboarding({ dateOptionType: 'muhurtham_help', weddingDate: 'Auspicious Muhurtham' })} 
+              onPress={() => {
+                const goodDate = generateGoodDate();
+                updateOnboarding({ 
+                  dateOptionType: 'muhurtham_help', 
+                  weddingDate: `${goodDate.day} ${goodDate.month} ${goodDate.year}` 
+                });
+              }} 
             />
           </View>
         )}
