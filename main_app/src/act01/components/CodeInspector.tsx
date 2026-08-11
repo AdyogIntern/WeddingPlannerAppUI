@@ -10,7 +10,7 @@ import { colors } from '../theme';
 
 export const WelcomeScreen = ({ onStart }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: colors.welcomeBackground, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, backgroundColor: colors.welcomeBackground, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="serifTitle" style={{ color: colors.textWhite }}>
         Plan a Chennai wedding from 8,000 km away.
       </Text>
@@ -30,7 +30,7 @@ import { colors } from '../theme';
 
 export const LocationScreen = ({ selectedId, onSelect, onContinue }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: colors.questionBackground, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, backgroundColor: colors.questionBackground, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="caption">QUESTION 2 OF 10</Text>
       <RNProgressBar progress={20} />
       <Text variant="serifHeading">Where are you living now?</Text>
@@ -47,7 +47,7 @@ import { View, Text, OptionCard, RNButton, RNProgressBar } from '../components/R
 
 export const DecidersScreen = ({ selectedIds, onToggle, onSubmit }) => {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="caption">QUESTION 10 OF 10</Text>
       <RNProgressBar progress={100} />
       <Text variant="serifHeading">Who else will be deciding with you?</Text>
@@ -64,7 +64,7 @@ import { View, Text, OptionCard, RNButton, RNProgressBar } from '../components/R
 
 export const TimelineScreen = ({ selectedId, onSelect, onContinue }) => {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="caption">QUESTION 1 OF 10</Text>
       <RNProgressBar progress={10} />
       <Text variant="serifHeading">When are you planning the wedding?</Text>
@@ -81,7 +81,7 @@ import { View, Text, OptionCard, RNButton, RNProgressBar } from '../components/R
 
 export const BudgetScreen = ({ selectedId, onSelect, onContinue }) => {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="caption">QUESTION 7 OF 10</Text>
       <RNProgressBar progress={70} />
       <Text variant="serifHeading">What is your target total budget?</Text>
@@ -98,7 +98,7 @@ import { View, Text, OptionCard, RNButton, RNProgressBar } from '../components/R
 
 export const PrioritiesScreen = ({ selectedIds, onToggle, onContinue }) => {
   return (
-    <View style={{ flex: 1, paddingHorizontal: 18 }}>
+    <View style={{ flex: 1, paddingLeft: 18 , paddingRight: 18 }}>
       <Text variant="caption">QUESTION 9 OF 10</Text>
       <RNProgressBar progress={90} />
       <Text variant="serifHeading">Pick three priorities for your wedding</Text>

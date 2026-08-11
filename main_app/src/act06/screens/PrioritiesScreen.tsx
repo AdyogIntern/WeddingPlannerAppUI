@@ -48,7 +48,7 @@ export const PrioritiesScreen: React.FC<PrioritiesScreenProps> = ({
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '18px',
+        paddingLeft: '18px', paddingRight: '18px',
         paddingTop: '6px',
         paddingBottom: '12px',
         justifyContent: 'space-between',
@@ -131,7 +131,7 @@ export const PrioritiesScreen: React.FC<PrioritiesScreenProps> = ({
             border: '1px solid #EBE2D5'
           }}
         >
-          <Sparkles size={13} color={colors.burgundyPrimary} style={{ marginTop: '1px', shrink: 0 }} />
+          <Sparkles size={13} color={colors.burgundyPrimary} style={{ marginTop: '1px', flexShrink: 0 }} />
           <Text 
             style={{ 
               fontSize: '10px', 
@@ -145,7 +145,7 @@ export const PrioritiesScreen: React.FC<PrioritiesScreenProps> = ({
       </View>
 
       {/* Fixed Bottom Submit Button Container */}
-      <View style={{ paddingTop: '6px', shrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ paddingTop: '6px', flexShrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <RNButton 
           title="Continue" 
           onPress={onContinue}

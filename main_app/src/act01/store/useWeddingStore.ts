@@ -196,7 +196,67 @@ export const useWeddingStore = create<WeddingStoreState>((set, get) => ({
   goToVision: () => set({ currentScreen: 'generating' }),
 
   startGeneratingBlueprint: () => {
+    const { onboarding } = get();
+    const hasAnswered = onboarding.guestCount !== null || (onboarding.topPriorities && onboarding.topPriorities.length > 0) || onboarding.currency;
+    let dynamicFunctions = JSON.parse(JSON.stringify(mockFunctions));
+
+    if (!hasAnswered) {
+      dynamicFunctions = dynamicFunctions.map((fn: any) => ({
+        ...fn,
+        guests: 0,
+        estimatedCostINR: 0,
+        estimatedCostUSD: 0,
+        slots: fn.slots.map((slot: any) => ({
+          ...slot,
+          costINR: 0,
+          costUSD: 0
+        }))
+      }));
+    } else {
+      const baseGuests = onboarding.guestCount || 420;
+      const guestRatio = baseGuests / 420;
+      const priorities = onboarding.topPriorities || [];
+
+      dynamicFunctions = dynamicFunctions.map((fn: any) => {
+        const newGuests = Math.round(fn.guests * guestRatio);
+        let fnTotalCostINR = 0;
+        let fnTotalCostUSD = 0;
+
+        const newSlots = fn.slots.map((slot: any) => {
+          let multiplier = guestRatio;
+          const cat = slot.category.toLowerCase();
+          
+          if (priorities.includes('Food' as any) && (cat.includes('cater') || cat.includes('food') || cat.includes('buffet'))) {
+            multiplier *= 1.5;
+          }
+          if (priorities.includes('Photography' as any) && (cat.includes('photo') || cat.includes('video') || cat.includes('film'))) {
+            multiplier *= 1.5;
+          }
+          if (priorities.includes('Decoration' as any) && (cat.includes('decor') || cat.includes('floral') || cat.includes('lighting'))) {
+            multiplier *= 1.5;
+          }
+
+          const costINR = Math.round(slot.costINR * multiplier);
+          const costUSD = Math.round(slot.costUSD * multiplier);
+          
+          fnTotalCostINR += costINR;
+          fnTotalCostUSD += costUSD;
+
+          return { ...slot, costINR, costUSD };
+        });
+
+        return {
+          ...fn,
+          guests: newGuests,
+          estimatedCostINR: fnTotalCostINR,
+          estimatedCostUSD: fnTotalCostUSD,
+          slots: newSlots
+        };
+      });
+    }
+
     set({ 
+      functions: dynamicFunctions,
       currentScreen: 'generating', 
       isGenerating: true, 
       generatingProgress: 0,

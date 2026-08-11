@@ -6,8 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
-
-# Temporary SDK and JDK for local APK compilation
 android-sdk/
 jdk/
 *.zip

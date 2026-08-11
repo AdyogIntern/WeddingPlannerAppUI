@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
 import { 
   ChevronLeft, 
   Minus, 
   Plus, 
-  Printer
+  Printer,
+  Pencil
 } from 'lucide-react';
 
 export const FunctionDetailScreen: React.FC = () => {
@@ -26,6 +27,7 @@ export const FunctionDetailScreen: React.FC = () => {
   const [boardType, setBoardType] = useState<'board' | 'timeline'>('board');
 
   // Edit states
+  const titleInputRef = useRef<HTMLInputElement>(null);
   const [fnName, setFnName] = useState(selectedFn.name);
   const [timeSlot, setTimeSlot] = useState<'Evening' | 'Afternoon' | 'Morning'>(
     selectedFn.timeSlot.includes('Morning') ? 'Morning' : selectedFn.timeSlot.includes('Afternoon') ? 'Afternoon' : 'Evening'
@@ -121,12 +123,21 @@ export const FunctionDetailScreen: React.FC = () => {
           <div className="space-y-3.5">
             {/* Header Title Section */}
             <div>
-              <input
-                type="text"
-                value={fnName}
-                onChange={e => setFnName(e.target.value)}
-                className="text-xl font-serif font-bold text-gray-900 leading-tight bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#671B2B] w-full pb-1 mb-1"
-              />
+              <div className="flex items-center gap-2 mb-1">
+                <input
+                  ref={titleInputRef}
+                  type="text"
+                  value={fnName}
+                  onChange={e => setFnName(e.target.value)}
+                  className="text-xl font-serif font-bold text-gray-900 leading-tight bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#671B2B] flex-1 pb-1"
+                />
+                <button 
+                  onClick={() => titleInputRef.current?.focus()}
+                  className="text-gray-400 hover:text-gray-700 bg-transparent border-none cursor-pointer p-1.5 flex items-center justify-center shrink-0 transition-colors rounded-md hover:bg-gray-100"
+                >
+                  <Pencil size={15} />
+                </button>
+              </div>
               <p className="text-[11px] text-gray-500 mt-0.5 font-medium">
                 {selectedFn.date || 'Sat 13 Feb'} · {selectedFn.owner || 'Meera'} owns this function
               </p>
@@ -488,7 +499,7 @@ export const FunctionDetailScreen: React.FC = () => {
       </View>
 
       {/* ================= FIXED BOTTOM ACTION BAR ================= */}
-      <View style={{ padding: '8px 14px 12px', shrink: 0, backgroundColor: '#FAF8F5', borderTop: '1px solid #E5E0D8' }}>
+      <View style={{ padding: '8px 14px 12px', flexShrink: 0, backgroundColor: '#FAF8F5', borderTop: '1px solid #E5E0D8' }}>
         {viewMode === 'board' ? (
           <div className="flex items-center justify-between gap-2">
             <div className="text-[10px] text-gray-700 font-medium leading-tight">

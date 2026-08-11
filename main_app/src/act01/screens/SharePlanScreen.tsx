@@ -509,7 +509,7 @@ export const SharePlanScreen: React.FC = () => {
 
       {/* ================= FIXED BOTTOM ACTION BAR ================= */}
       {screenMode === 'share' && (
-        <View style={{ padding: '8px 14px 12px', shrink: 0 }}>
+        <View style={{ padding: '8px 14px 12px', flexShrink: 0 }}>
           <button
             onClick={handleSendWhatsApp}
             className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer shadow-2xs hover:bg-[#521422] transition-colors text-center block"
@@ -520,7 +520,7 @@ export const SharePlanScreen: React.FC = () => {
       )}
 
       {screenMode === 'preview' && (
-        <View style={{ padding: '8px 14px 12px', shrink: 0 }}>
+        <View style={{ padding: '8px 14px 12px', flexShrink: 0 }}>
           <button
             onClick={() => window.print()}
             className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer shadow-2xs hover:bg-[#521422] transition-colors flex items-center justify-center gap-1.5 text-center block"
@@ -532,7 +532,7 @@ export const SharePlanScreen: React.FC = () => {
       )}
 
       {screenMode === 'nudges' && (
-        <View style={{ padding: '8px 14px 12px', shrink: 0 }}>
+        <View style={{ padding: '8px 14px 12px', flexShrink: 0 }}>
           <button
             onClick={() => setScreenMode('share')}
             className="w-[72%] max-w-[220px] mx-auto py-2.5 bg-[#671B2B] text-white rounded-md text-xs font-bold border-none cursor-pointer shadow-2xs hover:bg-[#521422] transition-colors text-center block"

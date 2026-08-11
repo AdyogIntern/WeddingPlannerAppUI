@@ -33,7 +33,7 @@ export const LocationScreen: React.FC<LocationScreenProps> = ({
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '18px',
+        paddingLeft: '18px', paddingRight: '18px',
         paddingTop: '6px',
         paddingBottom: '12px',
         justifyContent: 'space-between',
@@ -118,7 +118,7 @@ export const LocationScreen: React.FC<LocationScreenProps> = ({
       </View>
 
       {/* Fixed Bottom Submit Button Container */}
-      <View style={{ paddingTop: '6px', shrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ paddingTop: '6px', flexShrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <RNButton 
           title="Continue" 
           onPress={onContinue}

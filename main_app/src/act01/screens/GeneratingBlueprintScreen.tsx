@@ -56,8 +56,8 @@ export const GeneratingBlueprintScreen: React.FC = () => {
       style={{ 
         flex: 1, 
         backgroundColor: colors.welcomeBackground, 
-        paddingHorizontal: '20px',
-        paddingVertical: '20px',
+        paddingLeft: '20px', paddingRight: '20px',
+        paddingTop: '20px', paddingBottom: '20px',
         justifyContent: 'space-between',
         alignItems: 'center',
         height: '100%',
@@ -74,11 +74,6 @@ export const GeneratingBlueprintScreen: React.FC = () => {
           <span>Questions</span>
         </button>
 
-        <Text style={{ color: colors.textGold, fontSize: '10px', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-          ACT 1 · THE FIRST FOUR MINUTES
-        </Text>
-
-        <div className="w-16" /> {/* Spacer for symmetry */}
       </View>
 
       {/* Center Animated Rings & Wedding Illustration */}

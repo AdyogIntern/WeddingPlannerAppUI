@@ -4,7 +4,7 @@ import { useWeddingStore } from '../store/useWeddingStore';
 import { Check } from 'lucide-react';
 
 export const BlueprintGeneratedScreen: React.FC = () => {
-  const { setScreen } = useWeddingStore();
+  const { setScreen, getTotalCostINR, getTotalCostInCurrency, onboarding, functions } = useWeddingStore();
 
   // Tasks state for the interactive checklist
   const [tasks, setTasks] = useState({
@@ -33,7 +33,7 @@ export const BlueprintGeneratedScreen: React.FC = () => {
         backgroundColor: checked ? '#861F35' : 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
-        shrink: 0,
+        flexShrink: 0,
         marginTop: '2px',
         cursor: 'pointer',
       }}
@@ -58,7 +58,7 @@ export const BlueprintGeneratedScreen: React.FC = () => {
           backgroundColor: '#861F35', 
           width: '100%', 
           paddingBottom: '24px', 
-          shrink: 0,
+          flexShrink: 0,
           boxSizing: 'border-box'
         }}
       >
@@ -68,9 +68,9 @@ export const BlueprintGeneratedScreen: React.FC = () => {
             flexDirection: 'row', 
             justifyContent: 'flex-end', 
             alignItems: 'center', 
-            paddingHorizontal: '24px',
+            paddingLeft: '24px', paddingRight: '24px',
             height: '24px',
-            shrink: 0,
+            flexShrink: 0,
             marginTop: '12px',
             marginBottom: '12px'
           }}
@@ -114,13 +114,13 @@ export const BlueprintGeneratedScreen: React.FC = () => {
               whiteSpace: 'pre-line'
             }}
           >
-            {"Three days, five\nfunctions, 420 guests."}
+            {`Three days, ${functions.length}\nfunctions, ${onboarding.guestCount === null ? 0 : onboarding.guestCount || 420} guests.`}
           </Text>
         </View>
       </View>
 
       {/* Scrollable Content Area (Warm Cream Background) */}
-      <View style={{ flex: 1, overflowY: 'auto', width: '100%', shrink: 1, paddingTop: '16px', paddingBottom: '8px' }}>
+      <View style={{ flex: 1, overflowY: 'auto', width: '100%', flexShrink: 1, paddingTop: '16px', paddingBottom: '8px' }}>
         
         {/* Stats Grid */}
         <View style={{ flexDirection: 'row', gap: '12px', width: '84%', alignSelf: 'center', marginBottom: '14px' }}>
@@ -140,10 +140,10 @@ export const BlueprintGeneratedScreen: React.FC = () => {
               ESTIMATED
             </Text>
             <Text style={{ fontSize: '20px', fontWeight: '700', color: '#1D1D1F', display: 'block', lineHeight: '1.2' }}>
-              ₹41.8L
+              ₹{(getTotalCostINR() / 100000).toFixed(1)}L
             </Text>
             <Text style={{ fontSize: '11px', fontWeight: '500', color: '#8E8E93', display: 'block', marginTop: '2px' }}>
-              ≈ $49,750
+              ≈ ${getTotalCostInCurrency().toLocaleString()}
             </Text>
           </View>
 
@@ -194,7 +194,7 @@ export const BlueprintGeneratedScreen: React.FC = () => {
             </Text>
           </View>
           
-          <View style={{ width: '100%', backgroundColor: '#FAF5EE', height: '8px', borderRadius: '4px', overflow: 'hidden', marginVertical: '4px' }}>
+          <View style={{ width: '100%', backgroundColor: '#FAF5EE', height: '8px', borderRadius: '4px', overflow: 'hidden', marginTop: '4px' , marginBottom: '4px' }}>
             <View style={{ backgroundColor: '#B49A6C', height: '100%', width: `${currentProgress}%`, borderRadius: '4px', transition: 'width 0.4s ease' }} />
           </View>
 
@@ -279,8 +279,8 @@ export const BlueprintGeneratedScreen: React.FC = () => {
         style={{ 
           paddingTop: '8px', 
           paddingBottom: '16px', 
-          paddingHorizontal: '18px', 
-          shrink: 0, 
+          paddingLeft: '18px', paddingRight: '18px', 
+          flexShrink: 0, 
           alignItems: 'center', 
           width: '100%',
           boxSizing: 'border-box',

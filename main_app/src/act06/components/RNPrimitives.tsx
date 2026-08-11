@@ -189,7 +189,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
             backgroundColor: selected ? colors.burgundyPrimary : 'transparent',
             alignItems: 'center',
             justifyContent: 'center',
-            shrink: 0,
+            flexShrink: 0,
           }}
         >
           {selected && <Check size={12} color="#FFFFFF" strokeWidth={3} />}
@@ -203,7 +203,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
             backgroundColor: colors.burgundyPrimary,
             alignItems: 'center',
             justifyContent: 'center',
-            shrink: 0,
+            flexShrink: 0,
           }}
         >
           <Check size={12} color="#FFFFFF" strokeWidth={3} />
@@ -216,7 +216,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
             borderRadius: '50%',
             border: '1.5px solid #D0C5B8',
             backgroundColor: 'transparent',
-            shrink: 0,
+            flexShrink: 0,
           }}
         />
       )}
@@ -246,8 +246,8 @@ export const RNButton: React.FC<RNButtonProps> = ({
       style={{
         backgroundColor: isWhite ? '#FAF5EE' : colors.burgundyButton,
         borderRadius: '16px',
-        paddingVertical: '13.5px',
-        paddingHorizontal: '18px',
+        paddingTop: '13.5px', paddingBottom: '13.5px',
+        paddingLeft: '18px', paddingRight: '18px',
         alignItems: 'center',
         justifyContent: 'center',
         width: '82%',
@@ -284,7 +284,7 @@ export const RNProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
         width: '100%', 
         backgroundColor: colors.progressTrack, 
         borderRadius: '1px',
-        marginVertical: '12px',
+        marginTop: '12px', marginBottom: '12px',
         overflow: 'hidden' 
       }}
     >

@@ -29,7 +29,7 @@ export const ComparePlansScreen: React.FC = () => {
       style={{ 
         flex: 1, 
         backgroundColor: '#FAF8F5', 
-        paddingHorizontal: '22px',
+        paddingLeft: '22px', paddingRight: '22px',
         paddingTop: '12px',
         paddingBottom: '80px',
         minHeight: '100%',
@@ -37,7 +37,7 @@ export const ComparePlansScreen: React.FC = () => {
       }}
     >
       {/* ================= TOP HEADER ================= */}
-      <View style={{ shrink: 0 }}>
+      <View style={{ flexShrink: 0 }}>
         <div className="flex justify-between items-center mb-1">
           <button
             onClick={() => setScreen('blueprint_home')}
@@ -192,7 +192,7 @@ export const ComparePlansScreen: React.FC = () => {
       </View>
 
       {/* ================= BOTTOM ACTION BAR ================= */}
-      <View style={{ paddingTop: '8px', shrink: 0 }}>
+      <View style={{ paddingTop: '8px', flexShrink: 0 }}>
         <div className="flex justify-center items-center gap-2">
           <button
             onClick={handleMerge}

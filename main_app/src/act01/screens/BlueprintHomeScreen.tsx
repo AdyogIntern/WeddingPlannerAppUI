@@ -36,7 +36,8 @@ export const BlueprintHomeScreen: React.FC = () => {
     getTotalCostINR, 
     getTotalCostInCurrency, 
     currency,
-    addFunction
+    addFunction,
+    onboarding
   } = useWeddingStore();
 
   // Active Bottom Tab: 'today' | 'blueprint' | 'vendors' | 'family' | 'rituals'
@@ -127,7 +128,7 @@ export const BlueprintHomeScreen: React.FC = () => {
               </button>
               <div>
                 <h1 className="text-xl font-serif font-bold tracking-tight">Priya & Arjun</h1>
-                <p className="text-[11px] text-white/80 mt-0.5">14 Feb 2027 · Chennai · 5 functions · 420 guests</p>
+                <p className="text-[11px] text-white/80 mt-0.5">{onboarding.weddingDate || '14 Feb 2027'} · {onboarding.city || 'Chennai'} · {functions.length} functions · {onboarding.guestCount === null ? 0 : onboarding.guestCount || 420} guests</p>
               </div>
             </div>
             <span className="text-[9px] font-semibold text-[#F5E9C8] bg-white/10 px-2 py-0.5 rounded-full border border-white/10">
@@ -506,30 +507,12 @@ export const BlueprintHomeScreen: React.FC = () => {
                 </div>
 
                 <div className="space-y-2 text-[11px] text-gray-800">
-                  <div className="flex justify-between items-center">
-                    <span>Nichayathartham · Fri 9 am</span>
-                    <span className="font-bold font-sans">120</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Panda Kaal Muhurtham · Fri 4 pm</span>
-                    <span className="font-bold font-sans">60</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Sumangali Prarthanai · Sat 8 am</span>
-                    <span className="font-bold font-sans">80</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Mehendi & Sangeet · Sat 6 pm</span>
-                    <span className="font-bold font-sans">180</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Muhurtham · Sun 6:30 am</span>
-                    <span className="font-bold font-sans">420</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Reception · Sun 7 pm</span>
-                    <span className="font-bold font-sans">500</span>
-                  </div>
+                  {functions.map(fn => (
+                    <div key={fn.id} className="flex justify-between items-center">
+                      <span>{fn.name}</span>
+                      <span className="font-bold font-sans">{fn.guests}</span>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="border-t border-gray-100 pt-2 text-[9.5px] text-gray-400 leading-snug">

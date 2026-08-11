@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, RNButton } from '../components/RNPrimitives';
+import { View, Text, RNButton, TouchableOpacity } from '../components/RNPrimitives';
 import { useWeddingStore } from '../store/useWeddingStore';
+import { ChevronLeft } from 'lucide-react';
 
 export const RegistrationFormScreen: React.FC = () => {
-  const { goToVision } = useWeddingStore();
+  const { setScreen } = useWeddingStore();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,12 +18,33 @@ export const RegistrationFormScreen: React.FC = () => {
 
   const onRegister = () => {
     console.log('Registration data:', { fullName, email, phone, otp });
-    goToVision();
+    setScreen('blueprint_generated');
   };
 
   return (
-    <View style={{ flex: 1, padding: '20px', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FAF5EE' }}>
-      <Text variant="serifTitle" style={{ marginBottom: '24px' }}>Create Your Account</Text>
+    <View style={{ flex: 1, padding: '20px', justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#FAF5EE' }}>
+      
+      {/* Top Bar with Back Button */}
+      <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-start', marginBottom: '16px' }}>
+        <TouchableOpacity 
+          onPress={() => setScreen('questions')}
+          style={{ 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            width: '32px',
+            height: '32px',
+            borderRadius: '16px',
+            backgroundColor: '#EBE2D4',
+            cursor: 'pointer',
+            border: '1px solid #D9CDB8'
+          }}
+        >
+          <ChevronLeft size={16} color="#1D1D1F" />
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ flex: 1, width: '100%', maxWidth: '400px', justifyContent: 'center', alignItems: 'center', paddingBottom: '60px' }}>
+        <Text variant="serifTitle" style={{ marginBottom: '24px' }}>Create Your Account</Text>
 
       <View style={{ width: '100%', marginBottom: '12px' }}>
         <Text style={{ marginBottom: '4px' }}>Full Name</Text>
@@ -73,6 +95,7 @@ export const RegistrationFormScreen: React.FC = () => {
 
       <RNButton title="Register" onPress={onRegister} />
       <Text style={{ marginTop: '16px', color: '#666' }}>Already have an account? Login</Text>
+      </View>
     </View>
   );
 };

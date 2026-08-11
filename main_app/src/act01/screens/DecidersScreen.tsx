@@ -29,7 +29,7 @@ export const DecidersScreen: React.FC<DecidersScreenProps> = ({
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '32px',
+        paddingLeft: '32px', paddingRight: '32px',
         paddingTop: '60px',
         paddingBottom: '12px',
         justifyContent: 'space-between',
@@ -117,7 +117,7 @@ export const DecidersScreen: React.FC<DecidersScreenProps> = ({
       </View>
 
       {/* Fixed Bottom Submit Button Container */}
-      <View style={{ paddingTop: '6px', shrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ paddingTop: '6px', flexShrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <RNButton 
           title="Build my Blueprint" 
           onPress={onSubmit}

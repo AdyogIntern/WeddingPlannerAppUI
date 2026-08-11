@@ -50,9 +50,9 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
           flexDirection: 'row', 
           justifyContent: 'space-between', 
           alignItems: 'center', 
-          paddingHorizontal: '24px',
+          paddingLeft: '24px', paddingRight: '24px',
           height: '24px',
-          shrink: 0,
+          flexShrink: 0,
           marginTop: '12px'
         }}
       >
@@ -66,7 +66,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
         />
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text 
-            onPress={() => setLanguage('en')}
+            onClick={() => setLanguage('en')}
             style={{ 
               color: language === 'en' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)', 
               fontSize: '12.5px', 
@@ -77,11 +77,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
           >
             EN
           </Text>
-          <Text style={{ color: 'rgba(255, 255, 255, 0.65)', fontSize: '12.5px', marginHorizontal: '4px', fontWeight: '600', fontFamily: 'system-ui, sans-serif' }}>
+          <Text style={{ color: 'rgba(255, 255, 255, 0.65)', fontSize: '12.5px', marginLeft: '4px', marginRight: '4px', fontWeight: '600', fontFamily: 'system-ui, sans-serif' }}>
             ·
           </Text>
           <Text 
-            onPress={() => setLanguage('ta')}
+            onClick={() => setLanguage('ta')}
             style={{ 
               color: language === 'ta' ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)', 
               fontSize: '12.5px', 
@@ -96,7 +96,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
       </View>
 
       {/* Main Content Area */}
-      <View style={{ flex: 1, overflowY: 'auto', marginTop: '14px', shrink: 1, width: '100%' }}>
+      <View style={{ flex: 1, overflowY: 'auto', marginTop: '14px', flexShrink: 1, width: '100%' }}>
         {/* Top Image Slot: Traditional Muhurtham Mandapam Banner */}
         <View 
           style={{ 
@@ -109,7 +109,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
             justifyContent: 'center',
             alignItems: 'center',
             alignSelf: 'center',
-            shrink: 0,
+            flexShrink: 0,
             marginBottom: '20px'
           }}
         >
@@ -187,8 +187,8 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onOpenLin
         style={{ 
           paddingTop: '8px', 
           paddingBottom: '16px', 
-          paddingHorizontal: '18px', 
-          shrink: 0, 
+          paddingLeft: '18px', paddingRight: '18px', 
+          flexShrink: 0, 
           alignItems: 'center', 
           width: '100%',
           boxSizing: 'border-box'

@@ -43,7 +43,7 @@ export const TimelineScreen: React.FC<TimelineScreenProps> = ({
       style={{ 
         flex: 1, 
         backgroundColor: colors.questionBackground, 
-        paddingHorizontal: '32px',
+        paddingLeft: '32px', paddingRight: '32px',
         paddingTop: '60px',
         paddingBottom: '12px',
         justifyContent: 'space-between',
@@ -117,7 +117,7 @@ export const TimelineScreen: React.FC<TimelineScreenProps> = ({
             border: '1px solid #EBE2D5'
           }}
         >
-          <Calendar size={13} color={colors.burgundyPrimary} style={{ marginTop: '1px', shrink: 0 }} />
+          <Calendar size={13} color={colors.burgundyPrimary} style={{ marginTop: '1px', flexShrink: 0 }} />
           <Text 
             style={{ 
               fontSize: '10px', 
@@ -131,7 +131,7 @@ export const TimelineScreen: React.FC<TimelineScreenProps> = ({
       </View>
 
       {/* Fixed Bottom Submit Button Container */}
-      <View style={{ paddingTop: '6px', shrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ paddingTop: '6px', flexShrink: 0, width: '100%', alignItems: 'center', justifyContent: 'center' }}>
         <RNButton 
           title="Continue" 
           onPress={onContinue}
